@@ -1,0 +1,17 @@
+{
+  "softwareFile" : "C:\\dev\\workspace\\funtester\\funtester\\funtester-app\\examples\\funtester.fun",
+  "generateSemanticTests" : true,
+  "semanticTestFile" : "C:\\dev\\workspace\\funtester\\funtester\\funtester-app\\examples\\funtester.fat",
+  "pluginId" : "org.funtester.plugin.fest",
+  "testingFramework" : "testng",
+  "generateCode" : true,
+  "outputDirectory" : "C:/dev/workspace/funtester/funtester/funtester-app/src/test/java",
+  "mainClass" : "org.funtester.app.Main",
+  "packageName" : "org.funtester.tests.functional",
+  "timeoutInMS" : 5000,
+  "run" : true,
+  "commandsToRun" : [ "cmd /k cd C:/dev/workspace/funtester/funtester/funtester-app & mvn test -DskipTests=false" ],
+  "tryToRunInternally" : false,
+  "originalResultsFile" : "C:\\dev\\workspace\\funtester\\funtester\\funtester-app\\test-output\\testng-results.xml",
+  "convertedResultsFile" : "C:\\dev\\workspace\\funtester\\funtester\\funtester-app\\examples\\funtester.ftr"
+}
