@@ -1,0 +1,53 @@
+The FunTester License (FTL), version 1.0
+
+Copyright (c) 2014 Thiago Delgado Pinto
+
+:: DEFINITIONS
+
+Software:   all the distributed files (including binary files,
+            documentation files and source code files).
+			
+Author:     Thiago Delgado Pinto
+
+You:        the person or company that would like to use or
+            help developing/improving the Software.
+			
+:: PERMISSIONS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated files and documents (the "Software"), subject
+to some conditions explained ahead.
+
+You have the right to use, copy, modify, merge, publish, and distribute copies
+of the Software and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+a) You cannot sublicense or sell copies of the Software or its artifacts,
+   except with a signed and authenticated permission or contract with the Author;
+
+b) You can modify or merge the Software or one of its artifacts, since you agree
+   to grant to the Author a perpetual, irrevocable, non-exclusive, worldwide,
+   no-charge, royalty-free license to:
+   
+   (i)  make, have made, use, sell, offer to sell, import, and otherwise transfer
+        your contribution in whole or in part, alone or in combination with or
+        included in any product, work or materials arising out of the project
+	    to which your contribution was submitted; and
+		
+   (ii) to sublicense these same rights to third parties through multiple levels
+        of sublicensees or other licensing arrangements.
+
+c) You can create plug-ins using any FSF (Free Software Foundation) or
+   OSI (Open Source Initiative) approved license, whether You respect
+   the above conditions.
+   
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

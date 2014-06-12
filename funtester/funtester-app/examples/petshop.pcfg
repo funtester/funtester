@@ -1,0 +1,17 @@
+{
+  "softwareFile" : "C:\\dev\\workspace\\funtester\\funtester\\funtester-app\\examples\\petshop.fun",
+  "generateSemanticTests" : false,
+  "semanticTestFile" : "C:\\dev\\workspace\\funtester\\funtester\\funtester-app\\examples\\petshop.fat",
+  "pluginId" : "org.funtester.plugin.fest",
+  "testingFramework" : "testng",
+  "generateCode" : true,
+  "outputDirectory" : "C:/dev/workspace/funtester/src/sut/petshopstore/src/test/java",
+  "mainClass" : "petshop.Main",
+  "packageName" : "petshop.tests.functional",
+  "timeoutInMS" : 4000,
+  "run" : true,
+  "commandsToRun" : [ "cmd /k cd C:/dev/workspace/funtester/src/sut/petshopstore & mvn test" ],
+  "tryToRunInternally" : false,
+  "originalResultsFile" : "C:/dev/workspace/funtester/src/sut/petshopstore/target/surefire-reports/testng-results.xml",
+  "convertedResultsFile" : "C:\\dev\\workspace\\funtester\\funtester\\funtester-app\\examples\\petshop.ftr"
+}

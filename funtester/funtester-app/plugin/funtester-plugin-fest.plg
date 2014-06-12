@@ -1,0 +1,13 @@
+{
+	"id" : "org.funtester.plugin.fest",
+	"name" : "FEST plugin for FunTester",
+	"version" : "0.7.1",
+	"description" : "Generate FEST tests for Java Swing GUIs",
+	"frameworks" : [
+		{ "id" : "testng", "name" : "TestNG" }
+	],
+	"canRunTestsInternally" : false,
+	"authors" : "Thiago Delgado Pinto",
+	"website" : "http://www.assembla.com/projects/funtester-plugin-fest",
+	"commandToRun" : "java -jar ../../../funtester-plugin-fest/target/funtester-plugin-fest-0.7.1-shaded.jar {cfg}"
+}
