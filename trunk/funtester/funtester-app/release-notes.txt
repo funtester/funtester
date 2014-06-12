@@ -1,0 +1,32 @@
+# Version 0.7c (June 4th, 2014)
+
+@change: Some validations were relaxed for allowing certain symbols.
+
+@change: Translation to Brazilian Portuguese was extended.
+
+@change: Default saving directory is now the current directory, instead of
+         the user home directory.
+         
+@change: Project file now uses relative paths and has a model version number.
+
+@fix:    OracleStepDialog fixed to display max elements correctly.
+
+
+# Version 0.7b (May 27th, 2014)
+
+@new:    Known issues tab added to the About dialog.
+
+@change: Some validations and error messages were improved.
+
+@change: Translation to Brazilian Portuguese was extended.
+
+@change: Database script widgets are now disabled. They were not implemented,
+         but their widgets were enabled.
+
+@fix:    Database configuration dialog fixed. Now all the template options
+         can be chosen.
+
+
+# Version 0.7a (May 5th, 2014)
+
+- First public release.

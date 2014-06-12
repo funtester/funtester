@@ -1,0 +1,9 @@
+{
+	"name" : "MySQL JDBC Driver",
+	"type" : "mysql",
+	"driverFile" : "mysql-connector-java-5.1.28-bin.jar",
+	"driverClass" : "com.mysql.jdbc.Driver",
+	"defaultPort" : 3306,
+	"defaultUser" : "root",
+	"defaultPassword" : ""
+}
