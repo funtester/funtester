@@ -152,12 +152,15 @@ public class RegExDialog extends JDialog {
 				}
 				*/
 				
+				final String textMatch = Messages.alt( "_REGEX_MATCH", "match" );
+				final String textDoesNotMatch = Messages.alt( "_REGEX_NOT_MATCH", "doesn't match" );
+				
 				try {
 					boolean match = testValue.getText().matches( expression.getText() );
-					resultValue.setText( match ? "match" : "doesn't match" );
+					resultValue.setText( match ? textMatch : textDoesNotMatch );
 					testValue.requestFocusInWindow();
 				} catch (Exception ex) {
-					resultValue.setText( "doesn't match: " + ex.getLocalizedMessage() );
+					resultValue.setText( textDoesNotMatch + ": " + ex.getLocalizedMessage() );
 					testValue.requestFocusInWindow();
 				}
 			}
@@ -175,7 +178,7 @@ public class RegExDialog extends JDialog {
 		clearButton.setName("clearButton");
 		testPanel.add(clearButton, "8, 2");
 		
-		JLabel lblResult = new JLabel("Result:");
+		JLabel lblResult = new JLabel(Messages.getString("RegExDialog.lblResult.text")); //$NON-NLS-1$
 		testPanel.add(lblResult, "2, 4, left, default");
 		
 		resultValue = new JLabel(Messages.getString("RegExDialog.resultValue.text")); //$NON-NLS-1$
