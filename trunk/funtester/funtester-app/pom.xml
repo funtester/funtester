@@ -164,8 +164,12 @@
 		</dependency>
 
 		<!-- JGoodies -->
-		<!-- <dependency> <groupId>com.jgoodies</groupId> <artifactId>jgoodies-forms</artifactId> 
-			<version>1.6.0</version> </dependency> -->
+
+		<dependency>
+			<groupId>com.jgoodies</groupId>
+			<artifactId>jgoodies-forms</artifactId>
+			<version>1.6.0</version>
+		</dependency>
 			
 		<!-- JGoodies Binding -->
 		<!-- <dependency> <groupId>com.jgoodies</groupId> <artifactId>jgoodies-binding</artifactId> 
@@ -196,7 +200,6 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
-
 
 		<!-- Jide Swing Components -->
 		<!-- <dependency> <groupId>com.jidesoft</groupId> <artifactId>jide-oss</artifactId> 
