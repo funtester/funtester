@@ -260,7 +260,7 @@ public class DatabaseConfigDialog extends JDialog {
 		port = new JTextField();
 		port.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {			
+			public void keyPressed(KeyEvent e) {
 				Integer portValue;
 				try {
 					portValue = Integer.valueOf( port.getText() );
