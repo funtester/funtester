@@ -275,9 +275,10 @@ public class OracleStepDialog extends DefaultEditingDialog< OracleStep > {
 
 	@Override
 	protected void drawObject(final OracleStep obj) {
-		actionNickname.setSelectedItem( obj.getActionNickname() );
+		ActionNickname aNickname = obj.getActionNickname();
+		actionNickname.setSelectedItem( aNickname );
 		// Update max elements
-		updateMaxElements( obj.getActionNickname().maxElements() );
+		updateMaxElements( aNickname != null ? aNickname.maxElements() : 0 );
 		
 		elements.setText( obj.elementsAsText() );
 		messageOccurrence.setSelectedItem( obj.getMessageOccurrence() );

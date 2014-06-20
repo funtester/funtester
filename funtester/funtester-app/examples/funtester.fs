@@ -12,7 +12,7 @@
   "regularExpressions" : [ {
     "id" : 1,
     "name" : "software name",
-    "expression" : "[A-Za-z0-9.\\-_ ]{2,50}"
+    "expression" : "[A-Za-z0-9.\\-_ ]{1,50}"
   } ],
   "databaseConfigurations" : [ ],
   "queryConfigurations" : [ ],
@@ -94,7 +94,7 @@
     "ignoreToGenerateTests" : true,
     "description" : "Allow accessing the system",
     "includeFiles" : [ {
-      "name" : "org.funtester.app.ui.main.MainFrame"
+      "name" : "org.funtester.app.ui.MainFrame"
     } ],
     "databaseScripts" : [ ]
   }, {
@@ -119,7 +119,7 @@
         "id" : 1,
         "type" : "REG_EX",
         "importance" : "MEDIUM",
-        "message" : "The name must be between 2 to 50 characters long.",
+        "message" : "The name must be between %d and %d characters long. (Regular expression: %s)",
         "valueConfiguration" : {
           "@class" : "org.funtester.core.software.RegExBasedVC",
           "id" : 4,
@@ -129,7 +129,7 @@
         "id" : 5,
         "type" : "REQUIRED",
         "importance" : "MEDIUM",
-        "message" : "Please inform the name.",
+        "message" : "The name must be between %d and %d characters long. (Regular expression: %s)",
         "valueConfiguration" : null
       } ]
     }, {
@@ -153,7 +153,7 @@
         "valueConfiguration" : {
           "@class" : "org.funtester.core.software.MultiVC",
           "id" : 3,
-          "values" : [ "Default Vocabulary (English)", "Another Vocabulary (Portuguese)" ]
+          "values" : [ "Desktop Applications Vocabulary (English)", "Vocabulário para Aplicações Desktop (Portuguese)" ]
         }
       } ]
     }, {
@@ -230,11 +230,11 @@
     "Flow" : 3,
     "Step" : 12,
     "UseCase" : 2,
-    "Element" : 8,
-    "BusinessRule" : 5,
     "ValueConfiguration" : 4,
-    "RegEx" : 1,
     "Actor" : 2,
-    "ConditionState" : 1
+    "ConditionState" : 1,
+    "BusinessRule" : 5,
+    "Element" : 8,
+    "RegEx" : 1
   }
 }
