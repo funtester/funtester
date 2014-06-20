@@ -4,8 +4,9 @@ EACH NEW VERSION...
 PROJECTS:
 
 1. Change value of AppVersion.CURRENT in funtester-app; 
-2. Increase pom.xml's current version in funtester and all its subprojects;
-3. Edit plugins/funtester-plugin-fest.plg if the FEST plug-in has changed;
+2. If the MAJOR or MINOR version has changed, increase the current version in
+   the funtester's pom.xml and all its subprojects;
+3. If the FEST plug-in has changed, edit plugins/funtester-plugin-fest.plg;
 
 DEPLOY:
 
@@ -21,3 +22,7 @@ DEPLOY:
 . Check/update the plug-in file descriptors paths;
 . Create a "manual" folder and put the updated manual files;
 . Create a "examples" folder and put the updated example files;
+
+SITE:
+
+. Update the /last-version.txt.

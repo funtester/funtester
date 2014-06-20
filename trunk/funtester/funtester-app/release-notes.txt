@@ -1,3 +1,10 @@
+# Version 0.7c.1 (June 19th, 2014)
+
+@change: Translation to Brazilian Portuguese was extended.
+
+@fix:    OracleStepDialog display fixed.
+
+
 # Version 0.7c (June 4th, 2014)
 
 @change: Some validations were relaxed for allowing certain symbols.
