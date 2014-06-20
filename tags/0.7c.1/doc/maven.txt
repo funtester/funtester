@@ -1,0 +1,12 @@
+# Sonar:
+
+mvn clean install -DskipTests=true
+mvn sonar:sonar
+
+# Dependencies Analyze:
+
+mvn dependency:analyze
+
+# Dependencies Tree
+
+mvn dependency:tree

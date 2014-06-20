@@ -1,0 +1,9 @@
+{
+	"name" : "Firebird JDBC Driver",
+	"type" : "firebird",
+	"driverFile" : "",
+	"driverClass" : "org.firebirdsql.Driver",
+	"defaultPort" : 3050,
+	"defaultUser" : "SYSDBA",
+	"defaultPassword" : "masterkey"
+}

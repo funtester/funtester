@@ -1,0 +1,18 @@
+{
+  "modelVersion" : 1,
+  "softwareFile" : "C:\\Users\\Thiago\\Desktop\\funtester-0.7c\\examples\\funtester.fun",
+  "generateSemanticTests" : true,
+  "semanticTestFile" : "C:\\Users\\Thiago\\Desktop\\funtester-0.7c\\examples\\funtester.fat",
+  "pluginId" : "org.funtester.plugin.fest",
+  "testingFramework" : "testng",
+  "generateCode" : false,
+  "outputDirectory" : "C:\\Users\\Thiago\\Desktop\\funtester\\funtester\\funtester-app\\src\\test\\java\\org\\funtester\\tests",
+  "mainClass" : "org.funtester.app.Main",
+  "packageName" : "org.funtester.tests.functional",
+  "timeoutInMS" : 5000,
+  "run" : true,
+  "commandsToRun" : [ "cmd /k cd C:/Users/Thiago/Desktop/funtester/funtester/funtester-app & mvn test -DskipTests=false" ],
+  "tryToRunInternally" : false,
+  "originalResultsFile" : "C:\\Users\\Thiago\\Desktop\\funtester\\funtester\\funtester-app\\target\\surefire-reports\\testng-results.xml",
+  "convertedResultsFile" : "C:\\Users\\Thiago\\Desktop\\funtester-0.7c\\examples\\funtester.ftr"
+}

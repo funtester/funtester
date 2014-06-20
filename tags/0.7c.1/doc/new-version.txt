@@ -1,0 +1,28 @@
+EACH NEW VERSION...
+(to-do: automate this in the future)
+
+PROJECTS:
+
+1. Change value of AppVersion.CURRENT in funtester-app; 
+2. If the MAJOR or MINOR version has changed, increase the current version in
+   the funtester's pom.xml and all its subprojects;
+3. If the FEST plug-in has changed, edit plugins/funtester-plugin-fest.plg;
+
+DEPLOY:
+
+. Create a C:\funtester-<version> folder;
+. Copy the jar file and rename it to "funtester.jar";
+. Copy the updated "known-issues.txt" and "release-notes.txt";
+. Copy the LICENSE.txt
+. Copy the "funtester.sh" and "funtester.bat";
+. Copy the "profile" folder;
+. Copy the "vocabulary" folder;
+. Copy the "jdbc" folder;
+. Create a "plugin" folder and put the updated plug-in files and descriptors;
+. Check/update the plug-in file descriptors paths;
+. Create a "manual" folder and put the updated manual files;
+. Create a "examples" folder and put the updated example files;
+
+SITE:
+
+. Update the /last-version.txt.
