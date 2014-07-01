@@ -5,8 +5,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.EventListener;
-import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Announcer is a utility class to ease the use of the Publish/Subscribe design
@@ -29,7 +31,10 @@ public class Announcer<T extends EventListener> {
 //	private Logger logger = LoggerFactory.getLogger( Announcer.class );
 
 	private final T proxy;
-	private final ConcurrentLinkedDeque< T > listeners = new ConcurrentLinkedDeque< T >();
+	
+	/// @see http://docs.oracle.com/javase/6/docs/api/java/util/Collections.html#newSetFromMap(java.util.Map)
+	private final Set< T > listeners =
+			Collections.newSetFromMap( new ConcurrentHashMap< T, Boolean >() );
 		
 	public Announcer(Class<? extends T> listenerType) {
 		
@@ -58,7 +63,7 @@ public class Announcer<T extends EventListener> {
 		}
 	}	
 	
-	public ConcurrentLinkedDeque< T > getAll() {
+	public Set< T > getAll() {
 		return listeners;
 	}
 	
