@@ -68,12 +68,14 @@ public final class TextFileUtil {
 		InputStream is = new FileInputStream( fileName );
 		BufferedReader reader = new BufferedReader( new InputStreamReader( is, "UTF-8" ) );
 		
+		final String lineSeparator = System.getProperty( "line.separator" );
+		
 		StringBuffer sb = new StringBuffer();
 		try {
 			String line;
 			while ( reader.ready() && ( line = reader.readLine() ) != null ) {
 				sb.append( line );
-				sb.append( System.lineSeparator() );
+				sb.append(  lineSeparator );
 			}
 		} finally {
 			reader.close();
