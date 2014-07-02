@@ -1,0 +1,9 @@
+1. FunTester generate values from regular expressions using the Xeger library
+   and, thus, it is subject to the limitations of this library, described at
+   https://code.google.com/p/xeger/wiki/XegerLimitations
+   
+2. Currently, the file paths in the test generation configuration are not
+   relative (they are absolute). In this way, it could be necessary, in some
+   cases, to edit the project file manually to fix a file path (for instance,
+   when a file is under version control and two different users have checked
+   it out to different paths in the computer).
