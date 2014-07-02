@@ -14,11 +14,6 @@ public class DriverUnavailableException extends Exception {
 		super();
 	}
 
-	public DriverUnavailableException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super( message, cause, enableSuppression, writableStackTrace );
-	}
-
 	public DriverUnavailableException(String message, Throwable cause) {
 		super( message, cause );
 	}

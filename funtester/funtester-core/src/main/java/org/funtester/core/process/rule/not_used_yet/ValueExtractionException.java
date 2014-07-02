@@ -14,11 +14,6 @@ public class ValueExtractionException extends Exception {
 		super();
 	}
 
-	public ValueExtractionException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super( message, cause, enableSuppression, writableStackTrace );
-	}
-
 	public ValueExtractionException(String message, Throwable cause) {
 		super( message, cause );
 	}

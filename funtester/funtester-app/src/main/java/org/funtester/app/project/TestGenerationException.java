@@ -25,9 +25,4 @@ public class TestGenerationException extends RuntimeException {
 		super( message, cause );
 	}
 
-	public TestGenerationException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super( message, cause, enableSuppression, writableStackTrace );
-	}
-
 }

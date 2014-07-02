@@ -74,8 +74,7 @@ public class MainFrame extends JFrame implements
 	private ProjectPanel projectPanel = null; // Created on demand
 	
 	// Message list
-	private final DefaultListModel< String > listModel =
-			new DefaultListModel< String >();
+	private final DefaultListModel listModel = new DefaultListModel();
 	
 	private final FileActionContainer fileAC;
 	private final EditActionContainer editAC;
