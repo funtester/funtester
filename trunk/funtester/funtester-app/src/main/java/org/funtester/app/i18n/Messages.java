@@ -157,7 +157,7 @@ public final class Messages {
 		logger.debug( String.format( "Adding \"%s\" to %s.", content, fileName ) );
 		
 		try {
-			TextFileUtil.appendContent( System.lineSeparator() + content, fileName );
+			TextFileUtil.appendContent( System.getProperty( "line.separator" ) + content, fileName );
 		} catch ( IOException e ) {
 			logger.error( e.getLocalizedMessage(), e );
 		}

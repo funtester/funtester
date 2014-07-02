@@ -204,7 +204,7 @@ public class ActionStepDialog extends DefaultEditingDialog< ActionStep > {
 	}
 
 	private void filterActions(final Trigger trigger) {
-		actionNickname.setModel( new DefaultComboBoxModel< ActionNickname >(
+		actionNickname.setModel( new DefaultComboBoxModel(
 			actionNicknamesWithTrigger( trigger )
 			));
 		actionNickname.setSelectedIndex( -1 );

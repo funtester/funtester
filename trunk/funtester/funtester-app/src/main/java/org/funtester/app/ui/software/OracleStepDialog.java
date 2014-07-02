@@ -113,7 +113,7 @@ public class OracleStepDialog extends DefaultEditingDialog< OracleStep > {
 		lblActionNickname = new JLabel(Messages.getString("OracleStepDialog.lblActionNickname.text")); //$NON-NLS-1$
 		contentPanel.add(lblActionNickname, "2, 2, right, default");
 		
-		actionNickname = new JComboBox( new DefaultComboBoxModel< ActionNickname >(
+		actionNickname = new JComboBox( new DefaultComboBoxModel(
 				nicknamesForOracleStep( nicknames ) ) );
 		actionNickname.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
