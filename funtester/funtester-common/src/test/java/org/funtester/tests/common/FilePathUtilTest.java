@@ -1,6 +1,7 @@
 package org.funtester.tests.common;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import org.funtester.common.util.FilePathUtil;
 import org.testng.annotations.DataProvider;
@@ -97,14 +98,14 @@ public class FilePathUtilTest {
 	@DataProvider(name="mixedPaths")
 	public Object[][] mixedPaths() {
 		return new Object[][] {
-			{ "one/two/a", "../b/file.ext", "one/two/b/file.txt" },
+			{ "one/two/a", "../b/file.ext", "one/two/b/file.ext" },
 		};
 	}
 
 	@Test( dataProvider="mixedPaths" )
 	public void mixFileNameCorrectly(String directory, String fileName, String expected) {
 		String result = FilePathUtil.toAbsolutePath( fileName, directory );
-		assertEquals( result.length(), expected.length() );
+		assertEquals( result, expected );
 	}
 
 }

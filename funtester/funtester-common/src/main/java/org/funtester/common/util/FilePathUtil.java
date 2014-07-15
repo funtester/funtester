@@ -12,77 +12,161 @@ public class FilePathUtil {
 	private FilePathUtil() {}
 	
 	/**
-	 * Return a relative file path for an absolute file path.
+	 * Return a relative path for an absolute path.
 	 * This method does NOT touch the file system.
 	 * 
-	 * @param absoluteFilePath	the absolute file path to convert.
-	 * @param referenceDir		the directory for reference.
-	 * @return					a relative file path.
+	 * @param absolutePath	the absolute path to convert.
+	 * @param referenceDir	the directory for reference.
+	 * @return				a relative path.
 	 */
 	public static String toRelativePath(
-			final String absoluteFilePath,
+			final String absolutePath,
 			final String referenceDir
 			) {
 		
-		// Down
-		
-		int index = absoluteFilePath.lastIndexOf( referenceDir );
-		if ( index >= 0 ) {
-			return absoluteFilePath.substring( index + 1 + referenceDir.length() );
-		}
-		
-		// Up
-		
-		String path = absoluteFilePath.replaceAll( "\\\\", "/" );
+		// Transform "\" to "/"
+		String absPath = absolutePath.replaceAll( "\\\\", "/" );
 		String refDir = referenceDir.replaceAll( "\\\\", "/" );
 		
-		int lastSeparatorIndex = path.lastIndexOf( "/" );
-		String pathWithoutTheFile = ( lastSeparatorIndex >= 0 )
-				? path.substring( 0, lastSeparatorIndex ) : "";
-		
-		int partOfRefDirIndex = refDir.indexOf( pathWithoutTheFile );
-		String restOfRefDir = refDir.substring( partOfRefDirIndex + pathWithoutTheFile.length() );
-		int count = restOfRefDir.split( "/" ).length - 1;
-		StringBuilder sb = new StringBuilder();
-		for ( int i = 0; i < count; ++i ) {
-			sb.append( "../" );
+		// Add a "/" in the reference directory, if needed
+		if ( ! refDir.endsWith( "/" ) ) {
+			refDir += "/"; 
 		}
 		
-		String file = path.substring( lastSeparatorIndex + 1 );
-		return makeFileName( sb.toString(), file );
+		// If both are directories, and they are equal, then return "/"
+		if ( absPath.equalsIgnoreCase( refDir ) ) {
+			return "/";
+		}
+		
+		// Reference directory is in the absolute path
+		int indexOfRefDirInAbsPath = absPath.toLowerCase().indexOf( refDir.toLowerCase() ); 
+		if ( indexOfRefDirInAbsPath >= 0 ) {
+			return absPath.substring( indexOfRefDirInAbsPath + refDir.length() );
+		}
+		
+		// Part of the reference directory is expected to be in the absolute path
+		
+		String splittedRefDir [] = refDir.split( "/" );
+		String splittedAbsPath [] = absPath.split( "/" );
+		
+		final int refLen = splittedRefDir.length;
+		final int absLen = splittedAbsPath.length;
+		int lastEqualIndex = -1;
+		
+		// Save the last index where the paths are equal
+		
+		for ( int i = 0; i < absLen && i < refLen; ++i ) {
+
+			if ( splittedAbsPath[ i ].equalsIgnoreCase( splittedRefDir[ i ] ) ) {
+				lastEqualIndex = i;
+			} else {
+				break;
+			}
+		}
+		
+		// The paths have nothing in common, so return the original absolute path
+		if ( lastEqualIndex < 0 ) {
+			return absolutePath;
+		}
+
+		// They have a common root
+		StringBuilder path = new StringBuilder();
+		boolean addedRelPath = false;
+		
+		// Add a ../ for each directory of the relative path after the common root
+		for ( int ri = lastEqualIndex + 1; ri < refLen; ++ri ) {
+			path.append( "../" );
+			addedRelPath = true;
+		}
+		
+		// Add the pieces of the absolute path after the common root
+		for ( int ai = lastEqualIndex + 1; ai < absLen; ++ai ) {
+			if ( ai > lastEqualIndex + 1 
+					|| ( ( ai == lastEqualIndex + 1 ) && ! addedRelPath ) ) {
+				path.append( "/" );
+			}
+			path.append( splittedAbsPath[ ai ] );
+		}
+		
+		return path.toString();
 	}
 	
+	
 	/**
-	 * Return an absolute file path from a relative file path.
+	 * Return an absolute path from a relative path.
 	 * This method does NOT touch the file system.
 	 * 
-	 * @param relativePath	the relative file path.
+	 * @param relativePath	the relative path.
 	 * @param currentDir	the current directory.
-	 * @return				an absolute file path.
+	 * @return				an absolute path.
 	 */
 	public static String toAbsolutePath(
 			final String relativePath,
 			final String currentDir
 			) {
-		String curDir = currentDir.replaceAll( "\\\\", "/" );
+		
 		String path = relativePath.replaceAll( "\\\\", "/" );
+		String currDir = currentDir.replaceAll( "\\\\", "/" );
+		
+		if ( path.isEmpty() || path.equals( "." ) || path.equals( "./" ) ) {
+			return currentDir;
+		}
+		
 		
 		if ( ! path.contains( ".." ) ) {
-			final boolean b1 = curDir.endsWith( "/" );
+			final boolean b1 = currDir.endsWith( "/" );
 			final boolean b2 = path.startsWith( "/" );
 			
 			if ( b1 && b2 ) {
-				return curDir + path.substring( 1 );
+				return currDir + path.substring( 1 );
 			} else if ( b1 || b2 ) {
-				return curDir + path;
+				return currDir + path;
 			} else {
-				return curDir + "/" + path;
+				return currDir + "/" + path;
 			}
 		} 
 		
-		if ( ! curDir.endsWith( "/" ) ) { curDir += "/"; }
+		if ( ! currDir.endsWith( "/" ) ) { currDir += "/"; }
+		
+		
+		int dirIdx = currDir.length() - 1 - "/".length();
+		
+		int pathIdx = "../".length() - 1;
+		
+		while ( pathIdx >= 0 ) {
+			dirIdx = currDir.lastIndexOf( "/", dirIdx - 1 );
+			
+			pathIdx = path.indexOf( "../", pathIdx + 1 );
+		}
+
+		return 
+				directoryWithSeparator( currDir.substring( 0, dirIdx ) ) +
+				path.substring(	path.lastIndexOf( "../" ) + "../".length() )
+				;
 		
 		/*
+		
+		
+		
+		// count occurrences of "../"
+		int count = path.length() - path.replace( "../", "" ).length();
+		System.out.println( "count: " + count);
+		
+		int lastIdx = currDir.length() - 1 - "/".length();
+		int x = 1;
+		while ( x < count && lastIdx >= 0 ) {
+			lastIdx = currDir.lastIndexOf( "/", lastIdx - 1 );
+			x++;
+		}
+		
+		return currDir.substring( 0, lastIdx ) +
+				path.substring( path.lastIndexOf( "../" ) + "../".length() );
+		
+		*/
+		
+		
+		
+		/* OLD
 		int pathIndex = path.lastIndexOf( ".." );
 		int dirIndex = curDir.lastIndexOf( "/" );
 		while ( pathIndex >= 0 && dirIndex > 0 ) {
@@ -90,13 +174,16 @@ public class FilePathUtil {
 			pathIndex = path.substring( 0, pathIndex > 0 ? pathIndex - 1 : pathIndex ).lastIndexOf( ".." );
 		}
 		*/
+		
+		/*
+		
 		String tmpPath = path;
-		String tmpDir = curDir.substring( 0, curDir.lastIndexOf( "/" ) );
-		int relIndex, slashIndex;
-		while ( ( relIndex = tmpPath.indexOf( ".." ) ) >= 0
+		String tmpDir = currDir;
+		int upDirIndex, slashIndex;
+		while ( ( upDirIndex = tmpPath.indexOf( ".." ) ) >= 0
 				&&  ( slashIndex = tmpDir.lastIndexOf( "/" ) ) >= 0 ) {
 			//System.out.println( "tmpPath=" + tmpPath + ", " + "tmpDir=" + tmpDir );
-			tmpPath = tmpPath.substring( relIndex + 3 ); // 3 == "../".length()
+			tmpPath = tmpPath.substring( upDirIndex + 3 ); // 3 == "../".length()
 			tmpDir = tmpDir.substring( 0, slashIndex );
 		}
 		//System.out.println( "--" );
