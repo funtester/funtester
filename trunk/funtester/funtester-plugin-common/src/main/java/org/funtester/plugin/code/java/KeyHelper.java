@@ -1,4 +1,4 @@
-package org.funtester.plugin.code;
+package org.funtester.plugin.code.java;
 
 /**
  * Key helper
