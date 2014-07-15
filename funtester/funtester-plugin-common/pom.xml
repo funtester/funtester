@@ -18,6 +18,13 @@
 			<artifactId>funtester-common</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		
+		<!-- FreeMarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.20</version>
+		</dependency>
 
 	</dependencies>
 	  
