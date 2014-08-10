@@ -50,25 +50,10 @@ public class EditActionContainer {
 	
 	
 	public Action editConfigurationAction() {
-		final String fileName = state.getConfigurationFile();
-		AppConfigurationRepository repository = new JsonAppConfigurationRepository( fileName );
-		
-		AppConfiguration configuration = state.getConfiguration();
-		
-		Collection< Locale > locales = state.getLocalesMap().keySet();
-		
-		Map< String, String > lookAndFeelMap = state.getLookAndFeelMap();
-		Collection< String > lookAndFeels = lookAndFeelMap != null ? lookAndFeelMap.keySet() : null;
-		
-		AppConfigurationValidator validator = new AppConfigurationValidator( lookAndFeels );
-		
-		AppConfigurationManager manager = new AppConfigurationManager(
-				locales, lookAndFeels, validator, repository );
-		
 		return ( null == editConfigurationAction )
 			? editConfigurationAction = new BaseAction()
 				.withName( Messages.alt( "_MENU_EDIT_CONFIGURATION", "Configuration..." ) )
-				.withListener( createConfigurationEditActionListener( configuration, manager ) )
+				.withListener( createConfigurationEditActionListener() )
 				.withIcon( ImageUtil.loadIcon( ImagePath.configurationIcon() ) )
 			: editConfigurationAction;
 	}
@@ -91,10 +76,23 @@ public class EditActionContainer {
 				: editVocabulariesAction;
 	}
 	
-	private ActionListener createConfigurationEditActionListener(
-			final AppConfiguration configuration,
-			final AppConfigurationManager manager			
-			) {
+	private ActionListener createConfigurationEditActionListener() {
+		
+		final String fileName = state.getConfigurationFile();
+		AppConfigurationRepository repository = new JsonAppConfigurationRepository( fileName );
+		
+		final AppConfiguration configuration = state.getConfiguration();
+		
+		Collection< Locale > locales = state.getLocalesMap().keySet();
+		
+		Map< String, String > lookAndFeelMap = state.getLookAndFeelMap();
+		Collection< String > lookAndFeels = lookAndFeelMap != null ? lookAndFeelMap.keySet() : null;
+		
+		AppConfigurationValidator validator = new AppConfigurationValidator( lookAndFeels );
+		
+		final AppConfigurationManager manager = new AppConfigurationManager(
+				locales, lookAndFeels, validator, repository );
+		
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

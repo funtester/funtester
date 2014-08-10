@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -27,6 +29,8 @@ import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import org.funtester.app.i18n.Messages;
 import org.funtester.app.project.AppState;
@@ -36,9 +40,13 @@ import org.funtester.app.ui.common.DefaultEditingDialog;
 import org.funtester.app.ui.common.DefaultFileChooser;
 import org.funtester.app.ui.common.DefaultFileNameExtensionFilters;
 import org.funtester.app.ui.common.ImagePath;
+import org.funtester.app.ui.thirdparty.eu.hansolo.custom.SteelCheckBox;
+import org.funtester.app.ui.util.ClipboardUtil;
 import org.funtester.app.ui.util.ImageUtil;
 import org.funtester.app.validation.TestGenerationConfigurationValidator;
 import org.funtester.common.generation.TestGenerationConfiguration;
+import org.funtester.common.util.FileUtil;
+import org.funtester.common.util.PathType;
 import org.funtester.common.util.Validator;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -63,6 +71,7 @@ public class TestGenerationDialog extends
 	private final List< PluginInfo > plugins;
 	private final Map< Integer, List< String > > frameworkIndexToValuesMap;
 	private boolean currentPluginCanRunTestsInternally = false;
+	private File referenceDirectory;
 	
 	//
 	// Abstract test generation
@@ -71,6 +80,7 @@ public class TestGenerationDialog extends
 	private final JRadioButton useExistingFileOption;
 	private final JTextField semanticTestFile;
 	private final JButton chooseAbstractTestFileButton;
+	private final SteelCheckBox absoluteSemanticTestFilePath;
 	
 	//
 	// Plug-in
@@ -84,6 +94,7 @@ public class TestGenerationDialog extends
 	private final JCheckBox generateCodeOption;
 	private final JTextField outputDirectory;
 	private final JButton chooseOutputDirectoryButton;
+	private final SteelCheckBox absoluteOutputDirectory;
 	private final JTextField mainClass;
 	private final JTextField packageName;
 	private final JSpinner timeoutInMS;
@@ -97,9 +108,11 @@ public class TestGenerationDialog extends
 	private final JTextArea commandsToRun;
 	private final JTextField originalResultFile;
 	private final JButton chooseOriginalResultFileButton;
+	private final SteelCheckBox absoluteOriginalResultFilePath;
 	private final JTextField convertedResultFile;
 	private final JButton chooseConvertedResultFileButton;
-	private JTextField testSuiteName;
+	private final SteelCheckBox absoluteConvertedResultFilePath;
+	private JTextField baseDirectory;
 	
 	
 	/**
@@ -108,10 +121,27 @@ public class TestGenerationDialog extends
 	public TestGenerationDialog(
 			AppState appState
 			) {
-		setSize(new Dimension(870, 690));
+		setSize(new Dimension(980, 715));
 		setAlwaysOnTop( true );
 		
 		this.appState = appState;
+		
+		if ( null == appState.getConfigurationFile() ||
+				! ( new File( appState.getConfigurationFile() ).exists() ) ) {
+			this.referenceDirectory = FileUtil.currentDirectory();
+		}
+		else {
+			this.referenceDirectory = ( new File( appState.getConfigurationFile() ) )
+				.getParentFile();
+			
+			if ( null == this.referenceDirectory ) {
+				this.referenceDirectory = FileUtil.currentDirectory();
+			}
+		}
+		
+		//
+		// Extract plug-ins and frameworks
+		//
 
 		plugins = new ArrayList< PluginInfo >();
 		frameworkIndexToValuesMap = new LinkedHashMap< Integer, List< String > >();
@@ -137,7 +167,9 @@ public class TestGenerationDialog extends
 			++index;
 		}
 		
-		
+		//
+		// Create the panel
+		//
 		
 		okButton.setText(Messages.getString("TestGenerationDialog.thisOkButton.text")); //$NON-NLS-1$
 		
@@ -159,11 +191,14 @@ public class TestGenerationDialog extends
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.UNRELATED_GAP_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.UNRELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -201,8 +236,33 @@ public class TestGenerationDialog extends
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
+		JLabel lblBaseDirectory = new JLabel( Messages.getString("TestGenerationDialog.lblBaseDirectory.text") ); //$NON-NLS-1$
+		lblBaseDirectory.setVisible(false);
+		lblBaseDirectory.setForeground(SystemColor.textInactiveText);
+		contentPanel.add(lblBaseDirectory, "5, 2, right, default");
+		
+		baseDirectory = new JTextField();
+		baseDirectory.setVisible(false);
+		baseDirectory.setForeground(SystemColor.textInactiveText);
+		baseDirectory.setEditable(false);
+		baseDirectory.setBorder(UIManager.getBorder("TextField.border"));
+		baseDirectory.setBackground(SystemColor.control);
+		contentPanel.add(baseDirectory, "7, 2, 5, 1, fill, default");
+		baseDirectory.setColumns(10);
+		baseDirectory.setText( referenceDirectory.getAbsolutePath() );
+		
+		JButton copyBaseDirectoryButton = new JButton( ImageUtil.loadIcon( ImagePath.copyIcon() ) );
+		copyBaseDirectoryButton.setVisible(false);
+		copyBaseDirectoryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClipboardUtil.copyText( baseDirectory.getText() );
+			}
+		});
+		copyBaseDirectoryButton.setToolTipText( Messages.getString("TestGenerationDialog.copyBaseDirectoryButton.toolTipText") ); //$NON-NLS-1$
+		contentPanel.add(copyBaseDirectoryButton, "13, 2");
+		
 		JPanel abstractTestGenerationPanel = new JPanel();
-		contentPanel.add(abstractTestGenerationPanel, "3, 2, 11, 1, fill, fill");
+		contentPanel.add(abstractTestGenerationPanel, "3, 5, 13, 1, fill, fill");
 		abstractTestGenerationPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.MIN_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -211,6 +271,9 @@ public class TestGenerationDialog extends
 				FormFactory.GROWING_BUTTON_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		final String absoluteText = "absolute"; // TODO i18n
+		final String absoluteTooltipText = "absolute path"; // TODO i18n
 		
 		//
 		// Abstract test generation
@@ -232,22 +295,23 @@ public class TestGenerationDialog extends
 		ButtonGroup fileOptionGroup = new ButtonGroup();
 		
 		createNewFileOption = new JRadioButton(Messages.getString("TestGenerationDialog.createNewFileOption.text")); //$NON-NLS-1$
+		createNewFileOption.setMargin(new Insets(2, 0, 2, 2));
 		createNewFileOption.setName("createNewFileOption");
-		contentPanel.add(createNewFileOption, "7, 4");
+		contentPanel.add(createNewFileOption, "7, 7");
 		fileOptionGroup.add( createNewFileOption );
 		createNewFileOption.setSelected(true);
 		
 		useExistingFileOption = new JRadioButton(Messages.getString("TestGenerationDialog.useExistingFileOption.text")); //$NON-NLS-1$
 		useExistingFileOption.setName("useExistingFileOption");
-		contentPanel.add(useExistingFileOption, "9, 4");
+		contentPanel.add(useExistingFileOption, "9, 7");
 		fileOptionGroup.add( useExistingFileOption );
 		
 		JLabel lblSemanticTestFile = new JLabel(Messages.getString("TestGenerationDialog.lblSemanticTestFile.text")); //$NON-NLS-1$
-		contentPanel.add(lblSemanticTestFile, "5, 6, right, default");
+		contentPanel.add(lblSemanticTestFile, "5, 9, right, default");
 		
 		semanticTestFile = new JTextField();
 		semanticTestFile.setName("semanticTestFile");
-		contentPanel.add(semanticTestFile, "7, 6, 5, 1");
+		contentPanel.add(semanticTestFile, "7, 9, 5, 1");
 		semanticTestFile.setColumns(10);
 		
 		chooseAbstractTestFileButton = new JButton("...");
@@ -257,12 +321,21 @@ public class TestGenerationDialog extends
 				DefaultFileChooser.chooseFile(
 						semanticTestFile,
 						DefaultFileNameExtensionFilters.ABSTRACT_TESTS,
-						createNewFileOption.isSelected()
+						createNewFileOption.isSelected(),
+						PathType.RELATIVE
 						);
 			}
 		});
 		chooseAbstractTestFileButton.setName("chooseAbstractTestFileButton");
-		contentPanel.add(chooseAbstractTestFileButton, "13, 6");
+		contentPanel.add(chooseAbstractTestFileButton, "13, 9");
+		
+		absoluteSemanticTestFilePath = new SteelCheckBox();
+		absoluteSemanticTestFilePath.setVisible(false);
+		absoluteSemanticTestFilePath.setText( absoluteText );
+		absoluteSemanticTestFilePath.setToolTipText( absoluteTooltipText );
+		absoluteSemanticTestFilePath.setHorizontalAlignment(SwingConstants.CENTER);
+
+		contentPanel.add(absoluteSemanticTestFilePath, "15, 9");
 		
 		//
 		// Plug-in
@@ -280,21 +353,8 @@ public class TestGenerationDialog extends
 			}
 		});
 		
-		JLabel lblTestSuiteName = new JLabel(Messages.getString("TestGenerationDialog.lblTestSuiteName.text")); //$NON-NLS-1$
-		lblTestSuiteName.setForeground(Color.GRAY);
-		contentPanel.add(lblTestSuiteName, "5, 8, right, default");
-		
-		// Not editable for now
-		testSuiteName = new JTextField();
-		testSuiteName.setEditable(false);
-		testSuiteName.setEnabled(false);
-		testSuiteName.setName("testSuiteName");
-		contentPanel.add(testSuiteName, "7, 8, 5, 1, fill, default");
-		testSuiteName.setColumns(10);
-		testSuiteName.setText( appState.getConfiguration().getDefaultTestSuiteName() );
-		
 		JPanel pluginPanel = new JPanel();
-		contentPanel.add(pluginPanel, "3, 11, 11, 1, fill, fill");
+		contentPanel.add(pluginPanel, "3, 12, 13, 1, fill, fill");
 		pluginPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.MIN_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -316,24 +376,24 @@ public class TestGenerationDialog extends
 		JSeparator separator7 = new JSeparator();
 		pluginPanel.add(separator7, "5, 1");
 		
-		JLabel lblPlugin = new JLabel("Plug-in:");
-		contentPanel.add(lblPlugin, "5, 13, right, default");
+		JLabel lblPlugin = new JLabel(Messages.getString("TestGenerationDialog.lblPlugin.text")); //$NON-NLS-1$
+		contentPanel.add(lblPlugin, "5, 14, right, default");
 		plugin.setName("plugin");
-		contentPanel.add(plugin, "7, 13, 5, 1");
+		contentPanel.add(plugin, "7, 14, 5, 1");
 		
 		JLabel lblTestingFramework = new JLabel(Messages.getString("TestGenerationDialog.lblTestingFramework.text")); //$NON-NLS-1$
-		contentPanel.add(lblTestingFramework, "5, 15, right, default");
+		contentPanel.add(lblTestingFramework, "5, 16, right, default");
 		
 		testingFramework = new JComboBox();
 		testingFramework.setName("testingFramework");
-		contentPanel.add(testingFramework, "7, 15, 5, 1");
+		contentPanel.add(testingFramework, "7, 16, 5, 1");
 		
 		//
 		// Code generation
 		//
 		
 		JPanel codeGenerationPanel = new JPanel();
-		contentPanel.add(codeGenerationPanel, "3, 18, 11, 1, fill, fill");
+		contentPanel.add(codeGenerationPanel, "3, 19, 13, 1, fill, fill");
 		codeGenerationPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.MIN_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -350,7 +410,7 @@ public class TestGenerationDialog extends
 		generateCodeOption = new JCheckBox(Messages.getString("TestGenerationDialog.generateCodeOption.text")); //$NON-NLS-1$
 		generateCodeOption.setFont(new Font("Tahoma", Font.BOLD, 13));
 		generateCodeOption.setForeground(Color.DARK_GRAY);
-		generateCodeOption.setMargin(new Insets(2, 0, 2, 2));
+		generateCodeOption.setMargin(new Insets(0, 0, 0, 2));
 		generateCodeOption.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				setGenerateOptionsEnabledIf( e.getStateChange() == ItemEvent.SELECTED );
@@ -364,55 +424,68 @@ public class TestGenerationDialog extends
 		codeGenerationPanel.add(separator5, "5, 1");
 		
 		JLabel lblOutputDirectory = new JLabel(Messages.getString("TestGenerationDialog.lblOutputDirectory.text")); //$NON-NLS-1$
-		contentPanel.add(lblOutputDirectory, "5, 20, right, default");
+		contentPanel.add(lblOutputDirectory, "5, 21, right, default");
 		
 		outputDirectory = new JTextField();
 		outputDirectory.setName("outputDirectory");
-		contentPanel.add(outputDirectory, "7, 20, 5, 1, fill, default");
+		contentPanel.add(outputDirectory, "7, 21, 5, 1, fill, default");
 		outputDirectory.setColumns(10);
 		
 		chooseOutputDirectoryButton = new JButton("...");
 		chooseOutputDirectoryButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultFileChooser.chooseDirectory( outputDirectory );
+				DefaultFileChooser.chooseDirectory(
+						outputDirectory,
+						referenceDirectory,
+						PathType.RELATIVE
+						);
 			}
 		});
 		chooseOutputDirectoryButton.setName("chooseOutputDirectoryButton");
-		contentPanel.add(chooseOutputDirectoryButton, "13, 20");
+		contentPanel.add(chooseOutputDirectoryButton, "13, 21");
+		
+		absoluteOutputDirectory = new SteelCheckBox();
+		absoluteOutputDirectory.setVisible(false);
+		absoluteOutputDirectory.setText( absoluteText );
+		absoluteOutputDirectory.setToolTipText( absoluteTooltipText );
+		absoluteOutputDirectory.setHorizontalAlignment(SwingConstants.CENTER);
+
+		contentPanel.add(absoluteOutputDirectory, "15, 21");
+		
 		
 		JLabel lblMainClass = new JLabel(Messages.getString("TestGenerationDialog.lblMainClass.text")); //$NON-NLS-1$
-		contentPanel.add(lblMainClass, "5, 22, right, default");
+		contentPanel.add(lblMainClass, "5, 23, right, default");
 		
 		mainClass = new JTextField();
 		mainClass.setName("mainClass");
-		contentPanel.add(mainClass, "7, 22, 5, 1, fill, default");
+		contentPanel.add(mainClass, "7, 23, 5, 1, fill, default");
 		mainClass.setColumns(10);
 		
 		JLabel lblPackageName = new JLabel(Messages.getString("TestGenerationDialog.lblPackageName.text")); //$NON-NLS-1$
-		contentPanel.add(lblPackageName, "5, 24, right, default");
+		contentPanel.add(lblPackageName, "5, 25, right, default");
 		
 		packageName = new JTextField();
 		packageName.setName("packageName");
-		contentPanel.add(packageName, "7, 24, 5, 1, fill, default");
+		contentPanel.add(packageName, "7, 25, 5, 1, fill, default");
 		packageName.setColumns(10);
 		
 		JLabel lbTimeout = new JLabel(Messages.getString("TestGenerationDialog.lbTimeout.text")); //$NON-NLS-1$
-		contentPanel.add(lbTimeout, "5, 26, right, default");
+		contentPanel.add(lbTimeout, "5, 27, right, default");
 		
 		timeoutInMS = new JSpinner();
 		timeoutInMS.setName("timeoutInMS");
 		timeoutInMS.setModel(new SpinnerNumberModel(5000, 0, 1000000, 100));
-		contentPanel.add(timeoutInMS, "7, 26");
+		contentPanel.add(timeoutInMS, "7, 27");
 		
 		JLabel lblMilisseconds = new JLabel(Messages.getString("TestGenerationDialog.lblMilisseconds.text")); //$NON-NLS-1$
-		contentPanel.add(lblMilisseconds, "9, 26, left, default");
+		contentPanel.add(lblMilisseconds, "9, 27, left, default");
 		
 		//
 		// Run
 		//
 		
 		JPanel runPanel = new JPanel();
-		contentPanel.add(runPanel, "3, 29, 11, 1, fill, fill");
+		contentPanel.add(runPanel, "3, 30, 13, 1, fill, fill");
 		runPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.MIN_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -429,7 +502,7 @@ public class TestGenerationDialog extends
 		runOption = new JCheckBox(Messages.getString("TestGenerationDialog.runOption.text")); //$NON-NLS-1$
 		runOption.setForeground(Color.DARK_GRAY);
 		runOption.setFont(new Font("Tahoma", Font.BOLD, 13));
-		runOption.setMargin(new Insets(2, 0, 2, 2));
+		runOption.setMargin(new Insets(0, 0, 0, 2));
 		runOption.setName("runOption");
 		runOption.setSelected(true);
 		runOption.addItemListener(new ItemListener() {
@@ -446,26 +519,28 @@ public class TestGenerationDialog extends
 		ButtonGroup commandOptionGroup = new ButtonGroup();
 		
 		useCommandsOption = new JRadioButton(Messages.getString("TestGenerationDialog.useCommandsOption.text")); //$NON-NLS-1$
+		useCommandsOption.setMargin(new Insets(0, 0, 2, 2));
 		useCommandsOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				commandsToRun.setEnabled( true );
 			}
 		});
 		useCommandsOption.setSelected(true);
-		contentPanel.add(useCommandsOption, "7, 31");
+		contentPanel.add(useCommandsOption, "7, 32");
 		commandOptionGroup.add( useCommandsOption );
 		
 		runInternallyOption = new JRadioButton(Messages.getString("TestGenerationDialog.runInternallyOption.text")); //$NON-NLS-1$
+		runInternallyOption.setMargin(new Insets(0, 2, 2, 2));
 		runInternallyOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				commandsToRun.setEnabled( false );
 			}
 		});
-		contentPanel.add(runInternallyOption, "9, 31");
+		contentPanel.add(runInternallyOption, "9, 32");
 		commandOptionGroup.add( runInternallyOption );
 		
 		JPanel commandLabelPanel = new JPanel();
-		contentPanel.add(commandLabelPanel, "5, 33, fill, fill");
+		contentPanel.add(commandLabelPanel, "5, 34, fill, fill");
 		commandLabelPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
@@ -481,19 +556,19 @@ public class TestGenerationDialog extends
 		commandLabelPanel.add(lblOnePerLine, "1, 3, right, default");
 		
 		JScrollPane commandScrollPane = new JScrollPane();
-		contentPanel.add(commandScrollPane, "7, 33, 5, 1, fill, fill");
+		contentPanel.add(commandScrollPane, "7, 34, 5, 1, fill, fill");
 		
 		commandsToRun = new JTextArea();
 		commandsToRun.setName("commandsToRun");
 		commandScrollPane.setViewportView(commandsToRun);
 		
 		JLabel lblOriginalResultFile = new JLabel(Messages.getString("TestGenerationDialog.lblOriginalResultFile.text")); //$NON-NLS-1$
-		contentPanel.add(lblOriginalResultFile, "5, 35, right, default");
+		contentPanel.add(lblOriginalResultFile, "5, 36, right, default");
 		
 		originalResultFile = new JTextField();
 		originalResultFile.setName("originalResultFile");
 		originalResultFile.setColumns(10);
-		contentPanel.add(originalResultFile, "7, 35, 5, 1, fill, default");
+		contentPanel.add(originalResultFile, "7, 36, 5, 1, fill, default");
 		
 		chooseOriginalResultFileButton = new JButton("...");
 		chooseOriginalResultFileButton.addActionListener(new ActionListener() {
@@ -502,20 +577,29 @@ public class TestGenerationDialog extends
 				DefaultFileChooser.chooseFile(
 						originalResultFile,
 						DefaultFileNameExtensionFilters.ANY,
-						true // The file could still not exist
+						true,// The file could still not exist
+						PathType.RELATIVE
 						);
 			}
 		});
 		chooseOriginalResultFileButton.setName("chooseOriginalResultFileButton");
-		contentPanel.add(chooseOriginalResultFileButton, "13, 35");
+		contentPanel.add(chooseOriginalResultFileButton, "13, 36");
+		
+		absoluteOriginalResultFilePath = new SteelCheckBox();
+		absoluteOriginalResultFilePath.setVisible(false);
+		absoluteOriginalResultFilePath.setText( absoluteText );
+		absoluteOriginalResultFilePath.setToolTipText( absoluteTooltipText );
+		absoluteOriginalResultFilePath.setHorizontalAlignment(SwingConstants.CENTER);
+
+		contentPanel.add(absoluteOriginalResultFilePath, "15, 36");
 		
 		JLabel lblConvertedResultFile = new JLabel(Messages.getString("TestGenerationDialog.lblConvertedResultFile.text")); //$NON-NLS-1$
-		contentPanel.add(lblConvertedResultFile, "5, 37, right, default");
+		contentPanel.add(lblConvertedResultFile, "5, 38, right, default");
 		
 		convertedResultFile = new JTextField();
 		convertedResultFile.setName("convertedResultFile");
 		convertedResultFile.setColumns(10);
-		contentPanel.add(convertedResultFile, "7, 37, 5, 1, fill, default");
+		contentPanel.add(convertedResultFile, "7, 38, 5, 1, fill, default");
 		
 		chooseConvertedResultFileButton = new JButton("...");
 		chooseConvertedResultFileButton.addActionListener(new ActionListener() {
@@ -524,12 +608,21 @@ public class TestGenerationDialog extends
 				DefaultFileChooser.chooseFile(
 						convertedResultFile,
 						DefaultFileNameExtensionFilters.TEST_EXECUTION_REPORT,
-						true
+						true,// The file could still not exist
+						PathType.RELATIVE
 						);
 			}
 		});
 		chooseConvertedResultFileButton.setName("chooseConvertedResultFileButton");
-		contentPanel.add(chooseConvertedResultFileButton, "13, 37");
+		contentPanel.add(chooseConvertedResultFileButton, "13, 38");
+		
+		absoluteConvertedResultFilePath = new SteelCheckBox();
+		absoluteConvertedResultFilePath.setVisible(false);
+		absoluteConvertedResultFilePath.setText( absoluteText );
+		absoluteConvertedResultFilePath.setToolTipText( absoluteTooltipText );
+		absoluteConvertedResultFilePath.setHorizontalAlignment(SwingConstants.CENTER);
+
+		contentPanel.add(absoluteConvertedResultFilePath, "15, 38");		
 		
 		checkPlugins();
 		

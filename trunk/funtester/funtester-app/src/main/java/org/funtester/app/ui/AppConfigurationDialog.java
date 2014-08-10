@@ -42,7 +42,7 @@ public class AppConfigurationDialog extends JDialog {
 		setIconImage( ImageUtil.loadImage( ImagePath.configurationIcon() ) );
 		setModal(true);
 		setTitle(Messages.getString("AppConfigurationDialog.this.title")); //$NON-NLS-1$
-		setBounds( 100, 100, 714, 353 );
+		setBounds( 100, 100, 790, 353 );
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		contentPanel = new AppConfigurationPanel(

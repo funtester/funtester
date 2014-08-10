@@ -346,7 +346,10 @@ public class TestActionContainer implements ProjectListener {
 			
 			filePath = SimpleFileChooser.chooseFile(
 					owner, dialogTitle, currentDirectory,
-					DefaultFileNameExtensionFilters.TEST_EXECUTION_REPORT, false );
+					DefaultFileNameExtensionFilters.TEST_EXECUTION_REPORT,
+					false
+					).getAbsolutePath();
+			
 			if ( null == filePath ) { return; }
 			
 		} else {

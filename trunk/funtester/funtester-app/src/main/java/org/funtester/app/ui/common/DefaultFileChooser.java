@@ -7,7 +7,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.funtester.app.i18n.Messages;
 import org.funtester.app.ui.util.SimpleFileChooser;
+import org.funtester.common.util.FilePathUtil;
 import org.funtester.common.util.FileUtil;
+import org.funtester.common.util.PathType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Default file chooser.
@@ -17,21 +21,35 @@ import org.funtester.common.util.FileUtil;
  */
 public final class DefaultFileChooser {
 	
+	private static final Logger logger = LoggerFactory.getLogger( DefaultFileChooser.class );
+		
 	private DefaultFileChooser() {}
+	
 
 	/**
 	 * Open a directory selection dialog and put the selected directory
 	 * path in the given text field.
 	 * 
-	 * @param textField	the text field where to put the path.
+	 * @param textField				the text field where to put the path.
+	 * @param referenceDirectory	the reference directory.
+	 * @param pathType				option for choosing the path type.
 	 */
-	public static void chooseDirectory(JTextField textField) {
-		
-		File currentDirectory = directoryFor( textField.getText() );
+	public static void chooseDirectory(
+			final JTextField textField,
+			final File referenceDirectory,
+			final PathType pathType
+			) {
 		
 		final String title = Messages.alt( "_CHOOSE_DIRECTORY", "Choose a directory" );
-		final String path = SimpleFileChooser.chooseDirectory(
-				textField.getParent(), title, currentDirectory );
+		
+		final File textFieldDir = new File( FilePathUtil.toAbsolutePath(
+				textField.getText(), referenceDirectory.getAbsolutePath() ) );
+		
+		logger.debug( ">>- " + referenceDirectory.getAbsolutePath() );
+		logger.debug( ">>= " + textFieldDir.getAbsolutePath() );
+		
+		String path = SimpleFileChooser.chooseDirectoryPath( 
+				textField, title, textFieldDir, pathType );
 		
 		if ( path != null ) {
 			textField.setText( path );
@@ -46,11 +64,13 @@ public final class DefaultFileChooser {
 	 * @param textField			the text field where to put the path.
 	 * @param extFilter			the extension filter.
 	 * @param chooseForSaving	option for saving or opening the file.
+	 * @param pathType			option for choosing the path type.
 	 */
 	public static void chooseFile(
 			JTextField textField,
 			final FileNameExtensionFilter extFilter,
-			final boolean chooseForSaving
+			final boolean chooseForSaving,
+			final PathType pathType
 			) {
 		
 		File currentDirectory = directoryFor( textField.getText() );
@@ -59,11 +79,11 @@ public final class DefaultFileChooser {
 			? Messages.alt( "_SAVE_FILE", "Save file" )
 			: Messages.alt( "_OPEN_FILE", "Open file" );
 			
-		final String path = SimpleFileChooser.chooseFile(
+		final File file = SimpleFileChooser.chooseFile(
 				textField.getParent(), title, currentDirectory, extFilter, chooseForSaving );
 		
-		if ( path != null ) {
-			textField.setText( path );
+		if ( file != null ) {
+			textField.setText( pathType == PathType.ABSOLUTE ? file.getAbsolutePath() : file.getPath() );
 		}
 	}
 	
