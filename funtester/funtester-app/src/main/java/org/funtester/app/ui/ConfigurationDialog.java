@@ -35,6 +35,8 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 /**
  * Configuration dialog
@@ -84,7 +86,7 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 		
 		setTitle(Messages.getString("ConfigurationDialog.this.title")); //$NON-NLS-1$
 		setIconImage( ImageUtil.loadImage( ImagePath.configurationIcon() ) );
-		setBounds( 100, 100, 720, 390 );
+		setBounds( 100, 100, 720, 407 );
 
 		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.UNRELATED_GAP_COLSPEC,
@@ -114,6 +116,10 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.PARAGRAPH_GAP_ROWSPEC,
+				FormFactory.PARAGRAPH_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
@@ -209,6 +215,11 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 		lookAndFeel = new JComboBox( lookAndFeels.toArray() );
 		lookAndFeel.setName("lookAndFeel");
 		contentPanel.add(lookAndFeel, "5, 18, fill, default");
+		
+		JLabel lblWarning = new JLabel(Messages.getString("ConfigurationDialog.lblNewLabel.text")); //$NON-NLS-1$
+		lblWarning.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWarning.setForeground(Color.RED);
+		contentPanel.add(lblWarning, "3, 22, 5, 1");
 	}
 
 
@@ -247,7 +258,7 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 		plugin.setText( obj.getPluginDirectory() );
 		
 		final Locale l = new Locale( obj.getLocaleLanguage(), obj.getLocaleCountry() );
-		locale.setSelectedItem( displayedTextForLocale( l ) );
+		locale.setSelectedItem( textForLocale( l ) );
 		
 		lookAndFeel.setSelectedItem( obj.getLookAndFeelName() );
 	}
@@ -259,36 +270,54 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 	}
 	
 	
-	
+	/**
+	 * Map the given locales to use in the UI.
+	 * 
+	 * @param locales
+	 */
 	private void mapLocales(final Collection< Locale > locales) {
 		localeNames.clear();
 		itemsToIconsMap.clear();
 		itemsToLocalesMap.clear();
 		for ( Locale locale : locales ) {
-			// Map the locale's info (that will be displayed to the user) to the icon
-			String itemText = displayedTextForLocale( locale );
+			String itemText = textForLocale( locale );
 			localeNames.add( itemText );
 			itemsToLocalesMap.put( itemText, locale );
-			// Get the icon with the locale country
-			Icon image = null;
-			final String iconPath = ImagePath.countryFlagIcon( locale.getCountry().toLowerCase() );
-			try {
-				image = ImageUtil.loadIcon( iconPath );
-			} catch (Exception e) {
-				// image is still null -> no problem
-			}
+			Icon image = countryFlagForLocale( locale );
 			itemsToIconsMap.put( itemText, image );
 		}		
 		Collections.sort( localeNames );
 	}
 	
-	
-	private String displayedTextForLocale(final Locale currentLocale) {
-		String s = WordUtils.capitalize( currentLocale.getDisplayLanguage() );
-		if ( ! currentLocale.getDisplayCountry().isEmpty() ) {
-			s += " (" + currentLocale.getDisplayCountry() + ")";
+	/**
+	 * Generate the text to be displayed for a {@link Locale}.
+	 * 
+	 * @param l the locale.
+	 * @return	the text.
+	 */
+	private String textForLocale(final Locale l) {
+		String s = WordUtils.capitalize( l.getDisplayLanguage() );
+		if ( ! l.getDisplayCountry().isEmpty() ) {
+			s += " (" + l.getDisplayCountry() + ")";
 		}
 		return s;
-	}	
+	}
 
+	/** 
+	 * Return a country flag for the given locale.
+	 * 
+	 * @param locale
+	 * @return
+	 */
+	private Icon countryFlagForLocale(Locale locale) {
+		Icon image = null;
+		final String iconPath = ImagePath.countryFlagIcon(
+				locale.getCountry().toLowerCase() );
+		try {
+			image = ImageUtil.loadIcon( iconPath );
+		} catch (Exception e) {
+			// image is still null -> no problem
+		}
+		return image;
+	}
 }
