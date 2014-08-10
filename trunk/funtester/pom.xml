@@ -163,4 +163,5 @@
 	</dependencyManagement>
 
   
+	<description>FunTester generates functional tests (e.g. tests for the User Interface) for an application from its requirement documentation created with use cases.</description>
 </project>
