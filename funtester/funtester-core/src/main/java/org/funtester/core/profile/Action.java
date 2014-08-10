@@ -24,10 +24,11 @@ public class Action
 	private long id = 0;
 	private String name = "";
 	private Trigger trigger = Trigger.SYSTEM;
+	/** Target step kind **/
 	private StepKind kind = StepKind.ACTION;
-	// The number of elements that the action can accept
+	/** The number of elements that the action can accept **/
 	private int maxElements = 1;
-	// Whether the action can make the elements editable
+	/** Whether the action can make the elements editable **/
 	private boolean makeElementsEditable = false;
 
 	public long getId() {
