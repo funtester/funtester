@@ -240,7 +240,8 @@ public class HelpActionContainer implements PropertyChangeListener {
 					FileUtil.currentDirectory(),
 					DefaultFileNameExtensionFilters.MANUAL,
 					true
-					);
+					).getAbsolutePath();
+					
 			if ( null == manualFilePath ) {
 				return;
 			}

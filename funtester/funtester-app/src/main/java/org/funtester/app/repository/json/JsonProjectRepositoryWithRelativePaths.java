@@ -72,10 +72,9 @@ public class JsonProjectRepositoryWithRelativePaths implements ProjectRepository
 		
 		
 		//
-		// First test if the file exists.
-		// If YES, load the file.
-		// If NOT, it may be in a relative path, so we try to convert from the
-		// relative path to a absolute path.
+		// If the file exists, load it.
+		// Otherwise, it may be in a relative path, so we try to convert it
+		// (from the relative path to an absolute path).
 		//
 		
 		String vocabularyFile = FileUtil.absolutePathOf(
@@ -99,7 +98,7 @@ public class JsonProjectRepositoryWithRelativePaths implements ProjectRepository
 		Vocabulary vocabulary = vocabularyProxy.getVocabulary();
 		
 		//
-		// Read the last configuration if it exists
+		// Read the last configuration, if it exists
 		//
 		
 		if ( ( new File( lastConfigurationFile ).exists() ) ) {

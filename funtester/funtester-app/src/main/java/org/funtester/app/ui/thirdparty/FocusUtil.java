@@ -1,4 +1,4 @@
-package org.funtester.app.ui.util.thirdparty;
+package org.funtester.app.ui.thirdparty;
 
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;

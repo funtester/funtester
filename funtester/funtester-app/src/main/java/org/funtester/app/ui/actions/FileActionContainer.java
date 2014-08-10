@@ -218,7 +218,9 @@ public class FileActionContainer {
 				
 				String filePath = SimpleFileChooser.chooseFile(
 						owner, dialogTitle, currentDirectory,
-						DefaultFileNameExtensionFilters.PROJECT, false );
+						DefaultFileNameExtensionFilters.PROJECT, false
+						).getAbsolutePath();
+				
 				// Has cancelled? Exit!
 				if ( null == filePath ) {
 					return;
@@ -302,7 +304,9 @@ public class FileActionContainer {
 				
 				projectFilePath = SimpleFileChooser.chooseFile(
 						owner, dialogTitle, targetDirectory,
-						DefaultFileNameExtensionFilters.PROJECT, true );
+						DefaultFileNameExtensionFilters.PROJECT, true
+						).getAbsolutePath();
+						
 				// Has cancelled? Exit!
 				if ( null == projectFilePath ) {
 					return false;

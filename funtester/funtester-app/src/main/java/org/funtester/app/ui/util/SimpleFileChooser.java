@@ -8,16 +8,22 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.funtester.common.util.FilePathUtil;
+import org.funtester.common.util.PathType;
+
 /**
  * File choosing utility.
  * 
  * @author Thiago Delgado Pinto
  *
  */
-public class SimpleFileChooser {
-
+public final class SimpleFileChooser {
+	
+	private SimpleFileChooser() {}
+	
+	
 	/**
-	 * Show a dialog to choose a directory and returns the selected directory.
+	 * Show a directory chooser and returns the selected directory.
 	 * 
 	 * @param owner				the dialog owner.
 	 * @param dialogTitle		the dialog title.
@@ -25,7 +31,7 @@ public class SimpleFileChooser {
 	 * @return					the selected path or null whether the user
 	 * 							cancelled.
 	 */
-	public static String chooseDirectory(
+	public static File chooseDirectory(
 			final Component owner,
 			final String dialogTitle,
 			final File currentDirectory
@@ -37,6 +43,62 @@ public class SimpleFileChooser {
 		final int result = chooser.showOpenDialog( owner );
 		return selectedPathFrom( chooser, result );
 	}
+	
+	
+	/**
+	 * Show a directory chooser and return the selected directory path,
+	 * according to the reference directory and the path type. Whether the
+	 * path is relative, the chosen directory will be relative to the
+	 * reference directory. Otherwise, it will be an absolute path.
+	 * 
+	 * @param owner					the dialog owner.
+	 * @param dialogTitle			the dialog title.
+	 * @param referenceDirectory	the reference directory.
+	 * @param pathType				whether the path is relative or absolute.
+	 * @return						the selected path.
+	 */
+	public static String chooseDirectoryPath(
+			final Component owner,
+			final String dialogTitle,
+			final File referenceDirectory,
+			final PathType pathType
+			) {
+		final File dir = chooseDirectory( owner, dialogTitle, referenceDirectory );
+		if ( null == dir ) {
+			return null;
+		}
+		
+		return pathFor( referenceDirectory, pathType, dir );
+	}
+	
+	
+	/**
+	 * Open a file chooser and return the selected file path,
+	 * according to the reference directory and the path type. Whether the
+	 * path is relative, the chosen file will be relative to the
+	 * reference directory. Otherwise, it will be an absolute path.
+	 * 
+	 * @param owner					the dialog owner.
+	 * @param dialogTitle			the dialog title.
+	 * @param referenceDirectory	the reference directory.
+	 * @param pathType				whether the path is relative or absolute.
+	 * @param extFilter				the file extension filter.
+	 * @return
+	 */
+	public static String openFilePath(
+			final Component owner,
+			final String dialogTitle,
+			final File referenceDirectory,
+			final PathType pathType,
+			final FileNameExtensionFilter extFilter
+			) {
+		File file = chooseFile( owner, dialogTitle, referenceDirectory, extFilter, false );
+		if ( null == file ) {
+			return null;
+		}
+		return pathFor( referenceDirectory, pathType, file );
+	}
+	
 
 	/**
 	 * Show a file dialog to open or save a file.
@@ -46,10 +108,10 @@ public class SimpleFileChooser {
 	 * @param currentDirectory	the current path.
 	 * @param extFilter			the file extension filter.
 	 * @param chooseForSaving	option for saving or opening the file.
-	 * @return					the selected path or null whether the user
+	 * @return					the selected file or null whether the user
 	 * 							cancelled.
 	 */
-	public static String chooseFile(
+	public static File chooseFile(
 			final Component owner,
 			final String dialogTitle,
 			final File currentDirectory,
@@ -103,19 +165,41 @@ public class SimpleFileChooser {
 	}
 	
 	/**
-	 * Return the select path from a {@link JFileChooser}.
+	 * Return the select File from a {@link JFileChooser}.
 	 * 
 	 * @param chooser		the {@link JFileChooser}.
 	 * @param dialogResult	the result from the dialog.
 	 * @return
 	 */
-	private static String selectedPathFrom(
+	private static File selectedPathFrom(
 			final JFileChooser chooser,
 			final int dialogResult
 			) {
 		if ( JFileChooser.APPROVE_OPTION == dialogResult ) {
-			return chooser.getSelectedFile().getAbsolutePath();
+			return chooser.getSelectedFile();
 		}
 		return null;
+	}
+	
+	
+	/**
+	 * Return a path according to a reference directory and a path type.
+	 *  
+	 * @param referenceDirectory	the reference directory.
+	 * @param pathType				the path type.
+	 * @param originalPath 			the original path.
+	 * @return
+	 */
+	private static String pathFor(
+			final File referenceDirectory,
+			final PathType pathType,
+			final File originalPath
+			) {
+		if ( pathType.equals( PathType.ABSOLUTE ) ) {
+			return originalPath.getAbsolutePath();
+		}
+		
+		return FilePathUtil.toRelativePath(
+				originalPath.getAbsolutePath(), referenceDirectory.getAbsolutePath() );
 	}
 }
