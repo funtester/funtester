@@ -2,25 +2,19 @@ package org.funtester.app.ui.actions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.swing.Action;
 import javax.swing.JFrame;
 
 import org.funtester.app.i18n.Messages;
-import org.funtester.app.project.AppConfiguration;
-import org.funtester.app.project.AppConfigurationManager;
 import org.funtester.app.project.AppState;
 import org.funtester.app.repository.AppConfigurationRepository;
 import org.funtester.app.repository.json.JsonAppConfigurationRepository;
-import org.funtester.app.ui.AppConfigurationDialog;
+import org.funtester.app.ui.ConfigurationDialog;
 import org.funtester.app.ui.common.ImagePath;
 import org.funtester.app.ui.util.BaseAction;
 import org.funtester.app.ui.util.ImageUtil;
-import org.funtester.app.ui.util.UIUtil;
-import org.funtester.app.validation.AppConfigurationValidator;
+import org.funtester.app.ui.util.MsgUtil;
 
 /**
  * Container for the "Edit" actions.
@@ -30,8 +24,8 @@ import org.funtester.app.validation.AppConfigurationValidator;
  */
 public class EditActionContainer {
 
-//	private final JFrame owner;
-//	private final String title;
+	private final JFrame owner;
+	private final String title;
 	private final AppState state;	
 	
 	private Action editConfigurationAction = null;
@@ -43,8 +37,8 @@ public class EditActionContainer {
 			final String title,
 			final AppState state
 			) {
-//		this.owner = owner;
-//		this.title = title;
+		this.owner = owner;
+		this.title = title;
 		this.state = state;	
 	}
 	
@@ -53,7 +47,8 @@ public class EditActionContainer {
 		return ( null == editConfigurationAction )
 			? editConfigurationAction = new BaseAction()
 				.withName( Messages.alt( "_MENU_EDIT_CONFIGURATION", "Configuration..." ) )
-				.withListener( createConfigurationEditActionListener() )
+				//.withListener( createConfigurationEditActionListener() )
+				.withListener( createNewConfigurationEditActionListener() )
 				.withIcon( ImageUtil.loadIcon( ImagePath.configurationIcon() ) )
 			: editConfigurationAction;
 	}
@@ -76,32 +71,33 @@ public class EditActionContainer {
 				: editVocabulariesAction;
 	}
 	
-	private ActionListener createConfigurationEditActionListener() {
-		
-		final String fileName = state.getConfigurationFile();
-		AppConfigurationRepository repository = new JsonAppConfigurationRepository( fileName );
-		
-		final AppConfiguration configuration = state.getConfiguration();
-		
-		Collection< Locale > locales = state.getLocalesMap().keySet();
-		
-		Map< String, String > lookAndFeelMap = state.getLookAndFeelMap();
-		Collection< String > lookAndFeels = lookAndFeelMap != null ? lookAndFeelMap.keySet() : null;
-		
-		AppConfigurationValidator validator = new AppConfigurationValidator( lookAndFeels );
-		
-		final AppConfigurationManager manager = new AppConfigurationManager(
-				locales, lookAndFeels, validator, repository );
+	
+	private ActionListener createNewConfigurationEditActionListener() {
 		
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AppConfigurationDialog dlg = new AppConfigurationDialog( manager );
-				UIUtil.centerOnScreen( dlg );
-				dlg.draw( configuration );
-				dlg.setVisible( true );
+				ConfigurationDialog dlg = new ConfigurationDialog( state );
+				dlg.setObject( state.getConfiguration() );
+				dlg.showObject();
+				if ( ! dlg.isConfirmed() ) {
+					return;
+				}
+				// Changing
+				state.getConfiguration().copy( dlg.getObject() );
+				dlg = null;
+				
+				// Saving
+				AppConfigurationRepository repository = new JsonAppConfigurationRepository(
+						state.getConfigurationFile() );
+				try {
+					repository.save( state.getConfiguration() );
+				} catch ( Exception e1 ) {
+					MsgUtil.error( owner, e1.getLocalizedMessage(), title );
+				}
 			}
 		};
+		
 	}
 
 }
