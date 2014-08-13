@@ -8,6 +8,7 @@ import org.funtester.app.common.DefaultFileExtensions;
 import org.funtester.app.i18n.Messages;
 import org.funtester.app.project.AppConfiguration;
 import org.funtester.app.project.AppState;
+import org.funtester.app.project.Directories;
 import org.funtester.app.project.PluginInfo;
 import org.funtester.app.repository.PluginDetailsRepository;
 import org.funtester.app.repository.json.JsonPluginDetailsRepository;
@@ -47,14 +48,14 @@ public class LoadPluginsTask implements Task {
 		// Get the plug-in directory from the application configuration
 		
 		AppConfiguration cfg = appState.getConfiguration();
-		if ( null == cfg ) {
+		if ( null == cfg || null == cfg.getDirectories() ) {
 			final String msg = Messages.alt( "_CONFIGURATION_READING_ERROR", "Error while getting the configuration." );
 			throw new Exception( msg );
 		}
 		
-		String dirPath = cfg.getPluginDirectory();
+		String dirPath = cfg.getDirectories().getPlugin();
 		if ( null == dirPath ) {
-			dirPath = AppConfiguration.DEFAULT.getPluginDirectory();
+			dirPath = Directories.DEFAULT.getPlugin();
 		}
 		
 		final File dir = new File( dirPath );

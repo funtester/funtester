@@ -7,6 +7,7 @@ import java.util.Map;
 import org.funtester.app.i18n.Messages;
 import org.funtester.app.project.AppConfiguration;
 import org.funtester.app.project.AppState;
+import org.funtester.app.project.Directories;
 import org.funtester.app.repository.json.JsonProfileRepository;
 import org.funtester.core.profile.Profile;
 import org.slf4j.Logger;
@@ -44,16 +45,16 @@ public class LoadProfilesTask implements Task {
 		// Get the configuration
 		
 		AppConfiguration cfg = appState.getConfiguration();
-		if ( null == cfg ) {
+		if ( null == cfg || null == cfg.getDirectories() ) {
 			final String msg = Messages.alt( "_CONFIGURATION_READING_ERROR", "Error while reading the configuration." );
 			throw new Exception( msg );
 		}
 		
 		// Load the profiles
 		
-		String dirPath = cfg.getProfileDirectory();
+		String dirPath = cfg.getDirectories().getProfile();
 		if ( null == dirPath ) {
-			dirPath = AppConfiguration.DEFAULT.getProfileDirectory();
+			dirPath = Directories.DEFAULT.getProfile();
 		}
 		
 		File dir = new File( dirPath );
