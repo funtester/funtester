@@ -1,5 +1,6 @@
 package org.funtester.app.ui;
 
+import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,11 +18,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import org.apache.commons.lang3.text.WordUtils;
 import org.funtester.app.i18n.Messages;
 import org.funtester.app.project.AppConfiguration;
 import org.funtester.app.project.AppState;
+import org.funtester.app.project.Directories;
 import org.funtester.app.ui.common.DefaultEditingDialog;
 import org.funtester.app.ui.common.DefaultFileChooser;
 import org.funtester.app.ui.common.ImagePath;
@@ -35,8 +38,6 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
-import java.awt.Color;
-import javax.swing.SwingConstants;
 
 /**
  * Configuration dialog
@@ -47,6 +48,8 @@ import javax.swing.SwingConstants;
 public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration > {
 
 	private static final long serialVersionUID = -8333324434192577564L;
+	
+	private final AppState state;
 	
 	/* UI State */
 	
@@ -61,6 +64,7 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 	private final JTextField profile;
 	private final JTextField databaseDriver;
 	private final JTextField plugin;
+	private final JTextField manual;
 	private final JComboBox locale;
 	private final JComboBox lookAndFeel;
 
@@ -68,6 +72,8 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 	 * Create the dialog.
 	 */
 	public ConfigurationDialog(AppState appState) {
+		
+		this.state = appState;
 		
 		//
 		// UI State
@@ -86,7 +92,7 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 		
 		setTitle(Messages.getString("ConfigurationDialog.this.title")); //$NON-NLS-1$
 		setIconImage( ImageUtil.loadImage( ImagePath.configurationIcon() ) );
-		setBounds( 100, 100, 720, 407 );
+		setBounds( 100, 100, 720, 478 );
 
 		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.UNRELATED_GAP_COLSPEC,
@@ -113,6 +119,10 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.PARAGRAPH_GAP_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.PARAGRAPH_GAP_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -198,28 +208,43 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 		});	
 		contentPanel.add(pluginButton, "7, 12");
 		
+		JLabel lblManual = new JLabel(Messages.getString("ConfigurationDialog.lblManual.text")); //$NON-NLS-1$
+		contentPanel.add(lblManual, "3, 14, right, default");
+		
+		manual = new JTextField();
+		contentPanel.add(manual, "5, 14, fill, default");
+		manual.setColumns(10);
+		
+		JButton manualButton = new JButton( "..." );
+		manualButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultFileChooser.chooseDirectory( manual, referenceDirectory, PathType.RELATIVE );
+			}
+		});
+		contentPanel.add(manualButton, "7, 14");
+		
 		JLabel lblLocale = new JLabel(Messages.getString("ConfigurationDialog.lblLocale.text")); //$NON-NLS-1$
 		lblLocale.setIcon( ImageUtil.loadIcon( ImagePath.localeIcon() ) );
-		contentPanel.add(lblLocale, "3, 16, right, default");
+		contentPanel.add(lblLocale, "3, 20, right, default");
 		
 		mapLocales( locales );
 		locale = new JComboBox( localeNames );
 		locale.setName("locale");
 		locale.setRenderer( new IconAndTextListCellRenderer< String >( itemsToIconsMap ) );	
-		contentPanel.add(locale, "5, 16, fill, default");
+		contentPanel.add(locale, "5, 20, fill, default");
 		
 		JLabel lblLookAndFeel = new JLabel(Messages.getString("ConfigurationDialog.lblLookAndFeel.text")); //$NON-NLS-1$
 		lblLookAndFeel.setIcon( ImageUtil.loadIcon( ImagePath.themeIcon() ) );
-		contentPanel.add(lblLookAndFeel, "3, 18, right, default");
+		contentPanel.add(lblLookAndFeel, "3, 22, right, default");
 		
 		lookAndFeel = new JComboBox( lookAndFeels.toArray() );
 		lookAndFeel.setName("lookAndFeel");
-		contentPanel.add(lookAndFeel, "5, 18, fill, default");
+		contentPanel.add(lookAndFeel, "5, 22, fill, default");
 		
 		JLabel lblWarning = new JLabel(Messages.getString("ConfigurationDialog.lblNewLabel.text")); //$NON-NLS-1$
 		lblWarning.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWarning.setForeground(Color.RED);
-		contentPanel.add(lblWarning, "3, 22, 5, 1");
+		contentPanel.add(lblWarning, "3, 26, 5, 1");
 	}
 
 
@@ -234,10 +259,12 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 		
 		AppConfiguration obj = getObject();
 		
-		obj.setVocabularyDirectory( vocabulary.getText() );
-		obj.setProfileDirectory( profile.getText() );
-		obj.setDatabaseDriverDirectory( databaseDriver.getText() );
-		obj.setPluginDirectory( plugin.getText() );
+		Directories d = obj.getDirectories();
+		d.setVocabulary( vocabulary.getText() );
+		d.setProfile( profile.getText() );
+		d.setDatabaseDriver( databaseDriver.getText() );
+		d.setPlugin( plugin.getText() );
+		d.setManual( manual.getText() );
 		
 		final Locale l = itemsToLocalesMap.get( locale.getSelectedItem() );
 		obj.setLocaleLanguage( l.getLanguage() );
@@ -250,12 +277,15 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 
 
 	@Override
-	protected void drawObject(AppConfiguration obj) {
+	protected void drawObject(final AppConfiguration obj) {
 		
-		vocabulary.setText( obj.getVocabularyDirectory() );
-		profile.setText( obj.getProfileDirectory() );
-		databaseDriver.setText( obj.getDatabaseDriverDirectory() );
-		plugin.setText( obj.getPluginDirectory() );
+		final Directories d = obj.getDirectories();
+		
+		vocabulary.setText( d.getVocabulary() );
+		profile.setText( d.getProfile() );
+		databaseDriver.setText( d.getDatabaseDriver() );
+		plugin.setText( d.getPlugin() );
+		manual.setText( d.getManual() );
 		
 		final Locale l = new Locale( obj.getLocaleLanguage(), obj.getLocaleCountry() );
 		locale.setSelectedItem( textForLocale( l ) );
@@ -266,7 +296,7 @@ public class ConfigurationDialog extends DefaultEditingDialog< AppConfiguration 
 
 	@Override
 	protected Validator< AppConfiguration > createValidator() {
-		return new AppConfigurationValidator( lookAndFeels );
+		return new AppConfigurationValidator( lookAndFeels, state.getExecutionDirectory() );
 	}
 	
 	

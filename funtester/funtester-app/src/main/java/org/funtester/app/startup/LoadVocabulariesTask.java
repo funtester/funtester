@@ -7,6 +7,7 @@ import java.util.Map;
 import org.funtester.app.i18n.Messages;
 import org.funtester.app.project.AppConfiguration;
 import org.funtester.app.project.AppState;
+import org.funtester.app.project.Directories;
 import org.funtester.app.repository.json.JsonVocabularyProxyRepository;
 import org.funtester.core.vocabulary.Vocabulary;
 import org.slf4j.Logger;
@@ -46,11 +47,16 @@ public class LoadVocabulariesTask implements Task {
 		
 		final AppConfiguration cfg = appState.getConfiguration();
 		
+		if ( null == cfg || null == cfg.getDirectories() ) {
+			final String msg = Messages.alt( "_CONFIGURATION_READING_ERROR", "Error while getting the configuration." );
+			throw new Exception( msg );
+		}		
+		
 		// Load the vocabularies
 		
-		String dirPath = cfg.getVocabularyDirectory();
+		String dirPath = cfg.getDirectories().getVocabulary();
 		if ( null == dirPath ) {
-			dirPath = AppConfiguration.DEFAULT.getVocabularyDirectory();
+			dirPath = Directories.DEFAULT.getVocabulary();
 		}
 		
 		File dir = new File( dirPath );

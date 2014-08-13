@@ -17,20 +17,14 @@ public class AppConfiguration implements Copier< AppConfiguration >{
 			"en",
 			"US",
 			"Windows",
-			"vocabulary",
-			"profile",
-			"jdbc",
-			"plugin",
+			Directories.DEFAULT,
 			"FunTesterSuite"
-			);
+			);	
 	
 	private String localeLanguage = "";
 	private String localeCountry = "";	
 	private String lookAndFeelName = "";
-	private String vocabularyDirectory = "";
-	private String profileDirectory = "";
-	private String databaseDriverDirectory = "";
-	private String pluginDirectory = "";
+	private Directories directories = new Directories(); 
 	private String defaultTestSuiteName = "";
 	
 	public AppConfiguration() {
@@ -40,20 +34,14 @@ public class AppConfiguration implements Copier< AppConfiguration >{
 			final String localeLanguage,
 			final String localeCountry,
 			final String lookAndFeelName,
-			final String vocabularyDirectory,
-			final String profileDirectory,
-			final String databaseDriverDirectory,
-			final String plugInDirectory,
+			final Directories directories,
 			final String defaultTestSuiteName
 			) {
 		AppConfiguration o = new AppConfiguration();
 		o.localeLanguage = localeLanguage;
 		o.localeCountry = localeCountry;
 		o.lookAndFeelName = lookAndFeelName;
-		o.vocabularyDirectory = vocabularyDirectory;
-		o.profileDirectory = profileDirectory;
-		o.databaseDriverDirectory = databaseDriverDirectory;
-		o.pluginDirectory = plugInDirectory;
+		o.directories = directories;
 		o.defaultTestSuiteName = defaultTestSuiteName;
 		return o;
 	}
@@ -82,37 +70,14 @@ public class AppConfiguration implements Copier< AppConfiguration >{
 	public void setLookAndFeelName(String lookAndFeelName) {
 		this.lookAndFeelName = lookAndFeelName;
 	}	
-	
-	public String getVocabularyDirectory() {
-		return vocabularyDirectory;
-	}
-	
-	public void setVocabularyDirectory(String vocabularyDirectory) {
-		this.vocabularyDirectory = vocabularyDirectory;
+
+
+	public Directories getDirectories() {
+		return directories;
 	}
 
-	public String getProfileDirectory() {
-		return profileDirectory;
-	}
-	
-	public void setProfileDirectory(String profileDirectory) {
-		this.profileDirectory = profileDirectory;
-	}
-	
-	public String getDatabaseDriverDirectory() {
-		return databaseDriverDirectory;
-	}
-	
-	public void setDatabaseDriverDirectory(String directory) {
-		this.databaseDriverDirectory = directory;
-	}
-	
-	public String getPluginDirectory() {
-		return pluginDirectory;
-	}
-
-	public void setPluginDirectory(String plugInDirectory) {
-		this.pluginDirectory = plugInDirectory;
+	public void setDirectories(Directories directories) {
+		this.directories = directories;
 	}
 
 	public String getDefaultTestSuiteName() {
@@ -128,10 +93,7 @@ public class AppConfiguration implements Copier< AppConfiguration >{
 		this.localeLanguage = that.localeLanguage;
 		this.localeCountry = that.localeCountry;
 		this.lookAndFeelName = that.lookAndFeelName;
-		this.vocabularyDirectory = that.vocabularyDirectory;
-		this.profileDirectory = that.profileDirectory;
-		this.databaseDriverDirectory = that.databaseDriverDirectory;
-		this.pluginDirectory = that.pluginDirectory;
+		this.directories = that.directories;
 		this.defaultTestSuiteName = that.defaultTestSuiteName;
 		return this;
 	}
@@ -144,14 +106,11 @@ public class AppConfiguration implements Copier< AppConfiguration >{
 	@Override
 	public String toString() {
 		return ( new StringBuffer() )
-			.append( " localeLanguage: " ).append( localeLanguage )
-			.append( " localeCountry: " ).append( localeCountry )
-			.append( " lookAndFeelName: " ).append( lookAndFeelName )
-			.append( " vocabularyDirectory: " ).append( vocabularyDirectory )
-			.append( " profileDirectory: " ).append( profileDirectory )
-			.append( " databaseDriverDirectory: " ).append( databaseDriverDirectory )
-			.append( " pluginDirectory: " ).append( pluginDirectory )
-			.append( " defaultTestSuiteName: " ).append( defaultTestSuiteName )
+			.append( " localeLanguage : " ).append( localeLanguage )
+			.append( " localeCountry : " ).append( localeCountry )
+			.append( " lookAndFeelName : " ).append( lookAndFeelName )
+			.append( " directories : {" ).append( directories.toString() ).append( "}" )
+			.append( " defaultTestSuiteName : " ).append( defaultTestSuiteName )
 			.toString();
 	}
 	
@@ -161,10 +120,7 @@ public class AppConfiguration implements Copier< AppConfiguration >{
 			localeLanguage,
 			localeCountry,
 			lookAndFeelName,
-			vocabularyDirectory,
-			profileDirectory,
-			databaseDriverDirectory,
-			pluginDirectory,
+			directories,
 			defaultTestSuiteName
 		} );
 	}
@@ -176,10 +132,7 @@ public class AppConfiguration implements Copier< AppConfiguration >{
 		return EqUtil.equalsIgnoreCase( this.localeLanguage, that.localeLanguage )
 			&& EqUtil.equalsIgnoreCase( this.localeCountry, that.localeCountry )
 			&& EqUtil.equalsIgnoreCase( this.lookAndFeelName, that.lookAndFeelName )
-			&& EqUtil.equalsIgnoreCase( this.vocabularyDirectory, that.vocabularyDirectory )
-			&& EqUtil.equalsIgnoreCase( this.profileDirectory, that.profileDirectory )
-			&& EqUtil.equalsIgnoreCase( this.databaseDriverDirectory, that.databaseDriverDirectory )
-			&& EqUtil.equalsIgnoreCase( this.pluginDirectory, that.pluginDirectory )
+			&& EqUtil.equals( this.directories, that.directories )
 			&& EqUtil.equalsIgnoreCase( this.defaultTestSuiteName, that.defaultTestSuiteName )
 			;
 	}
