@@ -1,0 +1,9 @@
+{
+	"name" : "PostgreSQL JDBC Driver",
+	"type" : "postgresql",
+	"driverFile" : "",
+	"driverClass" : "org.postgresql.Driver",
+	"defaultPort" : 5432,
+	"defaultUser" : "postgres",
+	"defaultPassword" : ""
+}

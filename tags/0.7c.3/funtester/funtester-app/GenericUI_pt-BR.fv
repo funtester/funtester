@@ -1,0 +1,155 @@
+{
+  "id" : 1,
+  "name" : "Default Vocabulary",
+  "locale" : "en",
+  "profile" : {
+    "id" : 2,
+    "name" : "testng_fest",
+    "description" : "TestNG and FEST Profile",
+    "types" : [ {
+      "id" : 3,
+      "name" : "message",
+      "kind" : "WIDGET"
+    }, {
+      "id" : 4,
+      "name" : "textbox",
+      "kind" : "WIDGET"
+    }, {
+      "id" : 5,
+      "name" : "combobox",
+      "kind" : "WIDGET"
+    }, {
+      "id" : 6,
+      "name" : "frame",
+      "kind" : "WIDGET"
+    }, {
+      "id" : 7,
+      "name" : "button",
+      "kind" : "WIDGET"
+    }, {
+      "id" : 8,
+      "name" : "menu",
+      "kind" : "WIDGET"
+    }, {
+      "id" : 9,
+      "name" : "dialog",
+      "kind" : "WIDGET"
+    }, {
+      "id" : 10,
+      "name" : "key",
+      "kind" : "KEY_COMBINATION"
+    } ],
+    "actions" : [ {
+      "id" : 11,
+      "name" : "call",
+      "trigger" : "SYSTEM",
+      "kind" : "USE_CASE_CALL",
+      "maxElements" : 1,
+      "id" : 0
+    }, {
+      "id" : 12,
+      "name" : "press",
+      "trigger" : "ACTOR",
+      "kind" : "ELEMENT_INTERACTION",
+      "maxElements" : 1,
+      "id" : 0
+    }, {
+      "id" : 13,
+      "name" : "check",
+      "trigger" : "SYSTEM",
+      "kind" : "ELEMENT_CHECK",
+      "maxElements" : 1,
+      "id" : 0
+    }, {
+      "id" : 14,
+      "name" : "select",
+      "trigger" : "ACTOR",
+      "kind" : "ELEMENT_INTERACTION",
+      "maxElements" : 1,
+      "id" : 0
+    }, {
+      "id" : 15,
+      "name" : "answer.yes",
+      "trigger" : "SYSTEM",
+      "kind" : "ELEMENT_INTERACTION",
+      "maxElements" : 1,
+      "id" : 0
+    }, {
+      "id" : 16,
+      "name" : "click",
+      "trigger" : "ACTOR",
+      "kind" : "ELEMENT_INTERACTION",
+      "maxElements" : 1,
+      "id" : 0
+    }, {
+      "id" : 17,
+      "name" : "show",
+      "trigger" : "SYSTEM",
+      "kind" : "ELEMENT_INTERACTION",
+      "maxElements" : 1,
+      "id" : 0
+    }, {
+      "id" : 18,
+      "name" : "type",
+      "trigger" : "ACTOR",
+      "kind" : "ELEMENT_INTERACTION",
+      "maxElements" : 1,
+      "id" : 0
+    }, {
+      "id" : 19,
+      "name" : "select.first",
+      "trigger" : "ACTOR",
+      "kind" : "ELEMENT_INTERACTION",
+      "maxElements" : 1,
+      "id" : 0
+    }, {
+      "id" : 20,
+      "name" : "close",
+      "trigger" : "SYSTEM",
+      "kind" : "ELEMENT_INTERACTION",
+      "maxElements" : 1,
+      "id" : 0
+    } ]
+  },
+  "nicknames" : [ {
+    "id" : 21,
+    "nickname" : "press",
+    "action" : 12
+  }, {
+    "id" : 22,
+    "nickname" : "check the business rules of",
+    "action" : 13
+  }, {
+    "id" : 23,
+    "nickname" : "answer yes to the message",
+    "action" : 15
+  }, {
+    "id" : 24,
+    "nickname" : "selects",
+    "action" : 14
+  }, {
+    "id" : 25,
+    "nickname" : "calls the use case",
+    "action" : 11
+  }, {
+    "id" : 26,
+    "nickname" : "clicks",
+    "action" : 16
+  }, {
+    "id" : 27,
+    "nickname" : "selects the first option of",
+    "action" : 19
+  }, {
+    "id" : 28,
+    "nickname" : "types",
+    "action" : 18
+  }, {
+    "id" : 29,
+    "nickname" : "closes",
+    "action" : 20
+  }, {
+    "id" : 30,
+    "nickname" : "shows",
+    "action" : 17
+  } ]
+}

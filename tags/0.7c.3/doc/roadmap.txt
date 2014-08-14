@@ -1,0 +1,65 @@
+Roadmap
+=======
+
+s1 (current)
+
+- Create a GUI for editing the test generation and execution options;
+- Show the execution progress and test results;
+
+s2
+
+- Add a "importance" value to the business rules dialog;
+- Complete the translation (i18n) for Pt-Br;
+- Show last opened files;
+
+s3
+
+- Export project documentation (in formats such as HTML, DOC, RTF, and PDF)
+  using plug-ins (?);
+
+s4
+
+- CRUD for database scripts of use cases;
+- CRUD for database drivers using the GUI; (?)
+- CRUD for profiles and vocabularies using the GUI;
+
+s5
+
+- Show the last abstract test generations in a new tab "Abstract Tests";
+- Show the last script code generations in a new tab "Testing Scripts";
+- Show the last executions in a new tab "Executions";
+
+s6
+
+- Allow describing other kinds of UI expected behaviour when
+  a business rule is not fulfilled (for testing oracles);
+
+s7
+
+- Show generated testing scenarios;
+- History-based incremental scenario generation;
+
+s8
+
+- Add pair-wise test data generation;
+
+s9
+
+- Generate GUI prototypes from the requirements documentation (e.g. HTML forms, mockups, etc.)
+  using plug-ins;
+
+s10
+
+- View use cases using a graph visualization;
+- View/create testing scenarios using a graph visualization;
+
+s11
+
+- Show a traceability matrix for scenarios and use cases;
+- Show a traceability matrix for scenarios and abstract tests cases;
+- Show a traceability matrix for business rules and abstract test cases;
+
+s??
+
+- Identify UI controls of existing applications using plug-ins;
+- Create/edit/remove abstract test cases using the UI;
