@@ -14,6 +14,7 @@ import org.funtester.common.util.CopierUtil;
 import org.funtester.common.util.EqUtil;
 import org.funtester.common.util.Identifiable;
 import org.funtester.common.util.ItemsParser;
+import org.funtester.core.profile.StepKind;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -536,6 +537,50 @@ public class UseCase
 		return this.databaseScripts.add( databaseScript );
 	}
 	
+	//
+	// RELATED USE CASES
+	//
+	
+	/**
+	 * Return the included use cases.
+	 * @return
+	 */
+	public Collection< UseCase > inclusions() {
+		return referencedUseCases( basicFlow().getSteps() );
+	}
+
+	/**
+	 * Return the use cases that extend the current use case.
+	 * @return
+	 */
+	public Collection< UseCase > extensions() {
+		Collection< UseCase > referenced = new LinkedHashSet< UseCase >();
+		for ( Flow flow : getFlows() ) {
+			if ( flow.type() == FlowType.BASIC ) { continue; }
+			referenced.addAll( referencedUseCases( flow.getSteps() ) );
+		}
+		return referenced;
+	}
+
+	/**
+	 * Return the use cases referenced by the given steps.
+	 * @param steps
+	 * @return
+	 */
+	private Collection< UseCase > referencedUseCases(Collection< Step > steps) {
+		Collection< UseCase > referenced = new LinkedHashSet< UseCase >();
+		for ( Step step : steps ) {
+			if ( step.kind() != StepKind.USE_CASE_CALL ) { continue; }
+			UseCaseCallStep uccs = (UseCaseCallStep) step;
+			if ( null == uccs || null == uccs.getUseCase() ) { continue; }
+			referenced.add( uccs.getUseCase() );
+		}
+		return referenced;
+	}
+	
+	//
+	// OTHER
+	//
 	
 	@Override
 	public UseCase copy(final UseCase that) {
