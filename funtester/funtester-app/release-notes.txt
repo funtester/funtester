@@ -1,5 +1,7 @@
 # Version 0.7d (August ??th, 2014)
 
+@new:    Use case now have the fields "Inclusions" and "Extensions" (Ticket #37).
+
 @new:    FunTester now can read manuals with version numbers.
          Whether a manual for the current language or country
          is not found, and there is a manual in english, it
@@ -26,7 +28,7 @@
 
 @change: Default saving directory is now the current directory, instead of
          the user home directory.
-         
+
 @change: Project file now uses relative paths and has a model version number.
 
 @fix:    OracleStepDialog fixed to display max elements correctly.
