@@ -73,9 +73,13 @@ public class UseCasePanel
 	// INFORMATION
 	
 	private final JPanel informationTabPanel;
-	private final JCheckBox ignoreToGenerateTests;	
+	
+	private final JCheckBox ignoreToGenerateTests;
 	private final JTextField name;
 	private final JTextArea description;
+	private final JTextField inclusions;
+	private final JTextField extensions;
+	
 	private final JTextField actors;
 	private final JScrollPane actorScrollPane;
 	private final JTable actorsTable;
@@ -192,6 +196,12 @@ public class UseCasePanel
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.PARAGRAPH_GAP_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,}));
 		
@@ -218,18 +228,34 @@ public class UseCasePanel
 		description.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		description.addFocusListener( this );
 		
+		JLabel lblInclusions = new JLabel("Inclusions:");
+		informationTabPanel.add(lblInclusions, "2, 8, left, default");
+		
+		inclusions = new JTextField();
+		inclusions.setEditable(false);
+		informationTabPanel.add(inclusions, "4, 8, fill, default");
+		inclusions.setColumns(10);
+		
+		JLabel lblExtensions = new JLabel("Extensions:");
+		informationTabPanel.add(lblExtensions, "2, 10, left, default");
+		
+		extensions = new JTextField();
+		extensions.setEditable(false);
+		extensions.setColumns(10);
+		informationTabPanel.add(extensions, "4, 10, fill, default");
+		
 		JLabel lblActors = new JLabel(Messages.getString("UseCasePanel.lblActors.text")); //$NON-NLS-1$
-		informationTabPanel.add(lblActors, "2, 8");
+		informationTabPanel.add(lblActors, "2, 14");
 		
 		actors = new JTextField();
 		actors.setName("actors");
 		actors.setEditable(false);
-		informationTabPanel.add(actors, "4, 8");
+		informationTabPanel.add(actors, "4, 14");
 		actors.setColumns(10);
 		
 		actorScrollPane = new JScrollPane();
 		actorScrollPane.setName("actorScrollPane");
-		informationTabPanel.add(actorScrollPane, "4, 10");
+		informationTabPanel.add(actorScrollPane, "4, 16");
 		
 		actorsTable = new JTable();
 		actorsTable.setName("actorsTable");
@@ -248,13 +274,13 @@ public class UseCasePanel
 		actorScrollPane.setColumnHeaderView( null );
 		
 		JLabel lblPreconditions = new JLabel(Messages.getString("UseCasePanel.lblPreconditions.text")); //$NON-NLS-1$
-		informationTabPanel.add(lblPreconditions, "2, 12, default, top");
+		informationTabPanel.add(lblPreconditions, "2, 18, default, top");
 		
 		// Precondition
 		
 		preconditionPanel = new JPanel();
 		preconditionPanel.setName( "preconditionPanel" );
-		informationTabPanel.add(preconditionPanel, "4, 12, fill, fill");
+		informationTabPanel.add(preconditionPanel, "4, 18, fill, fill");
 		preconditionPanel.setLayout(new BorderLayout(0, 0));
 		
 		preconditionButtonsPanel = new JPanel();
@@ -481,10 +507,37 @@ public class UseCasePanel
 		ignoreToGenerateTests.setSelected( uc.getIgnoreToGenerateTests() );
 		name.setText( uc.getName() );
 		description.setText( uc.getDescription() );
+		
+		inclusions.setText( namesOfTheReferencedUseCases( uc.inclusions() ) );
+		extensions.setText( namesOfTheReferencedUseCases( uc.extensions() ) );
+		
 		actors.setText( actorNames( uc.getActors() ) );
 		actorSelectionTM.setSelectedActors( uc.getActors() );
 	}
 
+	/**
+	 * Return a text containing the name of the referenced use cases.
+	 * @param useCases
+	 * @return
+	 */
+	private String namesOfTheReferencedUseCases(final Collection< UseCase > useCases) {
+		StringBuilder sb = new StringBuilder();
+		boolean notTheFirstOne = false;
+		for ( UseCase uc : useCases ) {
+			if ( notTheFirstOne ) {
+				sb.append( ", " );
+			}
+			sb.append( uc.getName() );
+			notTheFirstOne = true;
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * Return a text containing the name of the actors.
+	 * @param actors
+	 * @return
+	 */
 	private String actorNames(final Collection< Actor > actors) {
 		int count = actors.size();
 		final String SEPARATOR = ", ";
