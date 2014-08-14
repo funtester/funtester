@@ -21,6 +21,7 @@ import org.funtester.app.i18n.Messages;
 import org.funtester.app.project.AppState;
 import org.funtester.app.project.Version;
 import org.funtester.app.project.VersionChecker;
+import org.funtester.app.startup.LoadManualsTask;
 import org.funtester.app.ui.AboutDialog;
 import org.funtester.app.ui.common.DefaultFileNameExtensionFilters;
 import org.funtester.app.ui.common.ImagePath;
@@ -222,19 +223,110 @@ public class HelpActionContainer implements PropertyChangeListener {
 	 */
 	private void openManualFile() {
 		
-		Locale locale = Locale.getDefault();
+		//
+		// Detect available manuals
+		//
 		
-		File manualFile = new File( manualFileNameForLocale( locale ) );
+		LoadManualsTask task = new LoadManualsTask();
+		try {
+			task.perform( new String[ 0 ], appState );
+		} catch ( Exception e ) {
+			MsgUtil.error( getOwner(), e.getLocalizedMessage(), getTitle() );
+			return;
+		}
 		
-		if ( ! manualFile.exists() ) {
+		String localizedManualFile = "";
+		String languageManualFile = "";
+		
+		String americanEnglishManualFile = "";
+		String englishManualFile = "";
+		
+		
+		if ( appState.hasManuals() ) {
 			
-			String manualFilePath = manualFile.getAbsolutePath();
+			Locale defaultLocale = Locale.getDefault();
 			
-			if ( ! theUserWantsToSearchTheManual( manualFilePath ) ) {
+			final String localizedManualPattern = LoadManualsTask.manualPatternForLanguageAndCountry(
+					defaultLocale.getLanguage(), defaultLocale.getCountry() );
+		
+			final String languageManualPattern = LoadManualsTask.manualPatternForLanguage(
+					defaultLocale.getLanguage() );
+			
+			final String americanEnglishManualPattern = LoadManualsTask.manualPatternForLanguageAndCountry(
+					Locale.ENGLISH.getLanguage(), Locale.ENGLISH.getCountry() );
+			
+			final String englishManualPattern = LoadManualsTask.manualPatternForLanguage(
+					Locale.ENGLISH.getLanguage() );
+			
+			
+			System.out.println( "patterns: "
+					+ "\n" + localizedManualPattern
+					+ "\n" + languageManualPattern
+					+ "\n" + americanEnglishManualPattern
+					+ "\n" + englishManualPattern
+					
+					);
+			
+			
+			for ( String manual : appState.getManuals() ) {
+				
+				String m = manual.toLowerCase();
+				
+				System.out.println( "manual: " + m );
+				
+				// Match LANGUAGE & COUNTRY ?
+				if ( m.matches( localizedManualPattern ) ) {
+					localizedManualFile = manual;
+					break;
+				}
+				
+				// Match LANGUAGE ?
+				if ( m.matches( languageManualPattern ) ) {
+					languageManualFile = manual;
+				}
+				
+				// Match ENGLISH LANGUAGE & COUNTRY ?
+				if ( m.matches( americanEnglishManualPattern ) ) {
+					americanEnglishManualFile = manual;
+				}
+				
+				// Match ENGLISH LANGUAGE ?
+				if ( m.matches( englishManualPattern ) ) {
+					englishManualFile = manual;
+				}
+				
+			} // for
+		}
+		
+		String manualFile = localizedManualFile;
+		if ( manualFile.isEmpty() ) {
+			manualFile = languageManualFile;
+		}
+		
+		if ( manualFile.isEmpty()
+				&& (   ! americanEnglishManualFile.isEmpty()
+					|| ! englishManualFile.isEmpty() ) ) {
+			
+			String msg = Messages.alt( "",
+					"A manual for your language was not found. Do you want to open the english manual?" );
+			if ( MsgUtil.yesTo( getOwner(), msg, getTitle() ) ) {
+				
+				if ( ! americanEnglishManualFile.isEmpty() ) {
+					manualFile = americanEnglishManualFile;
+				} else {
+					manualFile = englishManualFile;
+				}
+			}
+		}
+		
+		if ( manualFile.isEmpty() ) {
+			
+			String msg = Messages.alt( "_MANUAL_FILE_ASK_FIND_MANUALLY", "Do you want to find the manual manually?" );
+			if ( ! MsgUtil.yesTo( getOwner(), msg, getTitle() ) ) {
 				return;
 			}
 
-			manualFilePath = SimpleFileChooser.chooseFile(
+			manualFile = SimpleFileChooser.chooseFile(
 					owner,
 					Messages.alt( "_OPEN_FILE", "Open" ),
 					FileUtil.currentDirectory(),
@@ -242,47 +334,19 @@ public class HelpActionContainer implements PropertyChangeListener {
 					true
 					).getAbsolutePath();
 					
-			if ( null == manualFilePath ) {
+			if ( null == manualFile ) {
 				return;
 			}
-			
-			manualFile = new File( manualFilePath );
 		}
 		
 		try {
-			Desktop.getDesktop().open( manualFile );
+			Desktop.getDesktop().open( new File( manualFile ) );
 		} catch ( IOException ex ) {
 			MsgUtil.error( getOwner(), ex.getLocalizedMessage(), getTitle() );
 		}
 	}
 	
-	/**
-	 * Return a manual file name using a locale information.
-	 * 
-	 * @param locale
-	 * @return
-	 */
-	private String manualFileNameForLocale(final Locale locale) {
-		//return "manual/manual_pt_br.pdf";
-		return String.format( "manual/manual_%s_%s.pdf",
-				locale.getLanguage().toLowerCase(),
-				locale.getCountry().toLowerCase()
-				);
-	}
-	
-	/**
-	 * Ask the user for a manual file and return {@code true} whether he or
-	 * she wants to search it.
-	 * 
-	 * @param fileName the file name.
-	 * @return
-	 */
-	private boolean theUserWantsToSearchTheManual(final String fileName) {
-		final String msg = String.format(
-				Messages.alt( "_MANUAL_FILE_NOT_FOUND", "Manual file not found: \"%s\". Do you want to search it?" ),
-				fileName );
-		return MsgUtil.yesTo( getOwner(), msg, getTitle() );
-	}
+
 	
 	/**
 	 * Try to open the project website.

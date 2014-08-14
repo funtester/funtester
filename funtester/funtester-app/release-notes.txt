@@ -1,3 +1,16 @@
+# Version 0.7d (August ??th, 2014)
+
+@new:    FunTester now can read manuals with version numbers.
+         Whether a manual for the current language or country
+         is not found, and there is a manual in english, it
+         asks the user to open the file. Ticket #30.
+		 
+@new:    Configuration dialog now has the field "Manual", which
+         configures the directory for manual files.
+		 
+@new:    Configuration dialog now uses relative paths. (Partial ticket #17).
+
+
 # Version 0.7c.1 (June 19th, 2014)
 
 @change: Translation to Brazilian Portuguese was extended.

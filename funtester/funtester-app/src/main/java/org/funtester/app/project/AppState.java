@@ -1,6 +1,8 @@
 package org.funtester.app.project;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -42,6 +44,9 @@ public class AppState {
 	
 	/** Map the available locales to their respective files */ 
 	private Map< Locale, String > localesMap = new LinkedHashMap< Locale, String >();
+	
+	/** Manual files **/
+	private List< String > manuals = new ArrayList< String >();
 	
 	/** Map the available look and feels to theirs respective class names */ 
 	private Map< String, String > lookAndFeelMap = new LinkedHashMap< String, String >();
@@ -122,6 +127,39 @@ public class AppState {
 
 	public void setLocalesMap(Map< Locale, String > map) {
 		this.localesMap = map;
+	}
+
+	public List< String > getManuals() {
+		return manuals;
+	}
+
+	public void setManuals(List< String > manuals) {
+		this.manuals = manuals;
+	}
+	
+	/**
+	 * Clear the current manuals.
+	 */
+	public void clearManuals() {
+		manuals.clear();
+	}
+	
+	/**
+	 * Add a manual file
+	 * 
+	 * @param manual
+	 * @return
+	 */
+	public boolean addManual(String manual) {
+		return manuals.add( manual );
+	}
+	
+	/**
+	 * Return {@code true} whether it has manuals.
+	 * @return
+	 */
+	public boolean hasManuals() {
+		return ! manuals.isEmpty();
 	}
 
 	public Map< String, String > getLookAndFeelMap() {
