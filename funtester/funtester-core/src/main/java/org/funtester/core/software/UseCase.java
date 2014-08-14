@@ -546,6 +546,7 @@ public class UseCase
 	 * @return
 	 */
 	public Collection< UseCase > inclusions() {
+		if ( null == basicFlow() ) { return new LinkedHashSet< UseCase >(); }
 		return referencedUseCases( basicFlow().getSteps() );
 	}
 
