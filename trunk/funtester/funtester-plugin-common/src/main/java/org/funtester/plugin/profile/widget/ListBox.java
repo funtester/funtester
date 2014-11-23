@@ -1,13 +1,13 @@
 package org.funtester.plugin.profile.widget;
 
-import org.funtester.plugin.profile.Element;
+import org.funtester.plugin.profile.ElementCodeGenerator;
 
 /**
  * ListBox
  *
  * @author Thiago Delgado Pinto
  */
-public abstract class ListBox implements Element {
+public abstract class ListBox implements ElementCodeGenerator {
 
 	public boolean is(final String value) {
 		return value.equalsIgnoreCase( "listbox" )

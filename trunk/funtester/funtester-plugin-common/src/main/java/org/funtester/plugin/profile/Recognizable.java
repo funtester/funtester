@@ -1,11 +1,12 @@
 package org.funtester.plugin.profile;
 
 /**
- * Action
+ * Recognizable
  *
  * @author Thiago Delgado Pinto
+ *
  */
-public interface Action {
+public interface Recognizable {
 
 	boolean is(final String value);
 

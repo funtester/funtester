@@ -1,13 +1,13 @@
 package org.funtester.plugin.profile.widget;
 
-import org.funtester.plugin.profile.Element;
+import org.funtester.plugin.profile.ElementCodeGenerator;
 
 /**
  * Dialog
  *
  * @author Thiago Delgado Pinto
  */
-public abstract class Dialog implements Element {
+public abstract class Dialog implements ElementCodeGenerator {
 
 	public boolean is(final String value) {
 		return value.equalsIgnoreCase( "dialog" )
