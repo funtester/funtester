@@ -1,11 +1,13 @@
 package org.funtester.plugin.profile;
 
+import org.funtester.common.at.AbstractTestElement;
+
 /**
- * Element
+ * Element code generator
  *
  * @author Thiago Delgado Pinto
  */
-public interface Element {
+public interface ElementCodeGenerator {
 
 	/**
 	 * Return {@code true} weather the element has the given name.
@@ -16,6 +18,10 @@ public interface Element {
 	 */
 	boolean is(final String value);
 
-	String code();
+	String generateCode(
+			final ActionChecker actionChecker,
+			final String actionName,
+			final AbstractTestElement e
+			);
 
 }
