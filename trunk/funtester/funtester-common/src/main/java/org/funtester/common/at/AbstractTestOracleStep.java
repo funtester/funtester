@@ -4,24 +4,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Oracle-based abstract test step
- * 
+ *
  * @see {@link AbstractTestStep}
- * 
+ *
  * @author Thiago Delgado Pinto
  *
  */
 public class AbstractTestOracleStep extends AbstractTestStep {
 
 	private static final long serialVersionUID = 4498256866252978916L;
-	
+
 	private List< String > messages = new ArrayList< String >();
-	
+
 	public AbstractTestOracleStep() {
 		super();
 	}
-	
+
 	public AbstractTestOracleStep(
 			final long id,
 			final long useCaseId,
@@ -30,6 +32,11 @@ public class AbstractTestOracleStep extends AbstractTestStep {
 			final String actionName
 			) {
 		super( id, useCaseId, flowId, stepId, actionName );
+	}
+
+	@JsonIgnore
+	public AbstractTestStepKind kind() {
+		return AbstractTestStepKind.ORACLE;
 	}
 
 	public List< String > getMessages() {
@@ -53,15 +60,15 @@ public class AbstractTestOracleStep extends AbstractTestStep {
 	@Override
 	public AbstractTestStep newCopy() {
 		return ( new AbstractTestOracleStep() ).copy( this );
-	}	
-	
+	}
+
 	@Override
 	public int hashCode() {
 		return super.hashCode() * 31 * Arrays.hashCode( new Object[] {
 			messages
 		} );
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if ( ! ( o instanceof AbstractTestOracleStep ) ) {
