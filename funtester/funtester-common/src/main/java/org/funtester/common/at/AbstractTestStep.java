@@ -6,6 +6,7 @@ import java.util.Arrays;
 import org.funtester.common.util.Copier;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator;
 
 /**
  * Abstract test step
- * 
+ *
  * @author Thiago Delgado Pinto
  *
  */
@@ -28,27 +29,27 @@ public class AbstractTestStep
 	implements Serializable, Copier< AbstractTestStep > {
 
 	private static final long serialVersionUID = -7389548894237848597L;
-	
+
 	/** Abstract step identification */
 	private long id;
-	
+
 	/** Use case id used to keep track of the requirements */
 	private long useCaseId;
-	
+
 	/** Flow id used to keep track of the requirements */
 	private long flowId;
-	
+
 	/** Step id used to keep track of the requirements */
 	private long stepId;
-	
+
 	/** Name of the action performed by the system or the user, according to
 	 * the software's profile. */
-	private String actionName; 
-	
-	
+	private String actionName;
+
+
 	public AbstractTestStep() {
 	}
-	
+
 	public AbstractTestStep(
 			final long id,
 			final long useCaseId,
@@ -63,7 +64,12 @@ public class AbstractTestStep
 		this.stepId = stepId;
 		this.actionName = actionName;
 	}
-	
+
+	@JsonIgnore
+	public AbstractTestStepKind kind() {
+		return AbstractTestStepKind.UNKNOWN;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -112,23 +118,23 @@ public class AbstractTestStep
 		this.actionName = that.actionName;
 		return this;
 	}
-	
+
 	public AbstractTestStep newCopy() {
 		return ( new AbstractTestStep() ).copy( this );
 	}
-	
+
 	@Override
 	public String toString() {
 		return actionName;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Arrays.hashCode( new Object[] {
 			useCaseId, flowId, stepId, actionName
 		} );
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if ( ! ( o instanceof AbstractTestStep ) ) {
