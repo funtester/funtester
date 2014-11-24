@@ -1,12 +1,12 @@
 package org.funtester.plugin.profile;
 
 /**
- * Action checker
+ * Action recognizer
  *
  * @author Thiago Delgado Pinto
  *
  */
-public class ActionChecker {
+public class ActionRecognizer {
 
 	/**
 	 * Check whether the given value is equal to one of the other values.
@@ -68,6 +68,10 @@ public class ActionChecker {
 		return is( value, "deselect" );
 	}
 
+	public boolean isDisable(final String value) {
+		return is( value, "disable" );
+	}
+
 	public boolean isDoubleClick(final String value) {
 		return is( value, "click.double", "double.click", "doubleclick" );
 	}
@@ -78,6 +82,10 @@ public class ActionChecker {
 
 	public boolean isDrop(final String value) {
 		return is( value, "drop" );
+	}
+
+	public boolean isEnable(final String value) {
+		return is( value, "enable" );
 	}
 
 	public boolean isHide(final String value) {
