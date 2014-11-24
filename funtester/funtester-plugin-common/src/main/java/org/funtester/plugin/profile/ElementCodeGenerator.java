@@ -18,8 +18,10 @@ public interface ElementCodeGenerator {
 	 */
 	boolean is(final String value);
 
+	// TEMPORARY DEFINITION !!!
 	String generateCode(
-			final ActionChecker actionChecker,
+			final boolean isOracle,
+			final ActionRecognizer actionChecker,
 			final String actionName,
 			final AbstractTestElement e
 			);
