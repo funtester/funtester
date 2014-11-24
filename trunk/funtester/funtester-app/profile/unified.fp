@@ -1,7 +1,8 @@
 {
   "id" : 1,
   "name" : "Unified Profile",
-  "description" : "Unified Profile",
+  "description" : "Profile for describing Desktop, Web and Mobile User Interfaces",
+  
   "types" : [ {
     "id" : 2,
     "name" : "key",
@@ -144,20 +145,20 @@
 	"editable" : false
   }, {
     "id" : 6,
+    "name" : "box.dialog",
+    "kind" : "WIDGET",
+	"editable" : false
+  },{
+    "id" : 10,
     "name" : "box.dialog.cancel",
     "kind" : "WIDGET",
 	"editable" : false
   }, {
-    "id" : 10,
+    "id" : 11,
     "name" : "box.dialog.cancel-tryagain-continue",
     "kind" : "WIDGET",
 	"editable" : false
-  }, {
-    "id" : 11,
-    "name" : "box.dialog.help",
-    "kind" : "WIDGET",
-	"editable" : false
-  }, {
+  },{
     "id" : 12,
     "name" : "box.dialog.ok",
     "kind" : "WIDGET",
@@ -234,31 +235,36 @@
 	"editable" : true
   }, {
     "id" : 51,
-    "name" : "slider",
+    "name" : "slider.horizontal",
     "kind" : "WIDGET",
 	"editable" : true
   }, {
     "id" : 52,
-    "name" : "spinner",
+    "name" : "slider.vertical",
     "kind" : "WIDGET",
 	"editable" : true
   }, {
     "id" : 53,
+    "name" : "spinner",
+    "kind" : "WIDGET",
+	"editable" : true
+  }, {
+    "id" : 54,
     "name" : "tab",
     "kind" : "WIDGET",
 	"editable" : false
   }, {
-    "id" : 54,
+    "id" : 55,
     "name" : "tooltip",
     "kind" : "WIDGET",
 	"editable" : false
   }, {
-    "id" : 55,
+    "id" : 56,
     "name" : "tree",
     "kind" : "WIDGET",
-	"editable" : true
+	"editable" : false
   }, {
-    "id" : 56,
+    "id" : 57,
     "name" : "video",
     "kind" : "WIDGET",
 	"editable" : false
@@ -278,38 +284,10 @@
     "kind" : "WIDGET",
 	"editable" : false
   } ],
+  
+  
+  
   "actions" : [ {
-    "id" : 1,
-    "name" : "call",
-    "trigger" : "SYSTEM",
-    "kind" : "USE_CASE_CALL",
-    "maxElements" : 1
-  }, {
-    "id" : 2,
-    "name" : "press",
-    "trigger" : "ACTOR",
-    "kind" : "ACTION",
-    "maxElements" : 1000
-  }, {
-    "id" : 3,
-    "name" : "check",
-    "trigger" : "SYSTEM",
-    "kind" : "ORACLE",
-    "maxElements" : 1000
-  }, {
-    "id" : 4,
-    "name" : "select",
-    "trigger" : "ACTOR",
-    "kind" : "ACTION",
-    "maxElements" : 1000,
-	"makeElementsEditable" : true
-  }, {
-    "id" : 5,
-    "name" : "answer.yes",
-    "trigger" : "SYSTEM",
-    "kind" : "ACTION",
-    "maxElements" : 1
-  }, {
     "id" : 11,
     "name" : "answer.cancel",
     "trigger" : "SYSTEM",
@@ -340,15 +318,45 @@
     "kind" : "ACTION",
     "maxElements" : 1
   }, {
+    "id" : 5,
+    "name" : "answer.yes",
+    "trigger" : "SYSTEM",
+    "kind" : "ACTION",
+    "maxElements" : 1
+  }, {
+    "id" : 1,
+    "name" : "call",
+    "trigger" : "SYSTEM",
+    "kind" : "USE_CASE_CALL",
+    "maxElements" : 1
+  }, {
+    "id" : 3,
+    "name" : "check",
+    "trigger" : "SYSTEM",
+    "kind" : "ORACLE",
+    "maxElements" : 1000
+  }, {
+    "id" : 6,
+    "name" : "click",
+    "trigger" : "ACTOR",
+    "kind" : "ACTION",
+    "maxElements" : 1000
+  }, {
     "id" : 16,
     "name" : "click.double",
     "trigger" : "ACTOR",
     "kind" : "ACTION",
     "maxElements" : 1000
   }, {
-    "id" : 6,
-    "name" : "click",
-    "trigger" : "ACTOR",
+    "id" : 10,
+    "name" : "close",
+    "trigger" : "SYSTEM",
+    "kind" : "ACTION",
+    "maxElements" : 1
+  }, {
+    "id" : 22,
+    "name" : "deselect",
+    "trigger" : "SYSTEM",
     "kind" : "ACTION",
     "maxElements" : 1000
   }, {
@@ -359,28 +367,67 @@
     "maxElements" : 1
   }, {
     "id" : 18,
-    "name" : "DROP",
+    "name" : "drop",
     "trigger" : "ACTOR",
     "kind" : "ACTION",
     "maxElements" : 1
+  }, {
+    "id" : 25,
+    "name" : "disable",
+    "trigger" : "SYSTEM",
+    "kind" : "ORACLE",
+    "maxElements" : 1000
+  }, {
+    "id" : 26,
+    "name" : "enable",
+    "trigger" : "SYSTEM",
+    "kind" : "ORACLE",
+    "maxElements" : 1000
   }, {
     "id" : 19,
     "name" : "hide",
     "trigger" : "SYSTEM",
     "kind" : "ACTION",
+    "maxElements" : 1000
+  }, {
+    "id" : 24,
+    "name" : "navigate.to",
+    "trigger" : "SYSTEM",
+    "kind" : "ORACLE",
     "maxElements" : 1
+  }, {
+    "id" : 2,
+    "name" : "press",
+    "trigger" : "ACTOR",
+    "kind" : "ACTION",
+    "maxElements" : 1000
+  }, {
+    "id" : 4,
+    "name" : "select",
+    "trigger" : "ACTOR",
+    "kind" : "ACTION",
+    "maxElements" : 1000,
+	"makeElementsEditable" : true
+  }, {
+    "id" : 9,
+    "name" : "select.first",
+    "trigger" : "ACTOR",
+    "kind" : "ACTION",
+    "maxElements" : 1000,
+	"makeElementsEditable" : true
+  }, {
+    "id" : 20,
+    "name" : "select.items",
+    "trigger" : "ACTOR",
+    "kind" : "ACTION",
+    "maxElements" : 1000,
+	"makeElementsEditable" : true
   }, {
     "id" : 7,
     "name" : "show",
     "trigger" : "SYSTEM",
     "kind" : "ACTION",
     "maxElements" : 1
-  }, {
-    "id" : 20,
-    "name" : "pressKeys",
-    "trigger" : "USER",
-    "kind" : "ACTION",
-    "maxElements" : 1000
   }, {
     "id" : 8,
     "name" : "type",
@@ -390,45 +437,14 @@
 	"makeElementsEditable" : true
   }, {
     "id" : 21,
-    "name" : "select.items",
-    "trigger" : "USER",
-    "kind" : "ACTION",
-    "maxElements" : 1000
-  }, {
-    "id" : 9,
-    "name" : "select.first",
+    "name" : "uncheck",
     "trigger" : "ACTOR",
     "kind" : "ACTION",
-    "maxElements" : 1000,
-	"makeElementsEditable" : true
-  }, {
-    "id" : 23,
-    "name" : "deselect",
-    "trigger" : "USER",
-    "kind" : "ACTION",
     "maxElements" : 1000
   }, {
-    "id" : 22,
-    "name" : "uncheck",
-    "trigger" : "USER",
-    "kind" : "ACTION",
-    "maxElements" : 1
-  }, {
-    "id" : 24,
+    "id" : 23,
     "name" : "wait",
-    "trigger" : "USER",
-    "kind" : "ACTION",
-    "maxElements" : 1
-  }, {
-    "id" : 25,
-    "name" : "navigate.to",
-    "trigger" : "SYSTEM",
-    "kind" : "ORACLE",
-    "maxElements" : 1
-  }, {
-    "id" : 10,
-    "name" : "close",
-    "trigger" : "SYSTEM",
+    "trigger" : "ACTOR",
     "kind" : "ACTION",
     "maxElements" : 1
   } ]
