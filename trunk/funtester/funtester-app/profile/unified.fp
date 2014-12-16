@@ -187,7 +187,7 @@
     "id" : 22,
     "name" : "box.list",
     "kind" : "WIDGET",
-	"editable" : yes
+	"editable" : true
   }, {
     "id" : 23,
     "name" : "box.memo",
