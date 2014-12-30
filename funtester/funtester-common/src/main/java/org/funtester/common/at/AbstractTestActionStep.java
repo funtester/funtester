@@ -4,27 +4,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * Action-based abstract test step.
- *
+ * 
  * @see {@link AbstractTestStep}
- *
+ * 
  * @author Thiago Delgado Pinto
  *
  */
 public class AbstractTestActionStep extends AbstractTestStep {
 
 	private static final long serialVersionUID = 4110972799050538201L;
-
+	
 	private List< AbstractTestElement > elements =
 		new ArrayList< AbstractTestElement >();
-
+	
 	public AbstractTestActionStep() {
 		super();
 	}
-
+	
 	public AbstractTestActionStep(
 			final long id,
 			final long useCaseId,
@@ -33,11 +31,6 @@ public class AbstractTestActionStep extends AbstractTestStep {
 			final String actionName
 			) {
 		super( id, useCaseId, flowId, stepId, actionName );
-	}
-
-	@JsonIgnore
-	public AbstractTestStepKind kind() {
-		return AbstractTestStepKind.ACTION;
 	}
 
 	public List< AbstractTestElement > getElements() {
@@ -51,11 +44,11 @@ public class AbstractTestActionStep extends AbstractTestStep {
 	public boolean addElement(AbstractTestElement element) {
 		return elements.add( element );
 	}
-
+	
 	public int numberOfElements() {
 		return elements.size();
 	}
-
+	
 	// FROM Copier
 
 	public AbstractTestStep copy(final AbstractTestStep that) {
@@ -69,15 +62,15 @@ public class AbstractTestActionStep extends AbstractTestStep {
 
 	public AbstractTestStep newCopy() {
 		return ( new AbstractTestActionStep() ).copy( this );
-	}
-
+	}	
+	
 	@Override
 	public int hashCode() {
 		return super.hashCode() * 31 * Arrays.hashCode( new Object[] {
 			elements
 		} );
 	}
-
+	
 	@Override
 	public boolean equals(Object o) {
 		if ( ! ( o instanceof AbstractTestActionStep ) ) {

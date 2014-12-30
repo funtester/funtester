@@ -33,49 +33,47 @@ import org.funtester.core.software.Software;
 
 /**
  * Container for the "File" actions.
- *
+ * 
  * TODO refactor this class!
- *
+ * 
  * @author Thiago Delgado Pinto
  *
  */
 public class FileActionContainer {
-
-	private final JFrame owner;
-
+	
+	private final JFrame owner; 
+	
 	private Action fileNewAction = null;
 	private Action fileOpenAction = null;
 	private Action fileCloseAction = null;
 	private Action fileSaveAction = null;
-	private Action fileSaveAsAction = null;
-	private Action filePrintAction = null;
-	private Action fileExportAsHTMLAction = null;
+	private Action fileSaveAsAction = null;	
 	private Action fileExitAction = null;
-
-
+	private Action fileExportAsHTMLAction = null;
+		
 	private final AppState appState;
-
+	
 	private final Announcer< ProjectListener > announcer =
 			Announcer.to( ProjectListener.class );
-
+	
 	public FileActionContainer(JFrame owner, AppState appState) {
 		this.owner = owner;
 		this.appState = appState;
 		updateActionsEnabledState();
 	}
-
+	
 	private Announcer< ProjectListener > getAnnouncer() {
 		return announcer;
 	}
-
+	
 	public void addListener(ProjectListener listener) {
 		getAnnouncer().addListener( listener );
 	}
-
+	
 	public void removeListener(ProjectListener listener) {
 		getAnnouncer().removeListener( listener );
 	}
-
+	
 	public Action getFileNewAction() {
 		return ( null == fileNewAction )
 			? fileNewAction = new BaseAction()
@@ -85,17 +83,17 @@ public class FileActionContainer {
 				.withListener( createFileNewActionListener() )
 			: fileNewAction;
 	}
-
+	
 	public Action getFileOpenAction() {
 		return ( null == fileOpenAction )
 				? fileOpenAction = new BaseAction()
 					.withIcon( ImageUtil.loadIcon( ImagePath.openIcon() ) )
-					.withName( Messages.alt( "_MENU_FILE_OPEN", "Open..." ) )
+					.withName( Messages.alt( "_MENU_FILE_OPEN", "Open..." ) )					
 					.withAcceleratorKey( KeyStroke.getKeyStroke( KeyEvent.VK_O, KeyEvent.CTRL_MASK ) )
 					.withListener( createFileOpenActionListener() )
 				: fileOpenAction;
 	}
-
+	
 	public Action getFileCloseAction() {
 		return ( null == fileCloseAction )
 			? fileCloseAction = new BaseAction()
@@ -103,7 +101,7 @@ public class FileActionContainer {
 				.withListener( createFileCloseActionListener() )
 			: fileCloseAction;
 	}
-
+	
 	public Action getFileSaveAction() {
 		return ( null == fileSaveAction )
 				? fileSaveAction = new BaseAction()
@@ -113,7 +111,7 @@ public class FileActionContainer {
 					.withListener( createFileSaveActionListener() )
 				: fileSaveAction;
 	}
-
+	
 	public Action getFileSaveAsAction() {
 		return ( null == fileSaveAsAction )
 				? fileSaveAsAction = new BaseAction()
@@ -121,16 +119,15 @@ public class FileActionContainer {
 					.withListener( createFileSaveAsActionListener() )
 				: fileSaveAsAction;
 	}
-
-	public Action getFilePrintAction() {
-		return ( null == filePrintAction )
-				? filePrintAction = new BaseAction()
-					.withName( Messages.alt( "_MENU_FILE_PRINT", "Print..." ) )
-					.withAcceleratorKey( KeyStroke.getKeyStroke( KeyEvent.VK_P, KeyEvent.CTRL_MASK ) )
-					.withListener( createFilePrintActionListener() )
-				: filePrintAction;
+	
+	public Action getFileExitAction() {
+		return ( null == fileExitAction )
+			? fileExitAction = new BaseAction()
+				.withName( Messages.alt( "_MENU_FILE_EXIT", "Exit" ) )
+				.withListener( createFileExitActionListener() )
+			: fileExitAction;
 	}
-
+	
 	public Action getFileExportAsHTMLAction() {
 		return ( null == fileExportAsHTMLAction )
 			? fileExportAsHTMLAction = new BaseAction()
@@ -140,15 +137,6 @@ public class FileActionContainer {
 			: fileExportAsHTMLAction;
 	}
 
-
-	public Action getFileExitAction() {
-		return ( null == fileExitAction )
-			? fileExitAction = new BaseAction()
-				.withName( Messages.alt( "_MENU_FILE_EXIT", "Exit" ) )
-				.withListener( createFileExitActionListener() )
-			: fileExitAction;
-	}
-
 	public void updateActionsEnabledState() {
 		final boolean isClosed = ( FileState.CLOSED == appState.getProjectFileState() );
 		// fileNewAction() is always enabled
@@ -156,11 +144,10 @@ public class FileActionContainer {
 		getFileCloseAction().setEnabled( ! isClosed );
 		getFileSaveAction().setEnabled( ! isClosed );
 		getFileSaveAsAction().setEnabled( ! isClosed );
-		getFilePrintAction().setEnabled( ! isClosed );
 		//getFileExportAsHTMLAction().setEnabled( ! isClosed );
 	}
-
-
+	
+	
 	private ActionListener createFileCloseActionListener() {
 		return new ActionListener() {
 			@Override
@@ -169,7 +156,7 @@ public class FileActionContainer {
 			}
 		};
 	}
-
+	
 	private ActionListener createFileExitActionListener() {
 		return new ActionListener() {
 			@Override
@@ -180,27 +167,27 @@ public class FileActionContainer {
 			}
 		};
 	}
-
+	
 	private ActionListener createFileNewActionListener() {
 		return new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
 				final ActionListener closeAL = createFileCloseActionListener();
 				closeAL.actionPerformed( e );
 				if ( ! appState.getProjectFileState().equals( FileState.CLOSED ) ) { return; }
-
+				
 				SoftwareDialog dlg = new SoftwareDialog( appState.getVocabularyMap().keySet() );
 				UIUtil.centerOnScreen( dlg );
 				dlg.setVisible( true );
 				if (! dlg.isConfirmed() ) { return; }
-
+				
 				Software software = dlg.getSoftware().newCopy();
-
+				
 				final String vocabularyFileName =
 						appState.getVocabularyMap().get( software.getVocabulary() );
-
+				
 				Project project = new Project();
 				project.setVocabularyFile( vocabularyFileName );
 				project.setSoftware( software );
@@ -208,32 +195,32 @@ public class FileActionContainer {
 				appState.setProject( project );
 				appState.setProjectFileState( FileState.DIRTY );
 				appState.setProjectFileName( "" ); // Not saved yet
-
+				
 				// Notify
 				getAnnouncer().announce().hasOpened( project );
-
+				
 				updateActionsEnabledState();
 			}
 		};
 	}
-
+	
 	private ActionListener createFileOpenActionListener() {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
 				final ActionListener closeAL = createFileCloseActionListener();
 				closeAL.actionPerformed( e );
 				if ( ! appState.getProjectFileState().equals( FileState.CLOSED ) ) { return; }
-
+				
 				final String dialogTitle = Messages.alt( "_OPEN_FILE", "Open" );
 				final File currentDirectory = new File( "." );
-
+				
 				String filePath = SimpleFileChooser.chooseFile(
 						owner, dialogTitle, currentDirectory,
 						DefaultFileNameExtensionFilters.PROJECT, false
 						).getAbsolutePath();
-
+				
 				// Has cancelled? Exit!
 				if ( null == filePath ) {
 					return;
@@ -242,7 +229,7 @@ public class FileActionContainer {
 				if  ( ! filePath.endsWith( expectedExtension ) ) {
 					filePath += expectedExtension;
 				}
-
+				
 				// Open
 				final Project project;
 				try {
@@ -256,15 +243,15 @@ public class FileActionContainer {
 				appState.setProject( project );
 				appState.setProjectFileState( FileState.DIRTY );
 				appState.setProjectFileName( filePath );
-
+				
 				// Notify
 				getAnnouncer().announce().hasOpened( project );
-
+				
 				updateActionsEnabledState();
 			}
 		};
 	}
-
+	
 	private ActionListener createFileSaveActionListener() {
 		return new ActionListener() {
 			@Override
@@ -273,7 +260,7 @@ public class FileActionContainer {
 			}
 		};
 	}
-
+	
 	private ActionListener createFileSaveAsActionListener() {
 		return new ActionListener() {
 			@Override
@@ -282,7 +269,7 @@ public class FileActionContainer {
 			}
 		};
 	}
-
+	
 	private ActionListener createFileExportAsHTMLActionListener() {
 		return new ActionListener() {
 			@Override
@@ -296,61 +283,47 @@ public class FileActionContainer {
 			}
 		};
 	}
-
-	private ActionListener createFilePrintActionListener() {
-		return new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				// Not available whether the project is closed
-				if ( ! appState.getProjectFileState().equals( FileState.CLOSED ) ) { return; }
-
-
-				// TODO: Complete this action.
-			}
-		};
-	}
-
-
+	
+	
 	private boolean save(final boolean saveAsAnotherFile) {
-
+		
 		if ( ! appState.getProjectFileState().equals( FileState.CLOSED ) ) {
-
+			
 			final String dialogTitle = Messages.alt( "_SAVE_FILE", "Save" );
 			String projectFilePath = appState.getProjectFileName();
-
+			
 			/*
 			final File targetDirectory = ( saveAsAnotherFile )
 				? new File( "." )
 				: new File( System.getProperty( "user.home", "." ) );
 			*/
 			final File targetDirectory = FileUtil.currentDirectory();
-
+			
 			final boolean isNewProject = ( null == projectFilePath || projectFilePath.isEmpty() );
 			if ( isNewProject || saveAsAnotherFile ) {
-
+				
 				projectFilePath = SimpleFileChooser.chooseFile(
 						owner, dialogTitle, targetDirectory,
 						DefaultFileNameExtensionFilters.PROJECT, true
 						).getAbsolutePath();
-
+						
 				// Has cancelled? Exit!
 				if ( null == projectFilePath ) {
 					return false;
 				}
 			}
-
+			
 			final String expectedProjectExtension = "." + DefaultFileExtensions.PROJECT;
 			if  ( ! projectFilePath.endsWith( expectedProjectExtension ) ) {
 				projectFilePath += expectedProjectExtension;
 			}
-
+			
 			final String softwareFilePath = projectFilePath.replace(
 					expectedProjectExtension, "." + DefaultFileExtensions.SOFTWARE );
-
+			
 			Project project = appState.getProject();
 			project.setSoftwareFile( softwareFilePath );
-
+		
 			// Save
 			try {
 				createProjectRepository( projectFilePath ).save( project );
@@ -359,25 +332,25 @@ public class FileActionContainer {
 				MsgUtil.error( owner, e1.getLocalizedMessage(), dialogTitle );
 				return false;
 			}
-
+			
 			appState.setProjectFileState( FileState.SAVED );
 			appState.setProjectFileName( projectFilePath );
 		}
-		// Notify
+		// Notify			
 		getAnnouncer().announce().hasSaved( appState.getProject() );
 		updateActionsEnabledState();
-
+		
 		return true;
 	}
-
-
+	
+	
 	private boolean close() {
 		// If it is dirty, ask for saving
 		if ( appState.getProjectFileState() == FileState.DIRTY ) {
 			// Ask if want to save
 			final String msg = Messages.alt( "_WANNA_SAVE", "Do you want to save?" );
 			final String title = Messages.alt( "_CLOSE", "Close" );
-
+			
 			final int answer =  MsgUtil.answerToYesNoCancel( owner, msg, title );
 			if ( MsgUtil.isYes( answer ) ) {
 				if ( ! save( false ) ) {
@@ -388,19 +361,18 @@ public class FileActionContainer {
 			}
 			// Do not want to save, then continue...
 		}
-
+		
 		// Destroy the current project
 		appState.closeProject();
 		updateActionsEnabledState();
-
+		
 		// Notify
 		getAnnouncer().announce().hasClosed( appState.getProject() );
-
+		
 		return true;
 	}
-
+	
 	private ProjectRepository createProjectRepository(final String filePath) {
 		return new JsonProjectRepositoryWithRelativePaths( filePath );
 	}
-
 }
