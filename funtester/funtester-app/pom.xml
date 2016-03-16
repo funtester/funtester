@@ -1,23 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.funtester</groupId>
 		<artifactId>funtester</artifactId>
 		<version>0.7c</version>
 	</parent>
-	
+
 	<properties>
 		<skipTests>true</skipTests>
 		<mainClass>org.funtester.app.Main</mainClass>
 	</properties>
-	
+
 	<artifactId>funtester-app</artifactId>
 	<name>FunTester App</name>
 
 	<build>
-	
+
 		<plugins>
 
 			<!-- Maven Surefire Plugin -->
@@ -58,8 +58,8 @@
 
 							<filters>
 
-								<!-- This configuration solves the problem "Exception in thread "main" 
-									java.lang.SecurityException: Invalid signature file digest for Manifest main 
+								<!-- This configuration solves the problem "Exception in thread "main"
+									java.lang.SecurityException: Invalid signature file digest for Manifest main
 									attributes" The solution was found at: http://stackoverflow.com/questions/999489/invalid-signature-file-when-attempting-to-run-a-jar -->
 								<filter>
 									<artifact>*:*</artifact>
@@ -105,6 +105,7 @@
 										<include>vocabulary/*.fv</include>
 										<include>jdbc/*.dbt</include>
 										<include>jdbc/*.jar</include>
+										<include>templates/**/*.*</include>
 									</includes>
 									<excludes>
 										<exclude>target/*.*</exclude>
@@ -125,17 +126,17 @@
 			</plugin>
 
 
-			<!-- <plugin> <artifactId>maven-antrun-plugin</artifactId> <executions> 
-				<execution> <id>copy-resources</id> <phase>package</phase> <configuration> 
-				<tasks> <mkdir dir="target/jdbc" /> <mkdir dir="target/plugin" /> <mkdir 
-				dir="target/profile" /> <mkdir dir="target/vocabulary" /> </tasks> </configuration> 
+			<!-- <plugin> <artifactId>maven-antrun-plugin</artifactId> <executions>
+				<execution> <id>copy-resources</id> <phase>package</phase> <configuration>
+				<tasks> <mkdir dir="target/jdbc" /> <mkdir dir="target/plugin" /> <mkdir
+				dir="target/profile" /> <mkdir dir="target/vocabulary" /> </tasks> </configuration>
 				<goals> <goal>run</goal> </goals> </execution> </executions> </plugin> -->
 
 		</plugins>
 	</build>
 
 	<dependencies>
-	
+
 		<!-- FunTester Common -->
 		<dependency>
 			<groupId>org.funtester</groupId>
@@ -149,7 +150,7 @@
 			<artifactId>funtester-core</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-		
+
 		<!-- Apache Commons Lang -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -170,17 +171,17 @@
 			<artifactId>jgoodies-forms</artifactId>
 			<version>1.6.0</version>
 		</dependency>
-			
+
 		<!-- JGoodies Binding -->
-		<!-- <dependency> <groupId>com.jgoodies</groupId> <artifactId>jgoodies-binding</artifactId> 
+		<!-- <dependency> <groupId>com.jgoodies</groupId> <artifactId>jgoodies-binding</artifactId>
 			<version>2.7.0</version> </dependency> -->
 
 		<!-- Maven Project -->
-		<!-- <dependency> <groupId>org.apache.maven</groupId> <artifactId>maven-project</artifactId> 
+		<!-- <dependency> <groupId>org.apache.maven</groupId> <artifactId>maven-project</artifactId>
 			<version>2.2.1</version> </dependency> -->
 
 		<!-- Substance Swing Look and Feel -->
-		<!-- 
+		<!--
 		<dependency>
 			<groupId>org.java.net.substance</groupId>
 			<artifactId>substance</artifactId>
@@ -202,7 +203,7 @@
 		</dependency>
 
 		<!-- Jide Swing Components -->
-		<!-- <dependency> <groupId>com.jidesoft</groupId> <artifactId>jide-oss</artifactId> 
+		<!-- <dependency> <groupId>com.jidesoft</groupId> <artifactId>jide-oss</artifactId>
 			<version>3.5.10</version> </dependency> -->
 
 		<!-- Jackson (JSON) -->
@@ -210,7 +211,7 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-		
+
 		<!-- Jackson JODA Time -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
@@ -218,7 +219,7 @@
 		</dependency>
 
 		<!-- FreeMarker (template engine) -->
-		<!-- <dependency> <groupId>org.freemarker</groupId> <artifactId>freemarker</artifactId> 
+		<!-- <dependency> <groupId>org.freemarker</groupId> <artifactId>freemarker</artifactId>
 			<version>2.3.20</version> </dependency> -->
 
 		<!-- FEST Assert -->
@@ -235,11 +236,18 @@
 			<version>1.2.1</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- TestNG -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
+		</dependency>
+
+		<!--  Freemarker -->
+		<dependency>
+		  <groupId>org.freemarker</groupId>
+		  <artifactId>freemarker</artifactId>
+		  <version>2.3.23</version>
 		</dependency>
 
 	</dependencies>
