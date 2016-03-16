@@ -1,20 +1,25 @@
 package org.funtester.common.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * File utilities (touches the file system).
- * 
+ *
  * @author Thiago Delgado Pinto
  *
  */
 public final class FileUtil {
-	
+
 	private FileUtil() {}
 
 	/**
 	 * Verifies if a directory exists.
-	 * 
+	 *
 	 * @param directory	Directory to verify.
 	 * @return			<code>true</code> if it exists.
 	 */
@@ -24,7 +29,7 @@ public final class FileUtil {
 
 	/**
 	 * Returns the current directory.
-	 * 
+	 *
 	 * @return	Current directory as a <code>File</code>.
 	 */
 	public static File currentDirectory() {
@@ -37,7 +42,7 @@ public final class FileUtil {
 
 	/**
 	 * Returns the current directory as string.
-	 * 
+	 *
 	 * @return	Current directory as a <code>String</code>.
 	 */
 	public static String currentDirectoryAsString() {
@@ -51,9 +56,9 @@ public final class FileUtil {
 
 	/**
 	 * Return the directory of a file name.
-	 * 
+	 *
 	 * @param fileName	the file name.
-	 * @return			the file directory as string. 
+	 * @return			the file directory as string.
 	 */
 	public static String directoryOfFile(final String fileName) {
 		return ( new File( fileName ) ).getParent();
@@ -63,7 +68,7 @@ public final class FileUtil {
 	 * Return the absolute path of a file. If the file exists, just return it.
 	 * Otherwise, try to convert the path to absolute path (from a relative one)
 	 * and return it.
-	 * 
+	 *
 	 * @param filePath		the file to analyze.
 	 * @param currentDir	the current directory.
 	 * @return				an absolute path.
@@ -77,5 +82,30 @@ public final class FileUtil {
 		} else {
 			return FilePathUtil.toAbsolutePath( filePath, currentDir );
 		}
+	}
+
+	/**
+	 * Copy a file from src to dst.
+	 *
+	 * @param src
+	 * @param dst
+	 * @throws IOException
+	 */
+	public static void copy(File src, File dst) throws IOException {
+	    InputStream in = new FileInputStream( src );
+	    try {
+	        OutputStream out = new FileOutputStream( dst );
+	        try {
+	            byte[] buf = new byte[ 4096 ];
+	            int len;
+	            while ( ( len = in.read( buf ) ) > 0) {
+	                out.write( buf, 0, len );
+	            }
+	        } finally {
+	            out.close();
+	        }
+	    } finally {
+	        in.close();
+	    }
 	}
 }

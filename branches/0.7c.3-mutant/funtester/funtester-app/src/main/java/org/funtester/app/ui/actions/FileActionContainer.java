@@ -132,7 +132,6 @@ public class FileActionContainer {
 		return ( null == fileExportAsHTMLAction )
 			? fileExportAsHTMLAction = new BaseAction()
 				.withName( Messages.alt( "_MENU_FILE_EXPORT_HTML", "As HTML..." ) )
-				.withEnabled( false ) // TODO remove this line after implementing it
 				.withListener( createFileExportAsHTMLActionListener() )
 			: fileExportAsHTMLAction;
 	}
@@ -275,7 +274,7 @@ public class FileActionContainer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DocGenerator g = new HTMLDocGenerator();
-				try {
+				try {					
 					g.generate( appState.getProject().getSoftware() );
 				} catch ( Exception e1 ) {
 					MsgUtil.error( owner, e1.getLocalizedMessage(), "Export" );
