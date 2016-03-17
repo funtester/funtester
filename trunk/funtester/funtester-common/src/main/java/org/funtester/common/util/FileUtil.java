@@ -108,4 +108,14 @@ public final class FileUtil {
 	        in.close();
 	    }
 	}
+
+	/**
+	 * Return a path as an URI-like syntax.
+	 *
+	 * @param filePath
+	 * @return
+	 */
+	public static String toURI( String filePath ) {
+		return "file:///" + filePath.replaceAll( "\\\\", "/" );
+	}
 }

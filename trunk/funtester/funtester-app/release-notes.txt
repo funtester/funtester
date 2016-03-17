@@ -1,15 +1,32 @@
-Version 0.7d - August ??th, 2014 
+Version 0.8 - March 17th, 2016
+===========
+
+news:
+
+* [7] Feature: export Use Case Descriptions as HTML.
+  See "File" > "Export as" > "HTML".
+
+* [39] Feature: generate Use Case Diagramas (UML).
+  See "File" > "Export as" > "Use Case Diagram (UML)".
+
+developer-only:
+
+* Feature: generate Use Case Descriptions with mutants.
+  See "Tests" > "Generate specification mutants".
+
+
+Version 0.7d - August 1th, 2014
 ============
 
 news:
 
-* [37] Use case now have the fields "Inclusions" and "Extensions".
+* [37] Use cases now have the fields "Inclusions" and "Extensions".
 
 * [30] FunTester now can read manuals with version numbers.
   Whether a manual for the current language or country
   is not found, and there is a manual in english, it
-  asks the user to open the file.
-		 
+  asks the user for opening the file.
+
 * Configuration dialog now has the field "Manual", which
   configures the directory for manual files, and uses
   relative paths.

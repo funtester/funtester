@@ -221,8 +221,11 @@ public class MainFrame extends JFrame implements
 		JMenu exportMenu = new JMenu( Messages.alt( "MainFrame.exportMenu.text", "Export As" ) );
 		fileMenu.add(exportMenu);
 
-		JMenuItem menuItem = new JMenuItem( fileAC.getFileExportAsHTMLAction() );
-		exportMenu.add(menuItem);
+		JMenuItem exportAsHtmlSubMenu = new JMenuItem( fileAC.getFileExportAsHTMLAction() );
+		exportMenu.add(exportAsHtmlSubMenu);
+
+		JMenuItem exportAsUseCaseDiagramSubMenu = new JMenuItem( fileAC.getFileExportAsUseCaseDiagramAction() );
+		exportMenu.add(exportAsUseCaseDiagramSubMenu);
 
 		JSeparator separator3 = new JSeparator();
 		fileMenu.add(separator3);

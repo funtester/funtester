@@ -106,6 +106,7 @@
 										<include>jdbc/*.dbt</include>
 										<include>jdbc/*.jar</include>
 										<include>templates/**/*.*</include>
+										<include>tmp/**/*.*</include>
 									</includes>
 									<excludes>
 										<exclude>target/*.*</exclude>
