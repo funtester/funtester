@@ -1,42 +1,42 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.funtester</groupId>
 		<artifactId>funtester</artifactId>
-		<version>0.7c</version>
+		<version>0.8</version>
 	</parent>
-	
+
 	<artifactId>funtester-common</artifactId>
 	<name>FunTester Common</name>
 
 	<dependencies>
-		
+
 		<!-- Joda-Time -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
-		
+
 		<!-- Jackson Annotations (JSON) -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 		</dependency>
-		
+
 		<!-- Apache Commons Exec -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-exec</artifactId>
 		</dependency>
-		
+
 		<!-- TestNG -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 		</dependency>
-		
-	</dependencies>  
-    
+
+	</dependencies>
+
 </project>
