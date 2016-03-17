@@ -14,9 +14,9 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
  * Oracle step is an action step with additional information about how the
  * expected message (according to the business rules) is about to be displayed
  * and what element type is used to display the message.
- * 
+ *
  * @author Thiago Delgado Pinto
- * 
+ *
  * @see OracleMessageOccurrence
  * @see ElementType
  *
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 public class OracleStep extends ElementBasedStep {
 
 	private static final long serialVersionUID = 5132259085508881624L;
-	
+
 	// Help to compose the sentence and to give the action for the plugin
 	@JsonIdentityReference(alwaysAsId=true)
 	private ActionNickname actionNickname;
@@ -33,7 +33,7 @@ public class OracleStep extends ElementBasedStep {
 	// What element type used to display the message
 	@JsonIdentityReference(alwaysAsId=true)
 	private ElementType elementType;
-	
+
 	public OracleStep() {
 		super();
 	}
@@ -41,7 +41,7 @@ public class OracleStep extends ElementBasedStep {
 	public OracleStep(Flow flow) {
 		super( flow );
 	}
-	
+
 	@Override
 	public Trigger trigger() {
 		return Trigger.SYSTEM;
@@ -70,12 +70,12 @@ public class OracleStep extends ElementBasedStep {
 	public void setElementType(ElementType elementType) {
 		this.elementType = elementType;
 	}
-	
+
 	@Override
 	public StepKind kind() {
 		return StepKind.ORACLE;
-	}		
-	
+	}
+
 	@Override
 	public String asSentence() {
 		StringBuffer sb = new StringBuffer();
@@ -93,7 +93,7 @@ public class OracleStep extends ElementBasedStep {
 			OracleStep that = (OracleStep) obj;
 			this.actionNickname = that.actionNickname; // Reference
 			this.messageOccurrence = that.messageOccurrence;
-			
+
 			if ( this.elementType != null && that.elementType != null ) {
 				this.elementType.copy( that.elementType );
 			} else {
@@ -105,23 +105,23 @@ public class OracleStep extends ElementBasedStep {
 		}
 		return this;
 	}
-	
+
 	@Override
 	public OracleStep newCopy() {
 		return ( new OracleStep() ).copy( this );
 	}
-	
+
 	//
 	// Not necessary to override toString()
 	//
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode() * Arrays.hashCode( new Object[] {
 			actionNickname, messageOccurrence, elementType
 		} );
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if ( ! ( obj instanceof OracleStep ) ) { return false; }

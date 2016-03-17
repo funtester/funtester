@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators.PropertyGenerator;
 
 /**
  * A nickname for an action.
- * 
+ *
  * @author Thiago Delgado Pinto
  *
  */
@@ -27,7 +27,7 @@ public class ActionNickname
 		, Comparable< ActionNickname > {
 
 	private static final long serialVersionUID = 1508468164278080117L;
-	
+
 	private long id = 0;
 	@JsonIdentityReference(alwaysAsId=true)
 	private Action action;
@@ -35,13 +35,13 @@ public class ActionNickname
 
 	/**
 	 * Default constructor.
-	 */	
+	 */
 	public ActionNickname() {
 	}
-	
+
 	/**
 	 * Creates using a action and a nickname.
-	 * 
+	 *
 	 * @param action	Action
 	 * @param nickname	Nickname
 	 */
@@ -66,7 +66,7 @@ public class ActionNickname
 	public Action getAction() {
 		return action;
 	}
-	
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -74,12 +74,14 @@ public class ActionNickname
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
+
+	// -- LEGACY --------------------------------------------------------------
 	public StepKind actionKind() {
 		checkAction();
 		return getAction().getKind();
 	}
-	
+	// ------------------------------------------------------------------------
+
 	public String actionName() {
 		checkAction();
 		return getAction().getName();
@@ -90,17 +92,24 @@ public class ActionNickname
 		return getAction().getMaxElements();
 	}
 
+	public Trigger[] triggers() {
+		checkAction();
+		return getAction().getTriggers();
+	}
+
+	// -- LEGACY --------------------------------------------------------------
 	public Trigger actionTrigger() {
 		checkAction();
 		return getAction().getTrigger();
 	}
-	
+	// ------------------------------------------------------------------------
+
 	private void checkAction() {
 		if ( null == getAction() ) {
 			throw new RuntimeException( "Has no defined Action" );
 		}
 	}
-	
+
 	@Override
 	public ActionNickname copy(final ActionNickname that) {
 		this.id = that.id;
@@ -113,12 +122,12 @@ public class ActionNickname
 	public ActionNickname newCopy() {
 		return ( new ActionNickname() ).copy( this );
 	}
-	
+
 	@Override
 	public String toString() {
 		return getNickname();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if ( !( obj instanceof ActionNickname ) ) return false;
@@ -128,16 +137,16 @@ public class ActionNickname
 			&& EqUtil.equalsIgnoreCase( this.nickname, that.nickname )
 			;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Arrays.hashCode( new Object[] {
 			id, action, nickname
 		} );
 	}
-	
+
 	@Override
 	public int compareTo(final ActionNickname o) {
 		return getNickname().compareToIgnoreCase( o.getNickname() );
-	}	
+	}
 }

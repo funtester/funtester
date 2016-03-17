@@ -74,6 +74,7 @@ public class MainFrame extends JFrame implements
 	private ProjectPanel projectPanel = null; // Created on demand
 
 	// Message list
+	@SuppressWarnings("rawtypes")
 	private final DefaultListModel listModel = new DefaultListModel();
 
 	private final FileActionContainer fileAC;
@@ -405,6 +406,10 @@ public class MainFrame extends JFrame implements
 		JMenuItem openReportMenu = new JMenuItem( testAC.getOpenReportAction() );
 		openReportMenu.setName( "openReportMenu" );
 		testMenu.add( openReportMenu );
+
+		JMenuItem genSpecMutantsMenu = new JMenuItem( testAC.getGenerateSpecificationMutantsAction() );
+		genSpecMutantsMenu.setName( "genSpecMutantsMenu" );
+		testMenu.add(genSpecMutantsMenu);
 	}
 
 	private void createHelpMenu(JMenuBar menuBar) {
@@ -581,6 +586,7 @@ public class MainFrame extends JFrame implements
 		return bottomPanel;
 	}
 
+	@SuppressWarnings("unchecked")
 	private synchronized void showLog(final String msg, final Object ... args) {
 		if ( args.length > 0 ) {
 			listModel.addElement( String.format( msg, args ) );

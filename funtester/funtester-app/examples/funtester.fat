@@ -1,0 +1,2436 @@
+{
+  "name" : "",
+  "softwareName" : "FunTester",
+  "creation" : "2014-06-18T22:45:10.194-03:00",
+  "connections" : [ ],
+  "testCases" : [ {
+    "name" : "CreateaSoftware_BF_Test",
+    "useCaseName" : "Create a Software",
+    "scenarioName" : "BF",
+    "includeFiles" : [ "org.funtester.app.ui.software.SoftwareDialog", "org.funtester.app.ui.MainFrame" ],
+    "scripts" : [ ],
+    "testMethods" : [ {
+      "name" : "all_field_values_at_the_lower_limit",
+      "strategyKind" : "all_field_values_at_the_lower_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : true,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 1,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 2,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 3,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 4,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "_0xd4_ j0 9X7N456 _-D  _.77 .._N",
+          "valueConsideredValid" : true,
+          "valueOption" : "MIN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 5,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Desktop Applications Vocabulary (English)",
+          "valueConsideredValid" : true,
+          "valueOption" : "MIN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 6,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 7,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "all_field_values_just_above_lower_limit",
+      "strategyKind" : "all_field_values_just_above_lower_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : true,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 8,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 9,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 10,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 11,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "- -o._- e -3-_r5-c_-",
+          "valueConsideredValid" : true,
+          "valueOption" : "RIGHT_AFTER_MIN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 12,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Vocabulário para Aplicações Desktop (Portuguese)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RIGHT_AFTER_MIN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 13,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 14,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "all_field_values_at_the_upper_limit",
+      "strategyKind" : "all_field_values_at_the_upper_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : true,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 15,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 16,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 17,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 18,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "me --.2__..D AS3",
+          "valueConsideredValid" : true,
+          "valueOption" : "MAX"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 19,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Vocabulário para Aplicações Desktop (Portuguese)",
+          "valueConsideredValid" : true,
+          "valueOption" : "MAX"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 20,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 21,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "all_field_values_just_below_upper_limit",
+      "strategyKind" : "all_field_values_just_below_upper_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : true,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 22,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 23,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 24,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 25,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : " _3F",
+          "valueConsideredValid" : true,
+          "valueOption" : "RIGHT_BEFORE_MAX"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 26,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Desktop Applications Vocabulary (English)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RIGHT_BEFORE_MAX"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 27,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 28,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "all_field_values_with_the_median",
+      "strategyKind" : "all_field_values_with_the_median",
+      "scenarioName" : "BF",
+      "expectedSuccess" : true,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 29,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 30,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 31,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 32,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "XR.",
+          "valueConsideredValid" : true,
+          "valueOption" : "MEDIAN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 33,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Vocabulário para Aplicações Desktop (Portuguese)",
+          "valueConsideredValid" : true,
+          "valueOption" : "MEDIAN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 34,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 35,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "all_field_values_with_zero_or_equivalent",
+      "strategyKind" : "all_field_values_with_zero_or_equivalent",
+      "scenarioName" : "BF",
+      "expectedSuccess" : true,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 36,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 37,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 38,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 39,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "I_--G ",
+          "valueConsideredValid" : true,
+          "valueOption" : "ZERO"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 40,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Desktop Applications Vocabulary (English)",
+          "valueConsideredValid" : true,
+          "valueOption" : "ZERO"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 41,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 42,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "all_fields_with_random_values",
+      "strategyKind" : "all_fields_with_random_values",
+      "scenarioName" : "BF",
+      "expectedSuccess" : true,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 43,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 44,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 45,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 46,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "15X_7GT m ",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 47,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Desktop Applications Vocabulary (English)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 48,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 49,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "just_the_required_fields_with_random_values",
+      "strategyKind" : "just_the_required_fields_with_random_values",
+      "scenarioName" : "BF",
+      "expectedSuccess" : true,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 50,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 51,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 52,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 53,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "_ktX -2R",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 54,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Vocabulário para Aplicações Desktop (Portuguese)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 55,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 56,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "name_just_below_lower_limit",
+      "strategyKind" : "%s_just_below_lower_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 57,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 58,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 59,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 60,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : null,
+          "valueConsideredValid" : false,
+          "valueOption" : "RIGHT_BEFORE_MIN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 61,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Vocabulário para Aplicações Desktop (Portuguese)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 62,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 63,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "vocabulary_just_below_lower_limit",
+      "strategyKind" : "%s_just_below_lower_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 64,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 65,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 66,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 67,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "W-F ._F_.84g 6-_t_6. . ",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 68,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "BNd{:H{Jc:|K6||6SW/3",
+          "valueConsideredValid" : false,
+          "valueOption" : "RIGHT_BEFORE_MIN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 69,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "oracle",
+        "id" : 70,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 12,
+        "actionName" : "check",
+        "messages" : [ "Please choose one of the vocabulary items on the list." ]
+      }, {
+        "type" : "action",
+        "id" : 71,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "name_with_random_value_below_lower_limit",
+      "strategyKind" : "%s_with_random_value_below_lower_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 72,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 73,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 74,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 75,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : null,
+          "valueConsideredValid" : false,
+          "valueOption" : "RANDOM_BEFORE_MIN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 76,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Desktop Applications Vocabulary (English)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 77,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 78,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "vocabulary_with_random_value_below_lower_limit",
+      "strategyKind" : "%s_with_random_value_below_lower_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 79,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 80,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 81,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 82,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "D_6_ Xo  5 T 0_26Og _",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 83,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "N7sp*-GB#N<7)N.V|1uZ5hXP]u`",
+          "valueConsideredValid" : false,
+          "valueOption" : "RANDOM_BEFORE_MIN"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 84,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "oracle",
+        "id" : 85,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 12,
+        "actionName" : "check",
+        "messages" : [ "Please choose one of the vocabulary items on the list." ]
+      }, {
+        "type" : "action",
+        "id" : 86,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "name_just_above_upper_limit",
+      "strategyKind" : "%s_just_above_upper_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 87,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 88,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 89,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 90,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : null,
+          "valueConsideredValid" : false,
+          "valueOption" : "RIGHT_AFTER_MAX"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 91,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Vocabulário para Aplicações Desktop (Portuguese)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 92,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 93,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "vocabulary_just_above_upper_limit",
+      "strategyKind" : "%s_just_above_upper_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 94,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 95,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 96,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 97,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "-43  --.",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 98,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "{xe[(}rM9qn{SF$8T@=_@9qM_HuzkCt",
+          "valueConsideredValid" : false,
+          "valueOption" : "RIGHT_AFTER_MAX"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 99,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "oracle",
+        "id" : 100,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 12,
+        "actionName" : "check",
+        "messages" : [ "Please choose one of the vocabulary items on the list." ]
+      }, {
+        "type" : "action",
+        "id" : 101,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "name_with_random_value_above_upper_limit",
+      "strategyKind" : "%s_with_random_value_above_upper_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 102,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 103,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 104,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 105,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : null,
+          "valueConsideredValid" : false,
+          "valueOption" : "RANDOM_AFTER_MAX"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 106,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Vocabulário para Aplicações Desktop (Portuguese)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 107,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 108,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "vocabulary_with_random_value_above_upper_limit",
+      "strategyKind" : "%s_with_random_value_above_upper_limit",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 109,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 110,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 111,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 112,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "c.8  S L",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 113,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "qnb>=t9uYiE",
+          "valueConsideredValid" : false,
+          "valueOption" : "RANDOM_AFTER_MAX"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 114,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "oracle",
+        "id" : 115,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 12,
+        "actionName" : "check",
+        "messages" : [ "Please choose one of the vocabulary items on the list." ]
+      }, {
+        "type" : "action",
+        "id" : 116,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "all_the_required_fields_except_name",
+      "strategyKind" : "all_the_required_fields_except_%s",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 117,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 118,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 119,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 120,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ ]
+      }, {
+        "type" : "action",
+        "id" : 121,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Desktop Applications Vocabulary (English)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 122,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "oracle",
+        "id" : 123,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 12,
+        "actionName" : "check",
+        "messages" : [ "The name must be between %d and %d characters long. (Regular expression: %s)" ]
+      }, {
+        "type" : "action",
+        "id" : 124,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "all_the_required_fields_except_vocabulary",
+      "strategyKind" : "all_the_required_fields_except_%s",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 125,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 126,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 127,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 128,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : ".8__14.",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 129,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ ]
+      }, {
+        "type" : "action",
+        "id" : 130,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "oracle",
+        "id" : 131,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 12,
+        "actionName" : "check",
+        "messages" : [ "Please choose a vocabulary." ]
+      }, {
+        "type" : "action",
+        "id" : 132,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "name_with_invalid_format",
+      "strategyKind" : "%s_with_invalid_format",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 133,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 134,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 135,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 136,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "J$Am}lRN4j.Ny#tqS;wml:-&Va_Z0f!&#@>);j,.&j~Az,8J+mfzUEWn~FPqW[wc1uVJb&N3W|=F?`&UM)e<?-?9",
+          "valueConsideredValid" : false,
+          "valueOption" : "INVALID_FORMAT"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 137,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : "Desktop Applications Vocabulary (English)",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 138,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "oracle",
+        "id" : 139,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 12,
+        "actionName" : "check",
+        "messages" : [ "The name must be between %d and %d characters long. (Regular expression: %s)" ]
+      }, {
+        "type" : "action",
+        "id" : 140,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    }, {
+      "name" : "vocabulary_with_invalid_format",
+      "strategyKind" : "%s_with_invalid_format",
+      "scenarioName" : "BF",
+      "expectedSuccess" : false,
+      "importance" : "HIGH",
+      "steps" : [ {
+        "type" : "action",
+        "id" : 141,
+        "useCaseId" : 1,
+        "flowId" : 1,
+        "stepId" : 1,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "frame",
+          "internalName" : "MainFrame",
+          "name" : "Main Screen",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 142,
+        "useCaseId" : 1,
+        "flowId" : 3,
+        "stepId" : 10,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "menu",
+          "internalName" : "fileMenu",
+          "name" : "File",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        }, {
+          "type" : "menu",
+          "internalName" : "newMenu",
+          "name" : "New",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 143,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 2,
+        "actionName" : "show",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 144,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 3,
+        "actionName" : "type",
+        "elements" : [ {
+          "type" : "textbox",
+          "internalName" : "name",
+          "name" : "Name",
+          "value" : "3",
+          "valueConsideredValid" : true,
+          "valueOption" : "RANDOM_INSIDE_RANGE"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 145,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 4,
+        "actionName" : "select",
+        "elements" : [ {
+          "type" : "combobox",
+          "internalName" : "vocabulary",
+          "name" : "Vocabulary",
+          "value" : null,
+          "valueConsideredValid" : false,
+          "valueOption" : "INVALID_FORMAT"
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 146,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 5,
+        "actionName" : "click",
+        "elements" : [ {
+          "type" : "button",
+          "internalName" : "okButton",
+          "name" : "OK",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      }, {
+        "type" : "action",
+        "id" : 147,
+        "useCaseId" : 2,
+        "flowId" : 2,
+        "stepId" : 6,
+        "actionName" : "close",
+        "elements" : [ {
+          "type" : "dialog",
+          "internalName" : "SoftwareDialog",
+          "name" : "Software Dialog",
+          "value" : null,
+          "valueConsideredValid" : null,
+          "valueOption" : null
+        } ]
+      } ]
+    } ]
+  } ]
+}
