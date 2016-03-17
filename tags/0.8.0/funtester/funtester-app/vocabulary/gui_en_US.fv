@@ -1,0 +1,51 @@
+{
+  "profileFile" : "profile/gui.fp",
+  "vocabulary" : {
+	  "name" : "Desktop Applications Vocabulary",
+	  "locale" : {
+	    "language" : "en",
+	    "country" : "US"
+	  },
+	  "nicknames" : [ {
+		"id" : 1,
+	    "nickname" : "press",
+	    "action" : 2
+	  }, {
+		"id" : 2,	  
+	    "nickname" : "check the business rules of",
+	    "action" : 3
+	  }, {
+		"id" : 3,	  
+	    "nickname" : "answer yes to the message",
+	    "action" : 5
+	  }, {
+		"id" : 4,	  
+	    "nickname" : "selects",
+	    "action" : 4
+	  }, {
+		"id" : 5,	  
+	    "nickname" : "calls the use case",
+	    "action" : 1
+	  }, {
+		"id" : 6,	  
+	    "nickname" : "clicks",
+	    "action" : 6
+	  }, {
+		"id" : 7,	  
+	    "nickname" : "selects the first option of",
+	    "action" : 9
+	  }, {
+		"id" : 8,	  
+	    "nickname" : "types",
+	    "action" : 8
+	  }, {
+		"id" : 9,	  
+	    "nickname" : "closes",
+	    "action" : 10
+	  }, {
+		"id" : 10,	  
+	    "nickname" : "shows",
+	    "action" : 7
+	  } ]
+	}
+}

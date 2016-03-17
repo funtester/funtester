@@ -1,0 +1,91 @@
+Version 0.8 - March 17th, 2016
+===========
+
+news:
+
+* [7] Feature: export Use Case Descriptions as HTML.
+  See "File" > "Export as" > "HTML".
+
+* [39] Feature: generate Use Case Diagramas (UML).
+  See "File" > "Export as" > "Use Case Diagram (UML)".
+
+developer-only:
+
+* Feature: generate Use Case Descriptions with mutants.
+  See "Tests" > "Generate specification mutants".
+
+
+Version 0.7d - August 1th, 2014
+============
+
+news:
+
+* [37] Use cases now have the fields "Inclusions" and "Extensions".
+
+* [30] FunTester now can read manuals with version numbers.
+  Whether a manual for the current language or country
+  is not found, and there is a manual in english, it
+  asks the user for opening the file.
+
+* Configuration dialog now has the field "Manual", which
+  configures the directory for manual files, and uses
+  relative paths.
+
+
+Version 0.7c.1 - June 19th, 2014
+==============
+
+changes:
+
+* Translation to Brazilian Portuguese was extended.
+
+fixes:
+
+* OracleStepDialog display fixed.
+
+
+Version 0.7c - June 4th, 2014
+============
+
+changes:
+
+* Some validations were relaxed for allowing certain symbols.
+
+* Translation to Brazilian Portuguese extended.
+
+* Default saving directory is now the current directory, instead of
+  the user home directory.
+
+* Project file now uses relative paths and has a model version number.
+
+fixes:
+
+* OracleStepDialog fixed to display max elements correctly.
+
+
+Version 0.7b - May 27th, 2014
+============
+
+news:
+
+* Known issues tab added to the About dialog.
+
+changes:
+
+* Some validations and error messages were improved.
+
+* Translation to Brazilian Portuguese extended.
+
+* Database script widgets are now disabled. They were not implemented,
+  but their widgets were enabled.
+
+fixes:
+
+* Database configuration dialog fixed. Now all the template options
+  can be chosen.
+
+
+Version 0.7a - May 5th, 2014
+============
+
+* First public release.
