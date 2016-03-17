@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>org.funtester</groupId>
 		<artifactId>funtester</artifactId>
-		<version>0.7c</version>
+		<version>0.8</version>
 	</parent>
 
 	<artifactId>funtester-plugin-common</artifactId>
 	<name>FunTester Plugin Common</name>
-	
+
 	<dependencies>
 
 		<!-- FunTester Common -->
@@ -18,7 +18,7 @@
 			<artifactId>funtester-common</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-		
+
 		<!-- FreeMarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -27,5 +27,5 @@
 		</dependency>
 
 	</dependencies>
-	  
+
 </project>

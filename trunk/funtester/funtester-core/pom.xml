@@ -5,28 +5,28 @@
 	<parent>
 		<groupId>org.funtester</groupId>
 		<artifactId>funtester</artifactId>
-		<version>0.7c</version>
+		<version>0.8</version>
 	</parent>
 
 	<artifactId>funtester-core</artifactId>
 	<name>FunTester Core</name>
-  
+
 	<dependencies>
-	
+
 		<!-- FunTester Common -->
 		<dependency>
 			<groupId>org.funtester</groupId>
 			<artifactId>funtester-common</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-	
+
 		<!-- Automaton -->
 		<dependency>
 			<groupId>dk.brics</groupId>
 			<artifactId>automaton</artifactId>
 			<version>1.11</version>
 		</dependency>
-	
+
 		<!-- Xeger -->
 		<dependency>
 			<groupId>nl.flotsam</groupId>
@@ -40,7 +40,7 @@
 			<artifactId>jgrapht</artifactId>
 			<version>0.8.3</version>
 		</dependency>
-		
+
 		<!-- TestNG -->
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -53,19 +53,19 @@
 			<artifactId>fest-assert</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- SLF4j (Simple Log Facade for Java) -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
-		
+
 		<!-- Jackson Annotations (JSON) -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 		</dependency>
-		
+
 		<!-- Joda-Time -->
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -73,5 +73,5 @@
 		</dependency>
 
 	</dependencies>
-  
+
 </project>
