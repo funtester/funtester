@@ -33,17 +33,17 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Action container for a {@link Step}.
- * 
+ *
  * TODO: Refactor the showXXXStep methods.
- * 
+ *
  * @author Thiago Delgado Pinto
  *
  */
 public class StepActionContainer extends CRUDActionContainer< Step >{
-	
+
 	private static final Logger logger =
 			LoggerFactory.getLogger( StepActionContainer.class );
-	
+
 	private Action newDocStepAction;
 	private Action newActionStepAction;
 	private Action newUseCaseCallStepAction;
@@ -53,10 +53,10 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 	private Action removeAction;
 	private Action upAction;
 	private Action downAction;
-	
+
 	private ActionListener afterMoveUpActionListener;
 	private ActionListener afterMoveDownActionListener;
-	
+
 	private final Software software;
 	private Flow flow;
 
@@ -67,23 +67,23 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 		super( tableModel );
 		this.software = software;
 	}
-	
+
 	public Flow getFlow() {
 		return flow;
 	}
-	
+
 	public void setFlow(Flow flow) {
 		this.flow = flow;
 	}
-	
+
 	public void registerAfterMoveUpActionListener(ActionListener l) {
 		this.afterMoveUpActionListener = l;
 	}
-	
+
 	public void registerAfterMoveDownActionListener(ActionListener l) {
 		this.afterMoveDownActionListener = l;
-	}	
-	
+	}
+
 	public Action getNewDocStepAction() {
 		if ( null == newDocStepAction ) {
 			newDocStepAction = new BaseAction()
@@ -94,7 +94,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 		}
 		return newDocStepAction;
 	}
-	
+
 	public Action getNewActionStepAction() {
 		if ( null == newActionStepAction ) {
 			newActionStepAction = new BaseAction()
@@ -105,7 +105,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 		}
 		return newActionStepAction;
 	}
-	
+
 	public Action getNewUseCaseCallStepAction() {
 		if ( null == newUseCaseCallStepAction ) {
 			newUseCaseCallStepAction = new BaseAction()
@@ -116,7 +116,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 		}
 		return newUseCaseCallStepAction;
 	}
-	
+
 	public Action getNewOracleStepAction() {
 		if ( null == newOracleStepAction ) {
 			newOracleStepAction = new BaseAction()
@@ -126,8 +126,8 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 				;
 		}
 		return newOracleStepAction;
-	}	
-	
+	}
+
 	public Action getCloneAction() {
 		if ( null == cloneAction ) {
 			cloneAction = new BaseAction()
@@ -137,8 +137,8 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 				;
 		}
 		return cloneAction;
-	}	
-	
+	}
+
 	public Action getEditAction() {
 		if ( null == editAction ) {
 			editAction = new BaseAction()
@@ -149,7 +149,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 		}
 		return editAction;
 	}
-	
+
 	public Action getRemoveAction() {
 		if ( null == removeAction ) {
 			removeAction = new BaseAction()
@@ -159,8 +159,8 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 				;
 		}
 		return removeAction;
-	}	
-	
+	}
+
 	public Action getUpAction() {
 		if ( null == upAction ) {
 			upAction = new BaseAction()
@@ -171,7 +171,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 		}
 		return upAction;
 	}
-	
+
 	public Action getDownAction() {
 		if ( null == downAction ) {
 			downAction = new BaseAction()
@@ -182,9 +182,9 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 		}
 		return downAction;
 	}
-	
-	// ACTION LISTENERS 
-	
+
+	// ACTION LISTENERS
+
 	private ActionListener createNewDocStepActionListener() {
 		return new ActionListener() {
 			@Override
@@ -193,8 +193,8 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			}
 		};
 	}
-	
-	
+
+
 	private ActionListener createNewActionStepActionListener() {
 		return new ActionListener() {
 			@Override
@@ -203,7 +203,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			}
 		};
 	}
-	
+
 	private ActionListener createNewUseCaseCallStepActionListener() {
 		return new ActionListener() {
 			@Override
@@ -212,7 +212,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			}
 		};
 	}
-	
+
 	private ActionListener createNewOracleStepActionListener() {
 		return new ActionListener() {
 			@Override
@@ -221,7 +221,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			}
 		};
 	}
-	
+
 	/**
 	 * Edit the current step, according to the step kind.
 	 * @return
@@ -232,7 +232,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			public void actionPerformed(ActionEvent e) {
 				if ( null == getFlow() || null == getSelectedObject() ) { return; }
 				Step obj = getSelectedObject();
-				
+
 				// DocStep
 				if ( StepKind.DOC.equals( obj.kind() ) ) {
 					showDocStep( false );
@@ -246,11 +246,11 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 					// Not supported type. Do nothing.
 					logger.warn( "Unsuported step kind: " + obj.kind() );
 				}
-			
+
 			}
 		};
 	}
-	
+
 	private ActionListener createCloneActionListener() {
 		return new ActionListener() {
 			@Override
@@ -258,16 +258,16 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 				if ( null == getFlow() || getSelectedIndex() < 0 ) { return; }
 				final int index = getSelectedIndex();
 				final int cloneIndex = getFlow().cloneStepAt( index );
-				
+
 				// Generate a new id for the clone
 				Step step = getFlow().stepAt( cloneIndex );
 				step.setId( software.generateIdFor( Step.class.getSimpleName() ) );
-				
+
 				getTableModel().inserted( cloneIndex );
 			}
 		};
 	}
-	
+
 	private ActionListener createRemoveActionListener() {
 		return new ActionListener() {
 			@Override
@@ -282,8 +282,8 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			}
 		};
 	}
-	
-	
+
+
 	private ActionListener createUpActionListener() {
 		return new ActionListener() {
 			@Override
@@ -298,7 +298,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			}
 		};
 	}
-	
+
 	private ActionListener createDownActionListener() {
 		return new ActionListener() {
 			@Override
@@ -309,17 +309,17 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 				getTableModel().moved( oldIndex, newIndex );
 				if ( afterMoveDownActionListener != null ) {
 					afterMoveDownActionListener.actionPerformed( e );
-				}				
+				}
 			}
 		};
 	}
 
 	private void showDocStep(final boolean isNew) {
 		if ( null == getFlow() || ( ! isNew && null == getSelectedObject() ) ) { return; }
-		
+
 		DocStepDialog dlg = new DocStepDialog();
 		UIUtil.centerOnScreen( dlg );
-		
+
 		DocStep obj = (isNew ) ? new DocStep( getFlow() ) : (DocStep) getSelectedObject();
 		dlg.copyObject( obj );
 		dlg.showObject();
@@ -334,31 +334,31 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			getTableModel().updated( getSelectedIndex() );
 		}
 	}
-	
+
 	private void showActionStep(final boolean isNew) {
 		if ( null == getFlow() || ( ! isNew && null == getSelectedObject() ) ) { return; }
-		
+
 		final UseCase useCase = getFlow().getUseCase();
-		
+
 		ActionStepDialog dlg = new ActionStepDialog(
 				useCase, software.getVocabulary().getNicknames() );
 		UIUtil.centerOnScreen( dlg );
-		
+
 		ActionStep obj = ( isNew ) ? new ActionStep( getFlow() ) : (ActionStep) getSelectedObject();
 		dlg.copyObject( obj );
 		dlg.showObject();
 		if ( ! dlg.isConfirmed() ) { return; }
-		
+
 		if ( isNew ) {
 			obj = dlg.getObject().newCopy();
 			obj.setId( software.generateIdFor( Step.class.getSimpleName() ) );
-			
+
 			getTableModel().add( obj );
 		} else {
 			obj.copy( dlg.getObject() );
 			getTableModel().updated( getSelectedIndex() );
 		}
-		
+
 		// Add the elements to the use case
 		final Collection< Element > newElements = dlg.getNewElements();
 		for ( Element element : newElements ) {
@@ -373,7 +373,7 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 					element.setEditable( true );
 				}
 			}
-			
+
 			useCase.addElement( element );
 		}
 		/*
@@ -390,17 +390,17 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 		}
 		*/
 	}
-	
-	
+
+
 	private void showUseCaseCallStep(final boolean isNew) {
 		if ( null == getFlow() || ( ! isNew && null == getSelectedObject() ) ) { return; }
-		
+
 		UseCaseCallStepDialog dlg = new UseCaseCallStepDialog(
 				software.getVocabulary().getNicknames(),
 				software.getUseCases()
 				);
 		UIUtil.centerOnScreen( dlg );
-		
+
 		UseCaseCallStep obj = (isNew ) ? new UseCaseCallStep( getFlow() ) : (UseCaseCallStep) getSelectedObject();
 		dlg.copyObject( obj );
 		dlg.showObject();
@@ -415,18 +415,18 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			getTableModel().updated( getSelectedIndex() );
 		}
 	}
-	
+
 	private void showOracleStep(final boolean isNew) {
 		if ( null == getFlow() || ( ! isNew && null == getSelectedObject() ) ) { return; }
-		
+
 		final UseCase useCase = getFlow().getUseCase();
-		
+
 		OracleStepDialog dlg = new OracleStepDialog(
 			useCase,
 			software.getVocabulary().getNicknames()
 			);
 		UIUtil.centerOnScreen( dlg );
-		
+
 		OracleStep obj = (isNew ) ? new OracleStep( getFlow() ) : (OracleStep) getSelectedObject();
 		dlg.copyObject( obj );
 		dlg.showObject();
@@ -440,14 +440,14 @@ public class StepActionContainer extends CRUDActionContainer< Step >{
 			obj.copy( dlg.getObject() );
 			getTableModel().updated( getSelectedIndex() );
 		}
-		
+
 		// Add the elements to the use case
 		final Collection< Element > newElements = dlg.getNewElements();
 		for ( Element ie : newElements ) {
 			ie.setId( software.generateIdFor( Element.class.getSimpleName() ) );
 			ie.setUseCase( useCase );
-			
+
 			useCase.addElement( ie );
-		}		
-	}	
+		}
+	}
 }

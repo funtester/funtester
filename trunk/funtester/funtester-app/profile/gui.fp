@@ -2,6 +2,7 @@
   "id" : 1,
   "name" : "Desktop GUI Profile",
   "description" : "Desktop GUI Profile",
+  
   "types" : [ {
     "id" : 2,
     "name" : "key",
@@ -43,6 +44,9 @@
     "kind" : "WIDGET",
 	"editable" : false
   } ],
+  
+  
+  
   "actions" : [ {
     "id" : 1,
     "name" : "call",

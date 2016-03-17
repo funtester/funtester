@@ -17,8 +17,8 @@ public interface Task {
 	/**
 	 * Perform the task using the arguments and setting the parameters.
 	 * 
-	 * @param args			the application arguments (in).
-	 * @param parameters	the parameters (in, out)
+	 * @param args		the application arguments (in).
+	 * @param appState	current application state.
 	 * @throws Exception
 	 */
 	void perform(final String args[], AppState appState) throws Exception;

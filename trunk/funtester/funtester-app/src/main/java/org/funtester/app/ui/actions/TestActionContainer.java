@@ -18,6 +18,19 @@ import org.funtester.app.project.FileState;
 import org.funtester.app.project.Project;
 import org.funtester.app.project.ProjectListener;
 import org.funtester.app.project.TestGenerationPerformer;
+import org.funtester.app.project.mutation.SpecMutantGenerator;
+import org.funtester.app.project.mutation.types.AddBusinessRuleSpecMutator;
+import org.funtester.app.project.mutation.types.ChangeBusinessRuleSpecMutator;
+import org.funtester.app.project.mutation.types.ChangeBusinessRuleValueSpecMutator;
+import org.funtester.app.project.mutation.types.ChangeElementDateTypeSpecMutator;
+import org.funtester.app.project.mutation.types.ChangeElementIdSpecMutator;
+import org.funtester.app.project.mutation.types.ChangeElementValueTypeSpecMutator;
+import org.funtester.app.project.mutation.types.ChangeReturningFlowSpecMutator;
+import org.funtester.app.project.mutation.types.ChangeReturningStepSpecMutator;
+import org.funtester.app.project.mutation.types.RemoveBusinessRuleSpecMutator;
+import org.funtester.app.project.mutation.types.RemoveFlowSpecMutator;
+import org.funtester.app.project.mutation.types.RemoveMandatoryStepSpecMutator;
+import org.funtester.app.project.mutation.types.RemoveUseCaseCallStepSpecMutator;
 import org.funtester.app.repository.json.JsonTestExecutionReportRepository;
 import org.funtester.app.ui.common.DefaultFileNameExtensionFilters;
 import org.funtester.app.ui.common.ImagePath;
@@ -33,36 +46,41 @@ import org.funtester.common.generation.TestGenerationConfiguration;
 import org.funtester.common.report.TestExecutionReport;
 import org.funtester.common.report.TestExecutionReportRepository;
 import org.funtester.common.util.FileUtil;
+import org.funtester.common.util.PathType;
 import org.funtester.common.util.ProcessingListener;
+import org.funtester.core.software.Software;
 
 /**
  * Container for the "Test" actions.
- * 
+ *
  * @author Thiago Delgado Pinto
  *
  */
 public class TestActionContainer implements ProjectListener {
-	
+
 	private final JFrame owner;
 	private final String title;
 	private final AppState appState;
 	private final TestGenerationPerformer performer;
-	
+
 	/** Run after editing the configuration */
 	private Action generateAndRunAction = null;
-	
+
 	/** Just generate test code using a copy of the last configuration */
 //	private Action justGenerateTestCodeAction = null;
-	
+
 	/** Just run the tests using a copy of the last configuration */
 	private Action justRunTestsAction = null;
-	
+
 	/** Open a test execution report */
 	private Action openReportAction = null;
-	
+
+	/** Generate specification mutants */
+	private Action generateSpecificationMutantsAction = null;
+
 	/**
 	 * Create the action container.
-	 * 
+	 *
 	 * @param owner
 	 * @param title
 	 * @param state
@@ -76,10 +94,10 @@ public class TestActionContainer implements ProjectListener {
 		this.title = title;
 		this.appState = state;
 		this.performer = new TestGenerationPerformer( this.appState );
-		
+
 		updateActionsEnabledState();
 	}
-	
+
 	public Action getGenerateAndRunAction() {
 		return ( null == generateAndRunAction )
 				? generateAndRunAction = new BaseAction()
@@ -94,7 +112,7 @@ public class TestActionContainer implements ProjectListener {
 					} )
 				: generateAndRunAction;
 	}
-	
+
 	/* TODO to enter in the future ?
 	public Action getJustGenerateTestCodeAction() {
 		return ( null == justGenerateTestCodeAction )
@@ -126,7 +144,7 @@ public class TestActionContainer implements ProjectListener {
 					} )
 				: justRunTestsAction;
 	}
-	
+
 	public Action getOpenReportAction() {
 		return ( null == openReportAction )
 				? openReportAction = new BaseAction()
@@ -140,6 +158,14 @@ public class TestActionContainer implements ProjectListener {
 						}
 					} )
 				: openReportAction;
+	}
+
+	public Action getGenerateSpecificationMutantsAction() {
+		return ( null == generateSpecificationMutantsAction )
+				? generateSpecificationMutantsAction = new BaseAction()
+					.withName( Messages.alt( "_MENU_TEST_GEN_SPEC_MUTANTS", "Generate Specification Mutants..." ) )
+					.withListener( createGenSpecMutantsListener() )
+				: generateSpecificationMutantsAction;
 	}
 
 	@Override
@@ -156,28 +182,28 @@ public class TestActionContainer implements ProjectListener {
 	public void hasSaved(Project p) {
 		// Do nothing
 	}
-	
+
 	public void updateActionsEnabledState() {
 		final boolean isClosed = ( FileState.CLOSED == appState.getProjectFileState() );
-		
+
 		final boolean hasUseCases = ! isClosed &&
 				( appState.getProject().getSoftware().numberOfUseCases() > 0 ); // TODO refactor
-		
+
 		getGenerateAndRunAction().setEnabled( hasUseCases );
 //		getJustGenerateTestCodeAction().setEnabled( ! isClosed );
 		getJustRunTestsAction().setEnabled( hasUseCases );
 		getOpenReportAction().setEnabled( true ); // Always ?
 	}
-	
+
 	/*
 	private void justGenerateTestCode() {
 		runDirectly( true, false );
 	}*/
-	
+
 	private void justRunTests() {
 		runDirectly( false, true );
 	}
-	
+
 	/**
 	 * Run the last configuration directly.
 	 */
@@ -185,7 +211,7 @@ public class TestActionContainer implements ProjectListener {
 			final boolean generateTestCode,
 			final boolean runTests
 			) {
-		
+
 		// Get the last project configuration
 		TestGenerationConfiguration cfg = appState.getProject().getLastConfiguration();
 		if ( null == cfg ) {
@@ -194,22 +220,22 @@ public class TestActionContainer implements ProjectListener {
 			MsgUtil.error( owner, msg, title );
 			return;
 		}
-		
+
 		// Create a copy of the configuration to run
 		final TestGenerationConfiguration cfgCopy = cfg.newCopy();
 		cfgCopy.setGenerateCode( generateTestCode );
 		cfgCopy.setRun( runTests );
-		
+
 		// Run
 		performConfiguration( cfgCopy );
 	}
-	
-	
+
+
 	/**
 	 * Edit the last configuration and run.
 	 */
 	private void runAfterEditingConfiguration() {
-		
+
 		// Get the last project configuration
 		TestGenerationConfiguration cfg = appState.getProject().getLastConfiguration();
 		if ( null == cfg ) {
@@ -217,64 +243,64 @@ public class TestActionContainer implements ProjectListener {
 			cfg = new TestGenerationConfiguration();
 			appState.getProject().setLastConfiguration( cfg );
 		}
-		
+
 		// Show to edit
 		final boolean confirmed = editConfiguration( cfg );
 		if ( ! confirmed ) {
 			return;
 		}
-		
+
 		performConfiguration( cfg );
 	}
 
-	
+
 	class MyWorker extends SwingWorker< String, String >
 			implements MessageListener //, Consumer
 			{
-		
+
 		private final TestGenerationConfiguration cfg;
 		private final MessageListener ml;
-		
+
 		public MyWorker(
 				final TestGenerationConfiguration cfg,
 				final MessageListener ml
 				) {
-			this.cfg = cfg;	
+			this.cfg = cfg;
 			this.ml = ml;
 		}
-	
+
 		@Override
 		protected String doInBackground() throws Exception {
 			executePlugin( this, cfg );
 			return "done";
 		}
-		
+
 		@Override
 		protected void process(List< String > lines) {
 			for ( String line : lines ) {
 				ml.published( line );
 			}
 		}
-	
+
 		@Override
 		public void published(String message) {
 			publish( message );
 		}
 	}
-	
-	
+
+
 	private void performConfiguration(final TestGenerationConfiguration cfg) {
-		
+
 		final TestExecutionDialog dlg = new TestExecutionDialog( owner );
 		UIUtil.centerOnScreen( dlg );
 		//dlg.setAlwaysOnTop( true );
 		dlg.setVisible( true ); // Non modal
-		
+
 		MyWorker worker = new MyWorker( cfg, dlg );
 		worker.addPropertyChangeListener( dlg ); // Add the dialog as a listener
 		worker.execute();
 	}
-	
+
 	void executePlugin(
 			final MessageListener listener,
 			//final Consumer consumer,
@@ -282,32 +308,32 @@ public class TestActionContainer implements ProjectListener {
 			) {
 		final CollectingLogOutputStream outputStream = new CollectingLogOutputStream();
 		outputStream.addMessageListener( listener );
-		
+
 		//PrintStream old = System.out;
 		//StreamCapturer capturer = new StreamCapturer( "", consumer, old );
 		//System.setOut( new PrintStream( capturer ) );
-		
+
 		try {
 			performer.performConfiguration( cfg, outputStream );
-			
+
 			outputStream.removeMessageListener( listener );
-			
+
 			if ( cfg.getRun() ) { // Show the report
 				showTestExecutionReportFile( cfg.getConvertedResultsFile() );
 			}
-			
+
 		} catch (Exception e) {
 			outputStream.removeMessageListener( listener );
 			MsgUtil.error( owner, e.getLocalizedMessage(), title );
 		}
-		
-		//System.setOut( old );		
+
+		//System.setOut( old );
 	}
-	
-	
+
+
 	/**
 	 * Edit a given {@code TestGenerationConfiguration}.
-	 * 
+	 *
 	 * @param cfg	the configuration to edit.
 	 * @return		true if configured, false otherwise.
 	 */
@@ -325,38 +351,38 @@ public class TestActionContainer implements ProjectListener {
 		return true;
 	}
 
-	
+
 
 	/**
 	 * Show a test execution report file.
-	 * 
+	 *
 	 * @param testExecutionReportFilePath the test execution report file path.
 	 */
 	private void showTestExecutionReportFile(
 			final String testExecutionReportFilePath
 			) {
-		
+
 		final String filePath;
-		
+
 		if ( null == testExecutionReportFilePath || testExecutionReportFilePath.isEmpty()
 				|| ( ! ( new File( testExecutionReportFilePath ) ).exists() ) ) {
-			
+
 			String dialogTitle = Messages.alt( "_OPEN_FILE",  "Open" );
 			File currentDirectory = FileUtil.currentDirectory();
-			
+
 			filePath = SimpleFileChooser.chooseFile(
 					owner, dialogTitle, currentDirectory,
 					DefaultFileNameExtensionFilters.TEST_EXECUTION_REPORT,
 					false
 					).getAbsolutePath();
-			
+
 			if ( null == filePath ) { return; }
-			
+
 		} else {
 			filePath = testExecutionReportFilePath;
 		}
-		
-		
+
+
 		TestExecutionReportRepository repository = new JsonTestExecutionReportRepository( filePath );
 		TestExecutionReport report;
 		try {
@@ -365,11 +391,56 @@ public class TestActionContainer implements ProjectListener {
 			MsgUtil.error( owner, e.getLocalizedMessage(), title );
 			return;
 		}
-		
+
 		ProcessingListener listener = null; // TODO create it
 		TestExecutionReportDialog dlg = new TestExecutionReportDialog( owner, report, listener );
 		UIUtil.centerOnScreen( dlg );
 		dlg.setVisible( true );
+	}
+
+	private ActionListener createGenSpecMutantsListener() {
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				final File targetDirectory = FileUtil.currentDirectory();
+				final String dialogTitle = "Choose a directory";
+
+				String path = SimpleFileChooser.chooseDirectoryPath(
+						owner, dialogTitle, targetDirectory, PathType.ABSOLUTE );
+				if ( null == path ) { return; } // Cancel, then exits
+
+				String projectFileNameWithoutPath =
+						new File( appState.getProjectFileName() ).getName();
+
+				SpecMutantGenerator smg = new SpecMutantGenerator(
+						appState.getProject(), projectFileNameWithoutPath
+						);
+
+				Software software = appState.getCurrentSoftware();
+
+				smg.addMutator( new ChangeReturningStepSpecMutator() );
+				smg.addMutator( new ChangeReturningFlowSpecMutator() );
+				smg.addMutator( new RemoveUseCaseCallStepSpecMutator() );
+				smg.addMutator( new RemoveMandatoryStepSpecMutator() );
+				smg.addMutator( new ChangeElementIdSpecMutator() );
+				smg.addMutator( new ChangeElementDateTypeSpecMutator( software.profile() ) );
+				smg.addMutator( new ChangeElementValueTypeSpecMutator() );
+				smg.addMutator( new RemoveBusinessRuleSpecMutator() );
+				smg.addMutator( new AddBusinessRuleSpecMutator( software ) );
+				smg.addMutator( new ChangeBusinessRuleSpecMutator( software ) );
+				smg.addMutator( new ChangeBusinessRuleValueSpecMutator() );
+
+				smg.addMutator( new RemoveFlowSpecMutator() );
+
+				try {
+					smg.generateToDirectory( path );
+				} catch ( Exception ex ) {
+					MsgUtil.error( owner, ex.getLocalizedMessage(), title );
+					return;
+				}
+			}
+		};
 	}
 
 }

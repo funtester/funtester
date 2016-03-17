@@ -13,16 +13,16 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 /**
  * A step that the user can fire an action.
- * 
+ *
  * @author Thiago Delgado Pinto
  *
  */
 public class ActionStep extends ElementBasedStep {
-	
+
 	private static final long serialVersionUID = -2879606740119088016L;
-	
+
 	private Trigger trigger = Trigger.ACTOR;
-	
+
 	@JsonIdentityReference(alwaysAsId=true)
 	@JsonTypeInfo(defaultImpl=ActionNickname.class, use=Id.NAME)
 	private ActionNickname actionNickname;
@@ -30,11 +30,11 @@ public class ActionStep extends ElementBasedStep {
 	public ActionStep() {
 		super();
 	}
-	
+
 	public ActionStep(Flow flow) {
 		super( flow );
 	}
-	
+
 	public ActionStep(Flow flow, Trigger trigger, ActionNickname aNickname) {
 		this( flow );
 		setTrigger( trigger );
@@ -44,20 +44,20 @@ public class ActionStep extends ElementBasedStep {
 	public ActionNickname getActionNickname() {
 		return actionNickname;
 	}
-	
+
 	public void setActionNickname(ActionNickname actionNickname) {
 		this.actionNickname = actionNickname;
 	}
-		
+
 	@Override
 	public Trigger trigger() {
 		return getTrigger();
 	}
-	
+
 	public Trigger getTrigger() {
 		return trigger;
 	}
-	
+
 	public void setTrigger(Trigger trigger) {
 		this.trigger = trigger;
 		ActionNickname nick = getActionNickname();
@@ -68,11 +68,11 @@ public class ActionStep extends ElementBasedStep {
 			}
 		}
 	}
-	
+
 	@Override
 	public StepKind kind() {
 		return StepKind.ACTION;
-	}	
+	}
 
 	@Override
 	public String asSentence() {
@@ -83,7 +83,7 @@ public class ActionStep extends ElementBasedStep {
 		sb.append( elementsAsText() );
 		return sb.toString();
 	}
-	
+
 	@Override
 	public ActionStep copy(final Step obj) {
 		super.copy( obj );
@@ -106,7 +106,7 @@ public class ActionStep extends ElementBasedStep {
 			this.actionNickname
 			} );
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if ( ! ( obj instanceof ActionStep ) ) return false;
@@ -115,7 +115,7 @@ public class ActionStep extends ElementBasedStep {
 			&& EqUtil.equals( this.actionNickname, that.actionNickname )
 			;
 	}
-	
+
 	//
 	// Not necessary to overwrite toString
 	//

@@ -18,7 +18,7 @@ import org.funtester.app.ui.util.MsgUtil;
 
 /**
  * Container for the "Edit" actions.
- * 
+ *
  * @author Thiago Delgado Pinto
  *
  */
@@ -26,12 +26,12 @@ public class EditActionContainer {
 
 	private final JFrame owner;
 	private final String title;
-	private final AppState state;	
-	
+	private final AppState state;
+
 	private Action editConfigurationAction = null;
 	private Action editProfilesAction = null;
 	private Action editVocabulariesAction = null;
-	
+
 	public EditActionContainer(
 			JFrame owner,
 			final String title,
@@ -39,10 +39,10 @@ public class EditActionContainer {
 			) {
 		this.owner = owner;
 		this.title = title;
-		this.state = state;	
+		this.state = state;
 	}
-	
-	
+
+
 	public Action editConfigurationAction() {
 		return ( null == editConfigurationAction )
 			? editConfigurationAction = new BaseAction()
@@ -52,7 +52,7 @@ public class EditActionContainer {
 				.withIcon( ImageUtil.loadIcon( ImagePath.configurationIcon() ) )
 			: editConfigurationAction;
 	}
-	
+
 	public Action editProfilesAction() {
 		return ( null == editProfilesAction )
 				? editProfilesAction = new BaseAction()
@@ -61,7 +61,7 @@ public class EditActionContainer {
 					//.withListener( new EditProfilesActionListener( owner, title, manager ) )
 				: editProfilesAction;
 	}
-	
+
 	public Action editVocabulariesAction() {
 		return ( null == editVocabulariesAction )
 				? editVocabulariesAction = new BaseAction()
@@ -70,10 +70,10 @@ public class EditActionContainer {
 					//.withListener( new EditVocabulariesActionListener( owner, title, manager ) )
 				: editVocabulariesAction;
 	}
-	
-	
+
+
 	private ActionListener createNewConfigurationEditActionListener() {
-		
+
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -86,7 +86,7 @@ public class EditActionContainer {
 				// Changing
 				state.getConfiguration().copy( dlg.getObject() );
 				dlg = null;
-				
+
 				// Saving
 				AppConfigurationRepository repository = new JsonAppConfigurationRepository(
 						state.getConfigurationFile() );
@@ -97,7 +97,7 @@ public class EditActionContainer {
 				}
 			}
 		};
-		
+
 	}
 
 }

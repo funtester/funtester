@@ -1,0 +1,51 @@
+{
+  "profileFile" : "profile/unified.fp",
+  "vocabulary" : {
+	  "name" : "Vocabulário para Aplicações Desktop",
+	  "locale" : {
+	    "language" : "pt",
+	    "country" : "BR"
+	  },
+	  "nicknames" : [ {
+		"id" : 1,
+	    "nickname" : "pressiona",
+	    "action" : 2
+	  }, {
+		"id" : 2,
+	    "nickname" : "checa as regras de negócio de",
+	    "action" : 3
+	  }, {
+		"id" : 3,
+	    "nickname" : "responde Sim para a mensagem",
+	    "action" : 5
+	  }, {
+		"id" : 4,
+	    "nickname" : "seleciona",
+	    "action" : 4
+	  }, {
+		"id" : 5,	  
+	    "nickname" : "chama o caso de uso",
+	    "action" : 1
+	  }, {
+		"id" : 6,	  
+	    "nickname" : "clica",
+	    "action" : 6
+	  }, {
+		"id" : 7,	  
+	    "nickname" : "seleciona a primeira opção de",
+	    "action" : 9
+	  }, {
+		"id" : 8,	  
+	    "nickname" : "digita",
+	    "action" : 8
+	  }, {
+		"id" : 9,	  
+	    "nickname" : "fecha",
+	    "action" : 10
+	  }, {
+		"id" : 10,	  
+	    "nickname" : "exibe",
+	    "action" : 7
+	  } ]
+	}
+}
