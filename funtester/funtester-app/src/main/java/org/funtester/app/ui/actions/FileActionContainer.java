@@ -14,9 +14,10 @@ import org.funtester.app.i18n.Messages;
 import org.funtester.app.project.AppState;
 import org.funtester.app.project.DocGenerator;
 import org.funtester.app.project.FileState;
-import org.funtester.app.project.HTMLDocGenerator;
 import org.funtester.app.project.Project;
 import org.funtester.app.project.ProjectListener;
+import org.funtester.app.project.export.HTMLDocGenerator;
+import org.funtester.app.project.export.UseCaseDiagramGenerator;
 import org.funtester.app.repository.ProjectRepository;
 import org.funtester.app.repository.json.JsonProjectRepositoryWithRelativePaths;
 import org.funtester.app.ui.common.DefaultFileNameExtensionFilters;
@@ -50,6 +51,7 @@ public class FileActionContainer {
 	private Action fileSaveAsAction = null;
 	private Action filePrintAction = null;
 	private Action fileExportAsHTMLAction = null;
+	private Action fileExportAsUseCaseDiagramAction = null;
 	private Action fileExitAction = null;
 
 
@@ -139,6 +141,13 @@ public class FileActionContainer {
 			: fileExportAsHTMLAction;
 	}
 
+	public Action getFileExportAsUseCaseDiagramAction() {
+		return ( null == fileExportAsUseCaseDiagramAction )
+			? fileExportAsUseCaseDiagramAction = new BaseAction()
+				.withName( Messages.alt( "_MENU_FILE_EXPORT_USE_CASE_DIAGRAM", "as UML Use Case Diagram..." ) )
+				.withListener( createFileExportAsUseCaseDiagramActionListener() )
+			: fileExportAsUseCaseDiagramAction;
+	}
 
 	public Action getFileExitAction() {
 		return ( null == fileExitAction )
@@ -156,7 +165,8 @@ public class FileActionContainer {
 		getFileSaveAction().setEnabled( ! isClosed );
 		getFileSaveAsAction().setEnabled( ! isClosed );
 		getFilePrintAction().setEnabled( ! isClosed );
-		//getFileExportAsHTMLAction().setEnabled( ! isClosed );
+		getFileExportAsHTMLAction().setEnabled( ! isClosed );
+		getFileExportAsUseCaseDiagramAction().setEnabled( ! isClosed );
 	}
 
 
@@ -286,8 +296,28 @@ public class FileActionContainer {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if ( appState.getProjectFileState().equals( FileState.CLOSED ) ) {
+					return;
+				}
 				DocGenerator g = new HTMLDocGenerator();
-				try {					
+				try {
+					g.generate( appState.getProject().getSoftware() );
+				} catch ( Exception e1 ) {
+					MsgUtil.error( owner, e1.getLocalizedMessage(), "Export" );
+				}
+			}
+		};
+	}
+
+	private ActionListener createFileExportAsUseCaseDiagramActionListener() {
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if ( appState.getProjectFileState().equals( FileState.CLOSED ) ) {
+					return;
+				}
+				DocGenerator g = new UseCaseDiagramGenerator();
+				try {
 					g.generate( appState.getProject().getSoftware() );
 				} catch ( Exception e1 ) {
 					MsgUtil.error( owner, e1.getLocalizedMessage(), "Export" );
