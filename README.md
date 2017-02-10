@@ -10,7 +10,7 @@ Opensource functional testing tool
 
 ### Documentation
 
-> Documentation was migrated from Assembla. Most of it is in Textile format. Some links could be broken.
+> Documentation was migrated from Assembla. Most of it is in Textile format. Some links can be broken.
 
 #### Using Funtester
 * [Adopted File Extensions](https://github.com/funtester/funtester/blob/master/doc/FILE-EXTENSIONS.textile)
