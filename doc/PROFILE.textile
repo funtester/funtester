@@ -1,0 +1,35 @@
+Profile
+      
+      
+      
+      
+      
+      <p> A <i>Profile</i> is a set of <i>actions</i> and <i>widget types</i> that can be used to document the interactions between a user and the system, in the use cases. When we create a software project, !FunTester ask us to choose a [[Vocabulary]]. This Vocabulary will reference a Profile.</p><p><br></p><p>!FunTester Profile files have the <code>.fp</code> extension, the JSON format, and the following structure:</p>
+<pre>    
+{
+  "id" : int,
+  "name" : string,
+  "description" : string,
+  "types" : [
+    {
+      "id" : int,
+      "name" : string,       -- e.g. "button"
+      "kind" : string,       -- @see org/funtester/core/profile/ElementKind.java
+      "editable" : boolean
+    },
+    ...
+  ],
+  "actions" : [
+    {
+      "id" : int,
+      "name" : string,
+      "trigger" : string,    -- @see org/funtester/core/profile/Trigger.java
+      "kind" : string,       -- @see org/funtester/core/profile/StepKind.java
+      "maxElements" : int    -- maximum allowed elements
+    },
+    ...
+  ]
+}
+</pre>
+    
+    
