@@ -1,6 +1,8 @@
 # funtester
 Opensource functional testing tool
 
+> The *documentation* of this project is being migrated from Assembla (work in progress)
+
 ## Plug-ins for
 * [Java Swing Applications (through FEST Swing)](https://github.com/funtester/funtester-plugin-fest)
 * [Web Applications (through Selenium)](https://github.com/funtester/funtester-plugin-selenium)
