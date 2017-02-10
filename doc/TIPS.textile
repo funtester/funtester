@@ -1,0 +1,17 @@
+h1. Tips
+
+h3. Put your files under version control
+
+Most "FunTester's files":File_Extensions are simple "JSON":http://en.wikipedia.org/wiki/JSON files that you can easily put under "version control":http://en.wikipedia.org/wiki/Revision_control. We recommend you evolving your software specification, abstract tests, and project configurations along with your source code. Here are some version control systems:
+
+|_. Version control system |_. Some front-ends |
+| "Subversion":http://subversion.apache.org | "TortoiseSVN":http://tortoisesvn.tigris.org (Windows), "RabbitVCS":http://rabbitvcs.org (Linux), "svnX":https://code.google.com/p/svnx/ (Mac) |
+| "Git":http://git-scm.com | "Tortoise Git":http://code.google.com/p/tortoisegit (Windows), "RabbitVCS":http://rabbitvcs.org (Linux), "GitX-dev":http://rowanj.github.io/gitx (Mac) |
+| "Mercurial":http://mercurial.selenic.com | "TortoiseHg":http://tortoisehg.bitbucket.org (Windows), "RabbitVCS":http://rabbitvcs.org (Linux), "MacHg":http://jasonfharris.com/machg (Mac) |
+
+h3. Run your tests in a virtual machine
+
+Functional tests usually assume control of your mouse and keyboard to simulate a user interacting with the system under test. Using a virtual machine, you are free to work while the tests are executed. Here are some good options:
+* "Virtual Box":https://www.virtualbox.org/wiki/Downloads
+* "VMWare":https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0
+
