@@ -1,0 +1,35 @@
+h1. Development Guidelines
+
+h2. Subversion
+
+Never commit these _folders_:
+* @target@
+* @bin@
+
+
+Never commit these _files_:
+* any @.jar@ file, except for a JAR that does not exist in a web repository. In this case, the JAR should be put in a @setup@ folder, in the root directory
+* @dependency-reduced-pom.xml@
+
+
+Each commit message should start with:
+* @@new@, whether you have created something; or
+* @@change@, whether you have changed or deleted something; or
+* @@refactor@, whether you have refactored something.
+
+Try to separate these tree operations (new, change, refactor) in different commits. But don't be so severe. :)
+
+Tagging:
+* A _tag_ should be created when a version became stable. It doesn't need to be released to the public, but it should be tagged.
+* Start the commit message with something like "Version 1.7.3", where 1.7.3 should (obviously) be your _tag_ version number.
+
+h2. Coding style
+
+"Here":http://www.iwombat.com/standards/JavaStyleGuide.html there is a coding style that is close to ours. We also prefer:
+* Indenting code with Tab, not spaces. A tab must be set every 4 spaces.
+* Using spaces for separating parentheses in _method calls_, _conditional statements_ and _loops_.
+** Example 1: @if ( x > 50 )@
+** Example 2: @while ( y < 100 )@
+** Example 3: @Math.pow( 2, 3 );@
+* Using @final@ attributes, when applicable
+* Using "JavaDoc":http://en.wikipedia.org/wiki/Javadoc when applicable
