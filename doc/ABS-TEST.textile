@@ -1,0 +1,61 @@
+h1. Abstract test
+
+An _abstract test_ is a test case described in a format independent of programming languages or testing frameworks.
+
+An _abstract test_ file has a set of *test cases*. Each test case has *test methods*, and each test method has *test steps*. When converting abstract tests into test scripts, we usually generate one test case per file. This file usually contains a class that implements the desired test case using a _unit testing framework_ (such as JUnit, PHPUnit, !CppUnit, etc.). Each test step is converted to one or more command-lines, using the target _GUI testing framework_ (e.g. Selenium, Robotium, FEST, etc.).
+
+A test step is formed by one *action*, and one or more *elements*. An action is a word that defines a user interface behavior or interaction, such as @show@, @click@, @type@, etc. The set of available actions depend on the [[Profile]] used to document the software project. An element is a widget referenced by the action (on the current version, see "Widget Details":Widget_Details for more information). For instance, the action @click@ can reference a element named @okButton@. Whether the _type_ of the element (widget) can receive values (e.g. @textbox@, a @combobox@, or a @listbox@), it can have a value.
+<br />
+
+An *abstract tests file* has the @.fat@ extension, the JSON format, and the following structure:
+<pre><code>
+{
+  "name" : string, -- e.g. "MyTestSuite"
+  "softwareName" : string, -- e.g. "My Software 1.0"
+  "creation" : timestamp, -- e.g. "2014-01-20T12:43:48.210-03:00"
+  "connections" : [ ], -- not used yet
+  "testCases" : [ -- here are the Test Cases for the system under test
+    {
+      "name" : string, -- the name of the test case, composed by the name of the use case and involved flows. e.g.: "CreateSoftware_BF_AF1_Test"
+      "useCaseName" : string, -- the name of the use case. e.g. "Create Software"
+      "scenarioName" : string, -- the name of the scenario, composed by the involved use case's flows. e.g.: "BF,AF1"
+      "includeFiles" : [ string, ... ], -- source code files to be included by the test case. e.g. [ "org.funtester.app.ui.MainFrame" ]
+      "scripts" : [ ], -- not used yet
+      "testMethods" : [ -- here are the Test Methods of the Test Case
+        {
+          "name" : string, -- the suggested name for the test method. e.g. "all_field_values_at_the_lower_limit"
+          "strategyKind" : string, -- the kind of test strategy used by the test method. e.g. "all_field_values_at_the_lower_limit"
+          "scenarioName" : string, -- name of the scenario tested by the method. TO BE DEPRECATED. e.g. "BF,AF1"
+          "expectedSuccess" : boolean, -- whether is expected the test method to succeed. e.g. true
+          "importance" : string, -- the importance of the test method. e.g. "LOW"
+          "steps" : [ -- here are the Test Steps for the Test Method
+            {
+              "type" : string, -- the type of the step. e.g. "action"
+              "id" : int, -- the identification of the TEST step (this is different from stepId). e.g. 1
+              "useCaseId" : int, -- the identification of the related use case. e.g. 3
+              "flowId" : int,  -- the identification of the related flow. e.g. 7
+              "stepId" : int,  -- the identification of the related step. e.g. 17
+              "actionName" : string, -- the action to be performed in the step. e.g. "show"
+              "elements" : [ -- here are the Elements affected by the action (on "actionName"). TO BE CHANGED.
+                {
+                  "type" : string, -- the type of widget. e.g. "frame"
+                  "internalName" : string, -- the internal name of the widget. e.g. "MainFrame"
+                  "name" : string, -- the name of the widget as known by the user. e.g. "Main Window"
+                  "value" : string, -- the value for the widget. Note: default null.
+                  "valueConsideredValid" : boolean, -- whether the value is considered valid. Note: null also means false.
+                  "valueOption" : string -- the option used to generate the value. Note: default null.
+                },
+                ...
+              ]
+            },
+            ...
+          ]
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+}
+</code></pre>
+    
