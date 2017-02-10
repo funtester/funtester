@@ -1,0 +1,21 @@
+Vocabulary
+
+      <p> A <i>Vocabulary</i> is a set of words that better describe or translate the set of <i>actions</i> of a [[Profile]].</p><p><br></p><p>!FunTester Vocabulary files have the <code>.fp</code> extension, the JSON format, and the following structure:</p><pre>{
+  "profileFile" : string,     -- e.g. path/to/profile.fp
+  "vocabulary" : {
+    "name" : string,
+    "locale" : {
+      "language" : string,    -- e.g. "pt"
+      "country" : string      -- e.g. "BR"
+    },
+    "nicknames" : [
+      {
+        "id" : int,
+        "nickname" : string,  -- e.g. "clica"
+        "action" : int        -- action id
+      },
+      ...
+    ]
+  }
+}</pre>
+    
