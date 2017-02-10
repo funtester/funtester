@@ -1,15 +1,14 @@
 # funtester
 Opensource functional testing tool
 
-> This project is being migrated from Assembla. Documentation (Wiki) is still being converted.
-
 ## Plug-ins for
 * [Java Swing Applications (through FEST Swing)](https://github.com/funtester/funtester-plugin-fest)
 * [Web Applications (through Selenium)](https://github.com/funtester/funtester-plugin-selenium)
 * [Android Applications (through Robotium)](https://github.com/funtester/funtester-plugin-robotium)
 
 ### Documentation
-> Documentation is being migrated Assembla. Most of it is in Textile format.
+
+> Documentation was migrated from Assembla. Most of it is in Textile format. Some links could be broken.
 
 #### Using Funtester
 * [Adopted File Extensions](https://github.com/funtester/funtester/blob/master/doc/FILE-EXTENSIONS.textile)
