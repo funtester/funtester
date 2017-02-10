@@ -1,3 +1,5 @@
+h1. Project Setup
+
 __This page presents the needed softwares and procedures to put FunTester up and running.__
 
 h2. Softwares
