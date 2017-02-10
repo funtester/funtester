@@ -1,0 +1,99 @@
+h1. Business rules
+
+A business rule is currently defined as a restriction about the data of an *editable* widget, and the expected system behavior for when this restriction is not accomplished. A user can describe it after [[Widget_Details|giving more details about the widget]].
+<br />
+
+h2. Restriction
+
+This *restriction* can describe:
+* the source of the data:
+** A manually defined list;
+** An external data source, such as a database connection (through JDBC);
+** Another widget of the same use case;
+* the data format, defined through a regular expression;
+* the data limits (upper/lower value/length limits);
+* the obligatoriness of the data.
+
+Available restrictions:
+
+|_. Restriction |_. Compatible value types[1] |_. Data source[2] |
+| Required | All except @boolean@ | (not applicable) |
+| Lower limit | All except @boolean@, @string@ | S, Q, W |
+| Upper limit | All except @boolean@, @string@ | S, Q, W |
+| Lower length limit |  All except @boolean@ | S, Q, W |
+| Upper length limit |  All except @boolean@ | S, Q, W |
+| Regular expression | All | S |
+| Equal to | All | W |
+| One of | All | S, L, Q |
+| Not one of | All | S, L, Q |
+
+fn1. Available types: @string@, @int@, @double@, @boolean@, @date@, @time@, @datetime@.
+
+fn2. S=Single value, manually defined, L=List of values, manually defined, Q=From a database query, W=From another widget.
+
+<br />
+
+h2. Expected System Behavior
+
+The expected system behavior is currently expressed as the expected *message* for when the provided data is invalid, according to the defined restrictions. We plan to make these expectations more flexible, enabling them to verify any expected state of the user interface.
+
+The message supports some string formatting characters like C languages's @sprintf@, in order to ignore values that change from message to message:
+* @%s@: for replacing a string value;
+* @%d@: for replacing a integer value;
+* @%f@: for replacing a float/double value;
+
+Thus, a message like @"The salary must be between 500.00 and 50000.00."@
+can be described as @"The salary must be between %f and %f."@.
+<br />
+
+h2. Example
+
+Suppose that we have a use case _Create an Employee_, with its Basic Flow described like that:
+1. _The system shows the Employee Screen._
+2. _The actor types Name, E-mail._
+3. _The actor selects the Job Title._
+4. _The actor types the Salary._
+5. _The actor clicks OK._
+6. _The system verify the business rules of Name, E-mail, Job Title, Salary._
+7. _The system closes the Employee Screen._
+
+Whether we are using a desktop GUI, we can [[Widget_Details|detail the widgets]] above this way:
+
+|_. Name |_. Internal Name[1] |_. Type |_. Editable |_. Value type |
+| Employee Screen | !EmployeeWindow | Window | No | N/A |
+| Name | edtName | !TextBox | Yes | string |
+| E-mail | edtEmail | !TextBox | Yes | string |
+| Job Title | cbxJobTitle | !ComboBox | Yes | string |
+| Salary | edtSalary | !TextBox | Yes | double |
+| OK | okButton | Button | no | N/A |
+
+fn1. Software companies usually create their own standards to name widgets.
+
+Now we can define the business rules of the editable widgets: @Name@, @E-mail@, @Job Title@, and @Salary@. Let's say that:
+* @Name@, @Job Title@, and @Salary@ are required;
+* @Name@ 's length must be between 2 and 50 characters;
+* @E-mail@ must be in the format <code>/[A-Za-z][A-Za-z0-9.-_]{0,29}@[A-Za-z][A-Za-z0-9.-_]{0,19}/</code>;
+* @Job Title@ should come from the field @name@ of the query @SELECT name FROM jobtitle@, of a certain !MySQL database;
+* @Salary@ 's lower and upper limits vary according the the selected Job Title. These limits come, respectively, from the fields @min_salary@ and @max_salary@ of the query @SELECT min_salary, max_salary FROM jobtitle WHERE name = ?@. The query's anonymous parameter (@?@) will receive the selected @Job Title@, so that the @Salary@ will adjust its limits dynamically.
+
+These will be the detailed business rules:
+
+|_. Element (widget) |_. Restriction |_. Value |_. Expected system behavior/Message to be displayed |
+| Name | Required | N/A | Please inform the Name. |
+| Name | Lower length limit | @2@ | The Name must be at least 2 characters. |
+| Name | Upper length limit | @50@ | The Name must be at most 50 characters. |
+| E-mail | Regular expression | <code>/[A-Za-z][A-Za-z0-9.-_]{0,29}@[A-Za-z][A-Za-z0-9.-_]{0,19}/</code> | Please inform a valid E-mail. |
+| Job Title | Required | N/A | Please inform the Job Title. |
+| Job Title | Equal to | field @name@ of the query @SELECT name FROM jobtitle@[1] | Please choose one of the available Job Titles. |
+| Salary | Required | N/A | Please inform the Salary. |
+| Salary | Lower limit | field @min_salary@ of the query @SELECT min_salary, max_salary FROM jobtitle WHERE name = ?@[1], and @?@ = value of @Job Title@ | Please inform a Salary between %f and %f. |
+| Salary | Upper limit | field @max_salary@ of the query @SELECT min_salary, max_salary FROM jobtitle WHERE name = ?@[1], and @?@ = value of @Job Title@ | Please inform a Salary between %f and %f. |
+
+fn1. We have omitted the specification of the database in this example, for the sake of simplicity. However, this specification is basically the JDBC parameters used to connect the database.
+
+!FunTester allows you specifying database connections, database queries, and regular expressions apart from the use cases, in order to reuse them in different situations and to make their creation faster.
+<br />
+
+h4. Test generation
+
+See how the business rules are use to generate test cases [[Generated_Tests|here]].
