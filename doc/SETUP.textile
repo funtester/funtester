@@ -1,0 +1,98 @@
+__This page presents the needed softwares and procedures to put FunTester up and running.__
+
+h2. Softwares
+
+You may need to download and install the following softwares:
+* "JDK":http://www.oracle.com/technetwork/java/javase/downloads/index.html (we need _version 6_, but you can download the newest version);
+* "Maven 3":http://maven.apache.org/ (it needs JDK, not JRE). In the download page you shall find the installation instructions;
+* "Subversion":http://subversion.apache.org/ (we recommend "TortoiseSVN":http://tortoisesvn.net/ or "RabbitVCS":http://rabbitvcs.org/ whether you prefer using a GUI).
+
+We prefer using "Eclipse IDE":http://eclipse.org/. We also strongly recommend you to install the following plug-ins:
+* "Window Builder":http://www.eclipse.org/windowbuilder/ (Swing GUI Builder for Eclipse)
+* "m2e":https://www.eclipse.org/m2e/ (Maven to Eclipse Plugin)
+
+**Tip**: __You may install these plug-ins by accessing:__
+* @Help -> Install New Software@ and typing the corresponding plug-in's @Update Site@ in the @Work with@ text box (Update Sites in the links above); **OR**
+* @Help -> Eclipse Marketplace@ and finding the desired plug-in.
+
+You may find **Swing Designer** and **Window Builder** plug-ins inside the Eclipse Update Site:
+* Go to @General Purpose Tools@ and check the following:
+** @Swing Designer@
+** @Swing Designer Documentation@
+** @WindowBuilder Core@
+** @WindowBuilder Core Documentation@
+** @WindowBuilder Core UI@
+** @WindowBuilder GroupLayout Support@ (optional)
+** @WindowBuilder Java Core@
+
+
+**Optional softwares** (not necessary, but useful for quality control):
+* "Sonar":http://www.sonarqube.org/
+* "Stan4J Eclipse Plugin":http://stan4j.com/
+
+
+h3. Important notes
+
+# All the Java projects uses **JDK 1.6**, but (as you may know) you can download the "most up-to-date JDK version":http://www.oracle.com/technetwork/java/javase/downloads/index.html and configure your preferred IDE to use version 1.6. The project is already configured to use this version, but we recommend you to do it anyway.
+# You should configure properly all the environment variables: @JAVA_HOME@, @CLASSPATH@, @M2_HOME@, and @PATH@.
+# You may (optionally) want to configure the following environment variables: @MAVEN_OPTS@, @M2_REPO@, and @JRE_HOME@.
+# Adjust your IDE’s text editor to use UTF-8 (without BOM).
+
+**Tip**: __You may want to adjust Eclipse's default configuration through its @eclipse.ini@ file.__
+A) Use Java 6 and UTF-8 by default:
+<pre><code>--vmargs
+-Dosgi.requiredJavaVersion=1.6
+-Dfile.encoding=UTF-8
+</code></pre>
+
+B) Use JDK instead of using JRE (highly recommended):
+Windows:
+<pre><code>--vm
+path\to\jdk\bin\javaw.exe
+</code></pre>
+
+Linux/!MacOSX:
+<pre><code>--vm
+path/to/jdk/bin/java
+</code></pre>
+
+h2. Source Code
+
+You may check-out the last version of the source code from @https://subversion.assembla.com/svn/funtester-project/trunk@.
+We recommend you to check-out the source code into a “funtester” folder inside the your __workspace__ (folder).
+
+The project currently contains **five** maven projects:
+# **funtester**: this is the parent maven project;
+# **funtester-app**: contains the GUI and related classes. This is the project that we will generate the JAR file to deploy;
+# **funtester-common**: contains common classes;
+# **funtester-core**: contains the main classes;
+# **funtester-plugin-common**: contain useful classes for constructing plug-ins using Java.
+
+
+h3. Importing the projects using Eclipse:
+
+# @File -> Import…@;
+# In the Import Window, choose the Maven folder, and the option @Existing Maven Projects@. Then, click @Next@;
+# Click @Browse…@ and choose the folder where you checked-out the source code. Eclipse will detect the Maven projects inside it.
+# Let all the projects checked and click @Finish@.
+
+
+h2. Installing missing packages
+
+After checking out the source code from the Subversion repository, it will be necessary to install Automaton (@dk.brics:automaton:jar:1.1@) and Xeger (@nl.floatsam:xeger:jar:1.0-SNAPSHOT@). In the root directory, there will be a @setup@ folder with the needed @.jar@ files and the respective command-line scripts to install them (using Maven).
+* Under Windows, run @mvn-install-automaton.bat@ and @mvn-install-xeger.bat@.
+* Under Linux/!MacOSX,  run @mvn-install-automaton.sh@ and @mvn-install-xeger.sh@. 
+
+
+h2. Installing JAR files
+
+You need to install all the maven projects **before** running the application.
+* In Eclipse, left click the @funtester@ project (the parent project) and choose @Run@ > @Maven install@.
+* Or, in the command prompt, enter the @funtester@ folder and type: @mvn package@
+
+
+h2. Executing the application
+
+__Remember: You need to install the project JAR files before first running the application.__
+* In Eclipse: menu @Run@ > @Run As@ > @Java Application@, choose @the org.funtester.app.Main@ and click @OK@.
+* Or, in the command prompt: @java -jar funtester-app-<VERSION>.jar@ where @<VERSION>@ is the current project version.
