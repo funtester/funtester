@@ -1,0 +1,78 @@
+h1. Generated tests
+
+h2. Test Cases
+
+The current version generates one test case per scenario. A scenario is a combination of one or more _combinable_ flows of a use case.
+
+For testing a use case in isolation, the tool combines all the preceding use cases' scenarios that can possible reach the target use case (using successful flows and valid data). For example. whether a web application has a use case "Edit Profile" and the user needs to login before accessing it - that is, the use case "Login" needs to be executed before the use case "Edit Profile" -, the login will be executed successfully (using a successful path and valid data) so that execution can reach the target use case.
+
+h4. Importance value
+
+Each flow receives a *importance* value from the user. The importance of a scenario is the median value of its flows. This value can be used for annotating the generated tests in order to allow a user to *filter* the tests to be executed, and, thus, reducing the number of tests to execute.
+
+
+h2. Test Methods
+
+The tool uses the information of the target use case's [[Business_Rules|business rules]] for generating test methods, test data, and oracles.
+
+For each test scenario, the following tests are generated:
+
+|_. Target fields[1] |_. # of invalid valued fields[2] |_. Invalid value kind[3] |_. Valid value kind[4] |_. UC should generate PC ?[5] |_. # of Tests[6] |
+| All | 0 | - | random | yes | 1 |
+| All | 0 | - | upper limit | yes | 1 |
+| All | 0 | - | just below the upper limit | yes | 1 |
+| All | 0 | - | lower limit | yes | 1 |
+| All | 0 | - | just above the lower limit | yes | 1 |
+| All | 0 | - | median | yes | 1 |
+| All | 0 | - | zero (0) | yes | 1 |
+| Required ones | 0 | - | random | yes | 1 |
+| Required ones | 1 | not filled | random | no | 1 per required field |
+| All | 1 | just below the lower limit | random | no | 1 per editable field |
+| All | 1 | random below the lower limit | random | no | 1 per editable field |
+| All | 1 | just above the upper limit | random | no | 1 per editable field |
+| All | 1 | random above the upper limit | random | no | 1 per editable field |
+| All | 1 | invalid format | random | no | 1 per formatted field |
+
+fn1. Indicate what fields (editable widgets) the test use.
+
+fn2. Number of fields that receive invalid values.
+
+fn3. Indicate the kind of invalid value the (invalid valued) fields receive.
+
+fn4. Indicate the kind of valid value the (valid valued) fields receive.
+
+fn5. Whether it is expected that the use case terminates successfully and generates its postconditions.
+
+fn6. Number of generated tests.
+
+<br />
+
+Thus, the *minimum number of test methods per test case* can be (currently) calculated as @8 + 4E + R + F@, where:
+* E is the number of _editable_ fields;
+* R is the number of editable _required_ fields;
+* F is the number of editable fields with _formatting_ rules.
+
+For example, whether a use case has 4 editable fields: 1 required, 2 optional, and 1 with formatting rules, the test case will have @8 + 4*4 + 1 + 1 =@ 26 test methods.
+
+
+h4. Test data
+
+The test data vary according to their respective data type and [[Business_Rule|business rules]]:
+
+* For @string@ values, the _lower_ limit, the _upper_ limit, and the zero (0) value are relative to their *lengths*;
+* For @double@ values, it is taken into consideration the *greatest precision* used in the _lower_ and _upper_ limits. For example, if the lower limit is 1.253 and the upper limit is 1.71, the tool infers that the precision to be used is 0.001 (three decimal places);
+* For data from a list of values:
+** the _lower_ limit is the first item in the list;
+** the _upper_ limit is the last item in the list;
+** a _invalid value_ is a value that is not in the list;
+* When a business rule does not admit _zero_ as a valid value, its _lower_ limit is used instead;
+* When a business rule does not admit the _median_ value as a valid value, a _random_ valid value is used instead;
+* For generating data with _invalid format_, according to the regular expression, the regular expression is negated.
+
+h4. Oracles
+
+A use case will usually validate data entries, or will modify its user interface for showing internal state changes. The current version generates test oracles based on the expected messages for when a user provides invalid data. However, we plan to make the oracles more flexible, enabling them to verify any expected state of a user interface.
+
+h2. Format
+
+All the tests are generated as [[Abstract_Test|Abstract Tests]] to a JSON file with the @.fat@ [[File_Extensions|extension]]. These tests can be converted into source code using a [[Plugin_Development|plugin]].
