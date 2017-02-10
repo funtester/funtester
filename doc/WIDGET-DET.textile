@@ -1,0 +1,17 @@
+h1. Widget Details
+
+After describing a use case, we can detail its widgets, giving useful information for test generation purposes.
+
+In !FunTester, a widget is a _user interface element_ or just an *element*.  In the matter of the facts, an element can be more than just a widget (for instance, it can be a URL, a key,  or a waiting time). An _element_ has:
+* *kind*: the kind of the element: @widget@, @url@, @command@, @key@, or @time@ (in milliseconds). The current version only supports the kind @widget@;
+* *name* (_widget only_): the name of the element, as a user knows it;
+* *internal name* (_widget only_): the element identification, for recognizing it in the user interface;
+* *widget type* (_widget only_): the type of the widget, such as @textbox@, @combobox@, @button@, etc.;
+* *editable* (_widget only_): Whether the widget is editable (i.e.: receive values from the user);
+* *value type* (_editable widget only_): @string@, @integer@, @double@, @boolean@, @date@, @time@, and @datetime@;
+* *business rules* (_editable widget only_ ): the [[Business_Rules|business rules]] of the editable widget.
+
+After giving these information (including the the [[Business_Rules|business rules]]), we are ready for [[Generated_Tests|generating the test cases]].
+
+
+
