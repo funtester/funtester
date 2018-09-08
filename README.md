@@ -33,4 +33,6 @@ Opensource functional testing tool
 
 # License
 
-[FTL](https://github.com/funtester/funtester/blob/master/funtester/LICENSE.txt) Copyright © [Thiago Delgado Pinto](https://github.com/thiagodp)
+[FTL](https://github.com/funtester/funtester/blob/master/funtester/LICENSE.txt)
+
+Copyright © [Thiago Delgado Pinto](https://github.com/thiagodp)
