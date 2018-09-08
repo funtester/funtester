@@ -29,3 +29,8 @@ Opensource functional testing tool
 
 #### Developing Plug-ins for FunTester
 * [Plug-in Development](https://github.com/funtester/funtester/blob/master/doc/PLUGIN-DEV.textile)
+
+
+# License
+
+[FTL](https://github.com/funtester/funtester/blob/master/funtester/LICENSE.txt) Copyright © [Thiago Delgado Pinto](https://github.com/thiagodp)
